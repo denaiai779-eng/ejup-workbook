@@ -2091,7 +2091,7 @@ Knowledge, Character, Strength
             document.getElementById('exitTicket1').value = '';
             document.getElementById('exitTicket2').value = '';
             document.querySelectorAll('.effort-btn').forEach(btn => btn.classList.remove('selected'));
-            document.getElementById('exitTicketModal').style.display = 'flex';
+            document.getElementById('exitTicketModal').classList.add('show');
         }
 
         function selectEffort(rating) {
@@ -2101,7 +2101,7 @@ Knowledge, Character, Strength
         }
 
         function cancelExitTicket() {
-            document.getElementById('exitTicketModal').style.display = 'none';
+            document.getElementById('exitTicketModal').classList.remove('show');
             pendingExitTicket = { dayNum: null, method: null, effortRating: null };
         }
 
@@ -2130,7 +2130,7 @@ Knowledge, Character, Strength
             localStorage.setItem('ejupExitTickets', JSON.stringify(exitTickets));
 
             // Hide modal and proceed to parent verification
-            document.getElementById('exitTicketModal').style.display = 'none';
+            document.getElementById('exitTicketModal').classList.remove('show');
             finishDayCompletion(pendingExitTicket.dayNum, pendingExitTicket.method);
         }
 
@@ -2583,11 +2583,11 @@ Knowledge, Character, Strength
 
         // Format choice functions
         function showFormatChoice() {
-            document.getElementById('formatChoiceModal').style.display = 'flex';
+            document.getElementById('formatChoiceModal').classList.add('show');
         }
 
         function hideFormatChoice() {
-            document.getElementById('formatChoiceModal').style.display = 'none';
+            document.getElementById('formatChoiceModal').classList.remove('show');
         }
 
         function chooseFormat(format) {
@@ -2626,7 +2626,7 @@ Knowledge, Character, Strength
     </div>
 
     <!-- Format Choice Modal -->
-    <div id="formatChoiceModal" class="help-modal" style="display:none;" onclick="if(event.target===this)hideFormatChoice()">
+    <div id="formatChoiceModal" class="help-modal" onclick="if(event.target===this)hideFormatChoice()">
         <div class="help-content" style="position:relative; max-width: 450px; text-align: center;">
             <button class="help-close" onclick="hideFormatChoice()">x</button>
             <h3>How would you like to learn today?</h3>
@@ -2649,7 +2649,7 @@ Knowledge, Character, Strength
     </div>
 
     <!-- Exit Ticket Modal -->
-    <div id="exitTicketModal" class="help-modal" style="display:none;" onclick="if(event.target===this)cancelExitTicket()">
+    <div id="exitTicketModal" class="help-modal" onclick="if(event.target===this)cancelExitTicket()">
         <div class="help-content" style="position:relative; max-width: 500px;">
             <button class="help-close" onclick="cancelExitTicket()">x</button>
             <h3>Exit Ticket - Day <span id="exitTicketDay"></span></h3>
