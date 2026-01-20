@@ -154,13 +154,7 @@
         }
 
         .answer-reveal {
-            background: var(--navy);
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
+            display: none; /* Hidden - using AI evaluation instead */
         }
 
         .answer {
@@ -390,6 +384,29 @@
             font-weight: bold;
             cursor: pointer;
             width: 100%;
+        }
+
+        .effort-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid var(--navy);
+            background: white;
+            color: var(--navy);
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .effort-btn:hover {
+            background: var(--light-gray);
+        }
+
+        .effort-btn.selected {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--navy);
         }
 
         .help-close {
@@ -2050,13 +2067,70 @@ Knowledge, Character, Strength
             }
         }
 
-        function completeDay(dayNum, method) {
-            // Check if print method requires photo
+        // Exit ticket state
+        let pendingExitTicket = { dayNum: null, method: null, effortRating: null };
+
+        function showExitTicket(dayNum, method) {
+            // Check if print method requires photo first
             if (method === 'print' && !pendingPhotos[dayNum]) {
                 alert('Please upload a photo of your completed work first.');
                 return;
             }
 
+            pendingExitTicket = { dayNum, method, effortRating: null };
+            document.getElementById('exitTicketDay').textContent = dayNum;
+            document.getElementById('exitTicket1').value = '';
+            document.getElementById('exitTicket2').value = '';
+            document.querySelectorAll('.effort-btn').forEach(btn => btn.classList.remove('selected'));
+            document.getElementById('exitTicketModal').style.display = 'flex';
+        }
+
+        function selectEffort(rating) {
+            pendingExitTicket.effortRating = rating;
+            document.querySelectorAll('.effort-btn').forEach(btn => btn.classList.remove('selected'));
+            event.target.classList.add('selected');
+        }
+
+        function cancelExitTicket() {
+            document.getElementById('exitTicketModal').style.display = 'none';
+            pendingExitTicket = { dayNum: null, method: null, effortRating: null };
+        }
+
+        function submitExitTicket() {
+            const learned = document.getElementById('exitTicket1').value.trim();
+            const challenging = document.getElementById('exitTicket2').value.trim();
+            const effort = pendingExitTicket.effortRating;
+
+            if (!learned) {
+                alert('Please share one thing you learned today!');
+                return;
+            }
+            if (!effort) {
+                alert('Please rate your effort (1-5).');
+                return;
+            }
+
+            // Save exit ticket
+            const exitTickets = JSON.parse(localStorage.getItem('ejupExitTickets') || '{}');
+            exitTickets[pendingExitTicket.dayNum] = {
+                learned,
+                challenging,
+                effort,
+                time: new Date().toLocaleString()
+            };
+            localStorage.setItem('ejupExitTickets', JSON.stringify(exitTickets));
+
+            // Hide modal and proceed to parent verification
+            document.getElementById('exitTicketModal').style.display = 'none';
+            finishDayCompletion(pendingExitTicket.dayNum, pendingExitTicket.method);
+        }
+
+        function completeDay(dayNum, method) {
+            // Show exit ticket first
+            showExitTicket(dayNum, method);
+        }
+
+        function finishDayCompletion(dayNum, method) {
             const pin = prompt('Parent PIN required to mark day complete:');
             if (!pin || !PARENT_PINS[pin]) {
                 alert('Invalid PIN. Please have a parent enter their PIN.');
@@ -2488,6 +2562,39 @@ Knowledge, Character, Strength
             <button class="help-submit" onclick="submitQuestion()">Send to Mom/Dad</button>
 
             <div id="questionReviewList" class="question-list"></div>
+        </div>
+    </div>
+
+    <!-- Exit Ticket Modal -->
+    <div id="exitTicketModal" class="help-modal" style="display:none;" onclick="if(event.target===this)cancelExitTicket()">
+        <div class="help-content" style="position:relative; max-width: 500px;">
+            <button class="help-close" onclick="cancelExitTicket()">x</button>
+            <h3>Exit Ticket - Day <span id="exitTicketDay"></span></h3>
+            <p><strong>Before you finish, reflect on today's learning:</strong></p>
+
+            <div style="margin: 15px 0;">
+                <label style="display: block; margin-bottom: 8px; font-weight: bold;">1. What's ONE thing you learned today?</label>
+                <textarea id="exitTicket1" rows="2" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;" placeholder="I learned that..."></textarea>
+            </div>
+
+            <div style="margin: 15px 0;">
+                <label style="display: block; margin-bottom: 8px; font-weight: bold;">2. What was challenging or confusing?</label>
+                <textarea id="exitTicket2" rows="2" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;" placeholder="I found it hard to... OR Nothing was confusing today!"></textarea>
+            </div>
+
+            <div style="margin: 15px 0;">
+                <label style="display: block; margin-bottom: 8px; font-weight: bold;">3. Rate your effort today:</label>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <button class="effort-btn" onclick="selectEffort(1)">1</button>
+                    <button class="effort-btn" onclick="selectEffort(2)">2</button>
+                    <button class="effort-btn" onclick="selectEffort(3)">3</button>
+                    <button class="effort-btn" onclick="selectEffort(4)">4</button>
+                    <button class="effort-btn" onclick="selectEffort(5)">5</button>
+                </div>
+                <p style="text-align: center; font-size: 12px; color: #666; margin-top: 5px;">1 = I could have tried harder | 5 = I gave my best effort</p>
+            </div>
+
+            <button class="help-submit" onclick="submitExitTicket()" style="width: 100%; margin-top: 15px;">Submit Exit Ticket</button>
         </div>
     </div>
 </body>
