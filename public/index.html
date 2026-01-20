@@ -743,9 +743,9 @@
             <p style="color:#666;font-style:italic;">No questions yet.</p>
         </div>
 
-        <h3 style="margin:20px 0 15px;">Exit Tickets (Daily Reflections)</h3>
+        <h3 style="margin:20px 0 15px;">Multiplication Drill Results</h3>
         <div id="exitTicketsList" style="background:var(--light-gray);padding:15px;border-radius:8px;">
-            <p style="color:#666;font-style:italic;">No exit tickets yet.</p>
+            <p style="color:#666;font-style:italic;">No drill results yet.</p>
         </div>
 
         <h3 style="margin:20px 0 15px;">Curriculum Coverage</h3>
@@ -2076,60 +2076,142 @@ Knowledge, Character, Strength
             }
         }
 
-        // Exit ticket state
-        let pendingExitTicket = { dayNum: null, method: null, effortRating: null };
+        // Exit ticket state - Timed Multiplication Drill
+        let pendingExitTicket = { dayNum: null, method: null };
+        let drillProblems = [];
+        let currentProblem = 0;
+        let drillResults = [];
+        let timerInterval = null;
+        let timerSeconds = 0;
+        let timerRunning = false;
+
+        function generateProblems() {
+            const problems = [];
+            for (let i = 0; i < 10; i++) {
+                const a = Math.floor(Math.random() * 9) + 2; // 2-10
+                const b = Math.floor(Math.random() * 9) + 2; // 2-10
+                problems.push({ a, b, answer: a * b });
+            }
+            return problems;
+        }
 
         function showExitTicket(dayNum, method) {
-            // Check if print method requires photo first
             if (method === 'print' && !pendingPhotos[dayNum]) {
                 alert('Please upload a photo of your completed work first.');
                 return;
             }
 
-            pendingExitTicket = { dayNum, method, effortRating: null };
+            pendingExitTicket = { dayNum, method };
             document.getElementById('exitTicketDay').textContent = dayNum;
-            document.getElementById('exitTicket1').value = '';
-            document.getElementById('exitTicket2').value = '';
-            document.querySelectorAll('.effort-btn').forEach(btn => btn.classList.remove('selected'));
+
+            // Reset state
+            drillProblems = generateProblems();
+            currentProblem = 0;
+            drillResults = [];
+            timerSeconds = 0;
+
+            // Show start screen
+            document.getElementById('exitTicketStart').style.display = 'block';
+            document.getElementById('exitTicketQuiz').style.display = 'none';
+            document.getElementById('exitTicketResults').style.display = 'none';
+            document.getElementById('exitCloseBtn').style.display = 'block';
+
             document.getElementById('exitTicketModal').classList.add('show');
         }
 
-        function selectEffort(rating) {
-            pendingExitTicket.effortRating = rating;
-            document.querySelectorAll('.effort-btn').forEach(btn => btn.classList.remove('selected'));
-            event.target.classList.add('selected');
+        function startMultiplicationDrill() {
+            document.getElementById('exitTicketStart').style.display = 'none';
+            document.getElementById('exitTicketQuiz').style.display = 'block';
+            document.getElementById('exitCloseBtn').style.display = 'none';
+
+            timerRunning = true;
+            timerInterval = setInterval(() => {
+                timerSeconds++;
+                const mins = Math.floor(timerSeconds / 60);
+                const secs = timerSeconds % 60;
+                document.getElementById('timerDisplay').textContent = mins + ':' + (secs < 10 ? '0' : '') + secs;
+            }, 1000);
+
+            showProblem();
+        }
+
+        function showProblem() {
+            const p = drillProblems[currentProblem];
+            document.getElementById('questionNum').textContent = currentProblem + 1;
+            document.getElementById('mathProblem').textContent = p.a + ' x ' + p.b + ' = ';
+            document.getElementById('mathAnswer').value = '';
+            document.getElementById('mathAnswer').focus();
+        }
+
+        function checkAnswer() {
+            const userAnswer = parseInt(document.getElementById('mathAnswer').value);
+            const correct = drillProblems[currentProblem];
+            const isCorrect = userAnswer === correct.answer;
+
+            drillResults.push({
+                problem: correct.a + ' x ' + correct.b,
+                correctAnswer: correct.answer,
+                userAnswer: userAnswer || 0,
+                isCorrect: isCorrect
+            });
+
+            currentProblem++;
+
+            if (currentProblem < 10) {
+                showProblem();
+            } else {
+                endDrill();
+            }
+        }
+
+        function endDrill() {
+            clearInterval(timerInterval);
+            timerRunning = false;
+
+            document.getElementById('exitTicketQuiz').style.display = 'none';
+            document.getElementById('exitTicketResults').style.display = 'block';
+            document.getElementById('exitCloseBtn').style.display = 'block';
+
+            const correct = drillResults.filter(r => r.isCorrect).length;
+            document.getElementById('scoreDisplay').textContent = correct + '/10';
+
+            const mins = Math.floor(timerSeconds / 60);
+            const secs = timerSeconds % 60;
+            document.getElementById('timeDisplay').textContent = 'Time: ' + mins + ':' + (secs < 10 ? '0' : '') + secs;
+
+            // Show details
+            const detailsHtml = drillResults.map((r, i) => {
+                const color = r.isCorrect ? 'green' : 'red';
+                const icon = r.isCorrect ? '✓' : '✗';
+                return '<div style="padding:5px;color:' + color + ';">' + icon + ' ' + r.problem + ' = ' + r.correctAnswer + (r.isCorrect ? '' : ' (you: ' + r.userAnswer + ')') + '</div>';
+            }).join('');
+            document.getElementById('resultsDetails').innerHTML = detailsHtml;
         }
 
         function cancelExitTicket() {
+            if (timerRunning) {
+                if (!confirm('Are you sure? Your progress will be lost.')) return;
+                clearInterval(timerInterval);
+                timerRunning = false;
+            }
             document.getElementById('exitTicketModal').classList.remove('show');
-            pendingExitTicket = { dayNum: null, method: null, effortRating: null };
+            pendingExitTicket = { dayNum: null, method: null };
         }
 
         function submitExitTicket() {
-            const learned = document.getElementById('exitTicket1').value.trim();
-            const challenging = document.getElementById('exitTicket2').value.trim();
-            const effort = pendingExitTicket.effortRating;
+            const correct = drillResults.filter(r => r.isCorrect).length;
 
-            if (!learned) {
-                alert('Please share one thing you learned today!');
-                return;
-            }
-            if (!effort) {
-                alert('Please rate your effort (1-5).');
-                return;
-            }
-
-            // Save exit ticket
+            // Save exit ticket results
             const exitTickets = JSON.parse(localStorage.getItem('ejupExitTickets') || '{}');
             exitTickets[pendingExitTicket.dayNum] = {
-                learned,
-                challenging,
-                effort,
-                time: new Date().toLocaleString()
+                score: correct,
+                total: 10,
+                timeSeconds: timerSeconds,
+                problems: drillResults,
+                timestamp: new Date().toLocaleString()
             };
             localStorage.setItem('ejupExitTickets', JSON.stringify(exitTickets));
 
-            // Hide modal and proceed to parent verification
             document.getElementById('exitTicketModal').classList.remove('show');
             finishDayCompletion(pendingExitTicket.dayNum, pendingExitTicket.method);
         }
@@ -2566,18 +2648,20 @@ Knowledge, Character, Strength
 
             container.innerHTML = days.map(day => {
                 const ticket = exitTickets[day];
-                const effortStars = '★'.repeat(ticket.effort) + '☆'.repeat(5 - ticket.effort);
-                return `
-                    <div style="background:white;padding:15px;border-radius:8px;margin-bottom:10px;border-left:4px solid var(--gold);">
-                        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-                            <strong style="color:var(--navy);">Day ${day}</strong>
-                            <span style="color:var(--gold);font-size:18px;" title="Effort: ${ticket.effort}/5">${effortStars}</span>
-                        </div>
-                        <p style="margin:8px 0;"><strong>Learned:</strong> ${ticket.learned}</p>
-                        ${ticket.challenging ? `<p style="margin:8px 0;"><strong>Challenging:</strong> ${ticket.challenging}</p>` : ''}
-                        <small style="color:#666;">${ticket.time}</small>
-                    </div>
-                `;
+                const mins = Math.floor(ticket.timeSeconds / 60);
+                const secs = ticket.timeSeconds % 60;
+                const timeStr = mins + ':' + (secs < 10 ? '0' : '') + secs;
+                const percentage = Math.round((ticket.score / ticket.total) * 100);
+                const color = percentage >= 80 ? 'var(--success)' : percentage >= 60 ? 'var(--gold)' : '#c0392b';
+
+                return '<div style="background:white;padding:15px;border-radius:8px;margin-bottom:10px;border-left:4px solid ' + color + ';">' +
+                    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">' +
+                        '<strong style="color:var(--navy);">Day ' + day + '</strong>' +
+                        '<span style="font-size:24px;font-weight:bold;color:' + color + ';">' + ticket.score + '/' + ticket.total + '</span>' +
+                    '</div>' +
+                    '<p style="margin:8px 0;"><strong>Time:</strong> ' + timeStr + '</p>' +
+                    '<small style="color:#666;">' + ticket.timestamp + '</small>' +
+                '</div>';
             }).join('');
         }
 
@@ -2636,36 +2720,41 @@ Knowledge, Character, Strength
         </div>
     </div>
 
-    <!-- Exit Ticket Modal -->
-    <div id="exitTicketModal" class="help-modal" onclick="if(event.target===this)cancelExitTicket()">
+    <!-- Exit Ticket Modal - Timed Multiplication Facts -->
+    <div id="exitTicketModal" class="help-modal" onclick="if(event.target===this && !timerRunning)cancelExitTicket()">
         <div class="help-content" style="position:relative; max-width: 500px;">
-            <button class="help-close" onclick="cancelExitTicket()">x</button>
+            <button class="help-close" onclick="cancelExitTicket()" id="exitCloseBtn">x</button>
             <h3>Exit Ticket - Day <span id="exitTicketDay"></span></h3>
-            <p><strong>Before you finish, reflect on today's learning:</strong></p>
+            <p><strong>Timed Multiplication Facts</strong></p>
 
-            <div style="margin: 15px 0;">
-                <label style="display: block; margin-bottom: 8px; font-weight: bold;">1. What's ONE thing you learned today?</label>
-                <textarea id="exitTicket1" rows="2" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;" placeholder="I learned that..."></textarea>
+            <!-- Start Screen -->
+            <div id="exitTicketStart">
+                <p style="margin: 20px 0; text-align: center;">Answer 10 multiplication problems as fast as you can!</p>
+                <p style="text-align: center; color: #666;">Timer starts when you click Begin.</p>
+                <button class="help-submit" onclick="startMultiplicationDrill()" style="width: 100%; margin-top: 15px; font-size: 18px; padding: 15px;">Begin!</button>
             </div>
 
-            <div style="margin: 15px 0;">
-                <label style="display: block; margin-bottom: 8px; font-weight: bold;">2. What was challenging or confusing?</label>
-                <textarea id="exitTicket2" rows="2" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;" placeholder="I found it hard to... OR Nothing was confusing today!"></textarea>
-            </div>
-
-            <div style="margin: 15px 0;">
-                <label style="display: block; margin-bottom: 8px; font-weight: bold;">3. Rate your effort today:</label>
-                <div style="display: flex; gap: 10px; justify-content: center;">
-                    <button class="effort-btn" onclick="selectEffort(1)">1</button>
-                    <button class="effort-btn" onclick="selectEffort(2)">2</button>
-                    <button class="effort-btn" onclick="selectEffort(3)">3</button>
-                    <button class="effort-btn" onclick="selectEffort(4)">4</button>
-                    <button class="effort-btn" onclick="selectEffort(5)">5</button>
+            <!-- Quiz Screen -->
+            <div id="exitTicketQuiz" style="display: none;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <span style="font-size: 18px;">Question <span id="questionNum">1</span>/10</span>
+                    <span style="font-size: 24px; font-weight: bold; color: var(--navy);" id="timerDisplay">0:00</span>
                 </div>
-                <p style="text-align: center; font-size: 12px; color: #666; margin-top: 5px;">1 = I could have tried harder | 5 = I gave my best effort</p>
+                <div style="text-align: center; margin: 30px 0;">
+                    <span style="font-size: 48px; font-weight: bold;" id="mathProblem">7 x 8 = </span>
+                    <input type="number" id="mathAnswer" style="font-size: 36px; width: 100px; text-align: center; border: 2px solid var(--navy); border-radius: 8px; padding: 10px;" onkeypress="if(event.key==='Enter')checkAnswer()">
+                </div>
+                <button class="help-submit" onclick="checkAnswer()" style="width: 100%;">Next</button>
             </div>
 
-            <button class="help-submit" onclick="submitExitTicket()" style="width: 100%; margin-top: 15px;">Submit Exit Ticket</button>
+            <!-- Results Screen -->
+            <div id="exitTicketResults" style="display: none; text-align: center;">
+                <h3 style="color: var(--navy); margin: 20px 0;">Results</h3>
+                <div style="font-size: 48px; font-weight: bold; color: var(--gold);" id="scoreDisplay">8/10</div>
+                <p style="font-size: 24px; margin: 10px 0;" id="timeDisplay">Time: 0:45</p>
+                <div id="resultsDetails" style="text-align: left; margin: 20px 0; max-height: 150px; overflow-y: auto;"></div>
+                <button class="help-submit" onclick="submitExitTicket()" style="width: 100%; margin-top: 15px;">Complete Day</button>
+            </div>
         </div>
     </div>
 </body>
