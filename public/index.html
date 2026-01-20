@@ -9,8 +9,6 @@
             --navy: #1A365D;
             --gold: #D4AF37;
             --cream: #FDF6E3;
-            --light-gray: #F5F5F5;
-            --success: #2E7D32;
         }
 
         * {
@@ -23,2739 +21,329 @@
             font-family: 'Georgia', serif;
             background: var(--cream);
             color: var(--navy);
-            line-height: 1.6;
-            padding: 20px;
-            max-width: 900px;
-            margin: 0 auto;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         header {
             background: var(--navy);
             color: white;
-            padding: 30px;
-            border-radius: 10px;
-            margin-bottom: 30px;
+            padding: 40px 20px;
             text-align: center;
         }
 
         header h1 {
             color: var(--gold);
+            font-size: 2.5em;
             margin-bottom: 10px;
+            letter-spacing: 2px;
         }
 
-        .progress-bar {
-            background: rgba(255,255,255,0.2);
-            border-radius: 10px;
-            height: 20px;
-            margin-top: 20px;
-            overflow: hidden;
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
         }
 
-        .progress-fill {
-            background: var(--gold);
-            height: 100%;
-            width: 0%;
-            transition: width 0.5s ease;
+        .subtitle {
+            color: var(--gold);
+            font-style: italic;
+            margin-top: 5px;
         }
 
-        nav {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 30px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .day-nav {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-            gap: 10px;
-        }
-
-        .day-btn {
-            background: var(--light-gray);
-            border: 2px solid transparent;
-            border-radius: 8px;
-            padding: 10px;
-            cursor: pointer;
-            text-align: center;
-            transition: all 0.3s;
-        }
-
-        .day-btn:hover {
-            border-color: var(--gold);
-        }
-
-        .day-btn.completed {
-            background: var(--success);
-            color: white;
-        }
-
-        .day-btn.current {
-            border-color: var(--gold);
-            background: white;
-        }
-
-        .day-content {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        .video-link {
-            background: #e3f2fd;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 15px 0;
-            border-left: 4px solid var(--navy);
-        }
-
-        .video-link a {
-            color: var(--navy);
-            font-weight: bold;
-        }
-
-        .key-concept {
-            background: linear-gradient(135deg, var(--cream) 0%, #fff 100%);
-            border: 2px solid var(--gold);
-            border-radius: 10px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-
-        .activity {
-            background: var(--light-gray);
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-        }
-
-        .question {
-            margin: 15px 0;
-            padding: 15px;
-            background: white;
-            border-radius: 8px;
-            border-left: 3px solid var(--navy);
-        }
-
-        .question textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-family: inherit;
-            margin-top: 10px;
-        }
-
-        .answer-reveal {
-            display: none; /* Hidden - using AI evaluation instead */
-        }
-
-        .answer {
-            display: none;
-            background: #e8f5e9;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 10px;
-            border-left: 3px solid var(--success);
-        }
-
-        .answer.show {
-            display: block;
-        }
-
-        .reading-passage {
-            background: white;
-            border: 2px solid var(--navy);
-            border-radius: 10px;
-            padding: 25px 30px;
-            margin: 20px 0;
-            font-size: 1.1em;
-            line-height: 1.8;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-
-        .reading-passage p {
-            text-indent: 2em;
-            margin-bottom: 1em;
-        }
-
-        .reading-passage p:first-child {
-            text-indent: 0;
-        }
-
-        .reading-prompt {
-            background: var(--navy);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 8px 8px 0 0;
-            margin: 20px 0 0 0;
-            font-weight: bold;
-        }
-
-        .reading-passage-container {
-            margin: 20px 0 30px 0;
-        }
-
-        .reading-passage-container .reading-passage {
-            border-radius: 0 0 10px 10px;
-            margin-top: 0;
-        }
-
-        .completion-section {
-            background: var(--light-gray);
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 30px;
-            border: 2px solid var(--navy);
-        }
-
-        .completion-section h4 {
-            margin-bottom: 15px;
-            text-align: center;
-        }
-
-        .completion-buttons {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .day-complete-btn {
-            background: var(--gold);
-            color: var(--navy);
-            border: none;
-            padding: 15px 20px;
-            border-radius: 8px;
-            font-size: 1em;
-            cursor: pointer;
+        main {
             flex: 1;
-            min-width: 150px;
-            font-weight: bold;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
         }
 
-        .task-checkbox {
-            width: 20px;
-            height: 20px;
-            margin-right: 10px;
+        .intro {
+            text-align: center;
+            margin-bottom: 40px;
         }
 
-        .day-complete-btn.print {
-            background: var(--navy);
-            color: white;
-        }
-
-        .photo-upload {
-            margin-top: 15px;
-            padding: 15px;
-            background: white;
-            border-radius: 8px;
-            border: 2px dashed var(--navy);
-        }
-
-        .photo-upload input[type="file"] {
-            margin: 10px 0;
-        }
-
-        .photo-preview {
-            margin: 10px 0;
-        }
-
-        .photo-preview img {
-            max-width: 100%;
-            max-height: 300px;
-            border-radius: 8px;
-            border: 2px solid var(--gold);
-        }
-
-        .submit-photo-btn {
-            background: var(--success);
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            width: 100%;
-            margin-top: 10px;
-        }
-
-        .work-evidence {
-            margin-top: 15px;
-            padding: 15px;
-            background: #e8f5e9;
-            border-radius: 8px;
-            border-left: 4px solid var(--success);
-        }
-
-        .work-evidence img {
-            max-width: 100%;
-            max-height: 200px;
-            border-radius: 5px;
-            margin-top: 10px;
-        }
-
-        .work-evidence .verified {
-            color: var(--success);
-            font-weight: bold;
-        }
-
-        /* Question/Help System */
-        .help-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--navy);
-            color: white;
-            border: none;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            font-size: 24px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            z-index: 1000;
-        }
-
-        .help-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 1001;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .help-modal.show {
-            display: flex;
-        }
-
-        .help-content {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            max-width: 500px;
-            width: 90%;
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-
-        .help-content h3 {
-            margin-bottom: 15px;
+        .intro h2 {
             color: var(--navy);
-        }
-
-        .help-content textarea {
-            width: 100%;
-            height: 120px;
-            padding: 10px;
-            border: 2px solid var(--navy);
-            border-radius: 8px;
-            font-family: inherit;
-            font-size: 1em;
             margin-bottom: 15px;
         }
 
-        .help-content select {
-            width: 100%;
-            padding: 10px;
-            border: 2px solid var(--navy);
-            border-radius: 8px;
-            font-size: 1em;
-            margin-bottom: 15px;
+        .intro p {
+            font-size: 1.1em;
+            line-height: 1.7;
+            color: #444;
         }
 
-        .help-submit {
-            background: var(--gold);
-            color: var(--navy);
-            border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            width: 100%;
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
         }
 
-        .effort-btn {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            border: 2px solid var(--navy);
-            background: white;
-            color: var(--navy);
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .effort-btn:hover {
-            background: var(--light-gray);
-        }
-
-        .effort-btn.selected {
-            background: var(--gold);
-            border-color: var(--gold);
-            color: var(--navy);
-        }
-
-        .help-close {
-            background: none;
-            border: none;
-            font-size: 24px;
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            cursor: pointer;
-        }
-
-        .question-list {
-            margin-top: 15px;
-            max-height: 200px;
-            overflow-y: auto;
-        }
-
-        .question-item {
-            background: var(--light-gray);
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 8px;
-            font-size: 0.9em;
-        }
-
-        .question-item .q-type {
-            font-weight: bold;
-            color: var(--navy);
-        }
-
-        .question-item .q-time {
-            font-size: 0.8em;
-            color: #666;
-        }
-
-        /* Standards Tags */
-        .standards-tag {
-            display: inline-block;
-            background: var(--navy);
-            color: white;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 0.75em;
-            margin: 2px;
-        }
-
-        .standards-container {
-            margin: 10px 0;
-        }
-
-        /* Progress Dashboard */
-        .dashboard {
+        .feature {
             background: white;
             padding: 25px;
             border-radius: 10px;
-            margin-bottom: 30px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
         }
 
-        .dashboard h2 {
-            border-bottom: 3px solid var(--gold);
-            padding-bottom: 10px;
-            margin-bottom: 20px;
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
         }
 
-        .standards-progress {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 15px;
-        }
-
-        .standard-card {
-            background: var(--light-gray);
-            padding: 15px;
-            border-radius: 8px;
-            border-left: 4px solid var(--navy);
-        }
-
-        .standard-card.mastered {
-            border-left-color: var(--success);
-            background: #e8f5e9;
-        }
-
-        .standard-card.in-progress {
-            border-left-color: var(--gold);
-            background: #fff8e1;
-        }
-
-        .standard-card h4 {
-            font-size: 0.9em;
-            margin-bottom: 5px;
-        }
-
-        .standard-card .progress-mini {
-            background: #ddd;
-            height: 8px;
-            border-radius: 4px;
-            overflow: hidden;
-            margin-top: 8px;
-        }
-
-        .standard-card .progress-mini-fill {
-            height: 100%;
-            background: var(--success);
-            transition: width 0.3s;
-        }
-
-        .pacing-indicator {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 15px;
-            background: var(--light-gray);
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-
-        .pacing-indicator.on-track {
-            background: #e8f5e9;
-            border-left: 4px solid var(--success);
-        }
-
-        .pacing-indicator.behind {
-            background: #fff3e0;
-            border-left: 4px solid #ff9800;
-        }
-
-        .pacing-indicator.ahead {
-            background: #e3f2fd;
-            border-left: 4px solid #2196f3;
-        }
-
-        /* AI Evaluation System */
-        .eval-btn {
-            background: var(--gold);
+        .feature h3 {
             color: var(--navy);
-            border: none;
-            padding: 10px 20px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-            margin-top: 10px;
-        }
-
-        .eval-btn:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-        }
-
-        .eval-result {
-            margin-top: 15px;
-            padding: 20px;
-            border-radius: 10px;
-            display: none;
-        }
-
-        .eval-result.show {
-            display: block;
-        }
-
-        .eval-result.advanced {
-            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
-            border: 2px solid #4caf50;
-        }
-
-        .eval-result.proficient {
-            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-            border: 2px solid #2196f3;
-        }
-
-        .eval-result.developing {
-            background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
-            border: 2px solid #ff9800;
-        }
-
-        .eval-result.not_proficient {
-            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
-            border: 2px solid #f44336;
-        }
-
-        .eval-score {
-            display: inline-block;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 0.9em;
             margin-bottom: 10px;
         }
 
-        .eval-score.advanced { background: #4caf50; color: white; }
-        .eval-score.proficient { background: #2196f3; color: white; }
-        .eval-score.developing { background: #ff9800; color: white; }
-        .eval-score.not_proficient { background: #f44336; color: white; }
-
-        .eval-feedback {
-            font-size: 1.05em;
-            line-height: 1.6;
-            margin: 10px 0;
+        .feature p {
+            color: #666;
+            font-size: 0.95em;
         }
 
-        .eval-hint {
-            background: rgba(255,255,255,0.7);
-            padding: 10px 15px;
-            border-radius: 8px;
-            margin-top: 10px;
-            font-style: italic;
+        .cta-section {
+            margin: 50px 0;
         }
 
-        .loading-spinner {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid var(--navy);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-right: 10px;
+        .cta-section h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--navy);
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .format-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            max-width: 700px;
+            margin: 0 auto;
         }
 
-        /* Gradebook Styles */
-        .gradebook {
+        .format-card {
             background: white;
-            border-radius: 10px;
-            overflow: hidden;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .format-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .format-card.digital {
+            border: 3px solid var(--navy);
+        }
+
+        .format-card.print {
+            border: 3px solid var(--gold);
+        }
+
+        .format-icon {
+            font-size: 60px;
+            margin-bottom: 15px;
+        }
+
+        .format-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .format-card.digital h3 {
+            color: var(--navy);
+        }
+
+        .format-card.print h3 {
+            color: #8B6914;
+        }
+
+        .format-card ul {
+            list-style: none;
+            text-align: left;
             margin: 20px 0;
         }
 
-        .gradebook table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .gradebook th {
-            background: var(--navy);
-            color: white;
-            padding: 12px;
-            text-align: left;
-        }
-
-        .gradebook td {
-            padding: 10px 12px;
+        .format-card li {
+            padding: 8px 0;
             border-bottom: 1px solid #eee;
+            font-size: 0.95em;
         }
 
-        .gradebook tr:nth-child(even) {
-            background: var(--light-gray);
+        .format-card li:last-child {
+            border-bottom: none;
         }
 
-        .proficiency-badge {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 15px;
-            font-size: 0.85em;
+        .format-card li::before {
+            content: "✓ ";
+            color: var(--gold);
             font-weight: bold;
         }
 
-        .proficiency-badge.advanced { background: #4caf50; color: white; }
-        .proficiency-badge.proficient { background: #2196f3; color: white; }
-        .proficiency-badge.developing { background: #ff9800; color: white; }
-        .proficiency-badge.not_proficient { background: #f44336; color: white; }
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.1em;
+            text-decoration: none;
+            margin-top: 15px;
+        }
 
-        h2 {
+        .btn-navy {
+            background: var(--navy);
+            color: white;
+        }
+
+        .btn-gold {
+            background: var(--gold);
             color: var(--navy);
-            border-bottom: 3px solid var(--gold);
-            padding-bottom: 10px;
+        }
+
+        .standards {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 40px 0;
+        }
+
+        .standards h3 {
+            color: var(--navy);
             margin-bottom: 20px;
+            text-align: center;
         }
 
-        h3, h4 {
+        .standards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .standard-item {
+            background: var(--cream);
+            padding: 12px 15px;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+
+        .standard-item strong {
             color: var(--navy);
-            margin: 20px 0 10px 0;
         }
 
-        ul {
-            margin-left: 20px;
+        footer {
+            background: var(--navy);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9em;
         }
 
-        li {
-            margin: 5px 0;
+        footer a {
+            color: var(--gold);
+        }
+
+        @media (max-width: 600px) {
+            .format-options {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 1.8em;
+            }
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>EJUP Moving Week Workbook</h1>
-        <p>Self-Paced Independent Learning</p>
-        <p>January 20 - February 1, 2026</p>
-        <div style="margin: 15px 0;">
-            <button onclick="window.open('/print.html', '_blank')" style="background:var(--gold);color:var(--navy);border:none;padding:10px 20px;border-radius:8px;cursor:pointer;font-weight:bold;margin-right:10px;">Get Print/PDF Version</button>
-            <button onclick="window.print()" style="background:transparent;color:white;border:1px solid white;padding:10px 20px;border-radius:8px;cursor:pointer;">Print This Page</button>
-        </div>
-        <div class="progress-bar">
-            <div class="progress-fill" id="progressFill"></div>
-        </div>
-        <p class="progress-text"><span id="progressText">0</span> of 13 days complete</p>
+        <h1>EJUP</h1>
+        <p>Emory James University Prep</p>
+        <p class="subtitle">Moving Week Workbook | January 20 - February 1, 2026</p>
     </header>
 
-    <nav>
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;">
-            <h2 style="margin:0;border:none;padding:0;">Jump to Day</h2>
-            <button onclick="showDashboard()" style="background:var(--navy);color:white;border:none;padding:10px 20px;border-radius:8px;cursor:pointer;font-weight:bold;">Progress Dashboard</button>
-        </div>
-        <div class="day-nav">
-            <div class="day-btn" onclick="showDay(1)">Day 1<br><small>Tue 1/20...</small></div>
-<div class="day-btn" onclick="showDay(2)">Day 2<br><small>Wed 1/21...</small></div>
-<div class="day-btn" onclick="showDay(3)">Day 3<br><small>Thu 1/22...</small></div>
-<div class="day-btn" onclick="showDay(4)">Day 4<br><small>Fri 1/23...</small></div>
-<div class="day-btn" onclick="showDay(5)">Day 5<br><small>Sat 1/24...</small></div>
-<div class="day-btn" onclick="showDay(6)">Day 6<br><small>Sun 1/25...</small></div>
-<div class="day-btn" onclick="showDay(7)">Day 7<br><small>Mon 1/26...</small></div>
-<div class="day-btn" onclick="showDay(8)">Day 8<br><small>Tue 1/27...</small></div>
-<div class="day-btn" onclick="showDay(9)">Day 9<br><small>Wed 1/28...</small></div>
-<div class="day-btn" onclick="showDay(10)">Day 10<br><small>Thu 1/29...</small></div>
-<div class="day-btn" onclick="showDay(11)">Day 11<br><small>Fri 1/30...</small></div>
-<div class="day-btn" onclick="showDay(12)">Day 12<br><small>Sat 1/31...</small></div>
-<div class="day-btn" onclick="showDay(13)">Day 13<br><small>Sun 2/1...</small></div>
-        </div>
-    </nav>
+    <main>
+        <section class="intro">
+            <h2>Self-Paced Independent Learning</h2>
+            <p>A comprehensive 13-day workbook covering Math, Science, and Social Studies aligned with Michigan state standards. Complete at your own pace with AI-powered feedback or traditional print worksheets.</p>
+        </section>
 
-    <!-- Progress Dashboard -->
-    <section id="dashboard" class="dashboard hidden">
-        <h2>Progress Dashboard</h2>
-
-        <div id="pacingIndicator" class="pacing-indicator">Loading...</div>
-
-        <h3 style="margin:20px 0 15px;">Questions from Emory</h3>
-        <div id="questionReviewList" class="question-list" style="max-height:none;background:var(--light-gray);padding:15px;border-radius:8px;">
-            <p style="color:#666;font-style:italic;">No questions yet.</p>
-        </div>
-
-        <h3 style="margin:20px 0 15px;">Multiplication Drill Results</h3>
-        <div id="exitTicketsList" style="background:var(--light-gray);padding:15px;border-radius:8px;">
-            <p style="color:#666;font-style:italic;">No drill results yet.</p>
-        </div>
-
-        <h3 style="margin:20px 0 15px;">Curriculum Coverage</h3>
-        <div id="standardsProgress" class="standards-progress"></div>
-
-        <h3 style="margin:20px 0 15px;">M-STEP Standards Alignment</h3>
-        <div id="mstepAlignment" class="standards-progress"></div>
-
-        <h3 style="margin:20px 0 15px;">Gradebook - Evaluation Results</h3>
-        <div class="gradebook" id="gradebookTable">
-            <p style="color:#666;font-style:italic;padding:15px;">No evaluations yet.</p>
-        </div>
-
-        <div style="margin-top:20px;padding:15px;background:var(--light-gray);border-radius:8px;">
-            <h4>M-STEP Proficiency Levels</h4>
-            <p><span class="proficiency-badge advanced">ADVANCED</span> Exceeds grade-level expectations (3.5-4.0)</p>
-            <p><span class="proficiency-badge proficient">PROFICIENT</span> Meets grade-level expectations (2.5-3.4)</p>
-            <p><span class="proficiency-badge developing">DEVELOPING</span> Approaching expectations (1.5-2.4)</p>
-            <p><span class="proficiency-badge not_proficient">NOT PROFICIENT</span> Below expectations (1.0-1.4)</p>
-        </div>
-
-        <button onclick="document.getElementById('dashboard').classList.add('hidden');showDay(1);" style="margin-top:20px;background:var(--gold);color:var(--navy);border:none;padding:12px 24px;border-radius:8px;cursor:pointer;font-weight:bold;">Back to Workbook</button>
-    </section>
-
-    <section id="day1" class="day-content ">
-            <h2>Day 1: Tue 1/20</h2>
-            <h3>Today's Goals</h3>
-<input type="checkbox" class="task-checkbox"> Watch division intro video (10 min)
-<input type="checkbox" class="task-checkbox"> Complete area model practice (20 min)
-<input type="checkbox" class="task-checkbox"> Read Three Fires intro (15 min)
-<h3>MATH: Introduction to Division</h3>
-<div class="video-link">
-            <strong>Video:</strong> <a href="https://www.khanacademy.org/math/cc-fourth-grade-math/division" target="_blank">Khan Academy: Division Basics</a>
-        </div>
-<div class="key-concept"><strong>Division is the Opposite of Multiplication</strong>
-<p>If you know that 6 x 7 = 42, then you also know:
-<ul><li>42 / 6 = 7</li>
-<li>42 / 7 = 6</li>
-</ul>
-Think of it like this: Division asks "How many groups?" or "How many in each group?"</div></p>
-<div class="activity"><strong>Warm-Up: Multiplication to Division</strong>
-<div class="question" data-qid="1" data-standard="4.NBT.6">
-            <p>1. If 8 x 9 = 72, what is 72 / 8?</p>
-            <span class="standards-tag">4.NBT.6</span>
-            <textarea id="answer-1" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(1, '4.NBT.6', this)">Check My Answer</button>
-            <div id="eval-result-1" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">72 / 8 = 9</div>
-<div class="question" data-qid="2" data-standard="4.NBT.6">
-            <p>2. If 7 x 6 = 42, what is 42 / 7?</p>
-            <span class="standards-tag">4.NBT.6</span>
-            <textarea id="answer-2" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(2, '4.NBT.6', this)">Check My Answer</button>
-            <div id="eval-result-2" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">42 / 7 = 6</div>
-<div class="question" data-qid="3" data-standard="4.NBT.6">
-            <p>3. A baseball team has 45 balls to put equally into 9 buckets. Write this as a division problem and solve it.</p>
-            <span class="standards-tag">4.NBT.6</span>
-            <textarea id="answer-3" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(3, '4.NBT.6', this)">Check My Answer</button>
-            <div id="eval-result-3" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">45 / 9 = 5 balls per bucket</div></div>
-<h3>SOCIAL STUDIES: Meet the Three Fires Confederacy</h3>
-<div class="reading-passage-container">
-            <div class="reading-prompt">Read the following passage carefully, then answer the comprehension questions.</div>
-            <div class="reading-passage"><p>Long before any European ship crossed the Atlantic Ocean, the Great Lakes region was home to thriving Indigenous nations. Among the most powerful was an alliance called the Three Fires Confederacy, made up of three related Anishinaabe peoples: the Ojibwe, the Odawa, and the Potawatomi. These three nations shared similar languages, beliefs, and customs, but each had their own special role in the alliance.</p>
-<p>The Ojibwe, sometimes called Chippewa, were known as the "Keepers of the Faith." They were the spiritual leaders of the confederacy, responsible for preserving sacred traditions, ceremonies, and the stories that passed wisdom from generation to generation. The Ojibwe lived primarily in the northern Great Lakes region, in areas that are now Michigan, Wisconsin, and Minnesota. They were skilled hunters and gatherers who developed deep knowledge of the forests and waterways.</p>
-<p>The Odawa, also spelled Ottawa, earned the title "Keepers of Trade." They were master negotiators and traders who traveled vast distances by canoe, creating trade networks that stretched hundreds of miles. The Odawa traded copper, furs, corn, and other goods between different nations. Their trading skills would later make them important partners—and sometimes rivals—of European fur traders.</p>
-<p>The Potawatomi were called the "Keepers of the Fire," which was a sacred responsibility. Fire represented the heart of the community—the place where people gathered, where food was prepared, and where important decisions were made. The Potawatomi lived in the southern Great Lakes region and were known for their farming skills, growing corn, beans, and squash in the rich soil.</p>
-<p>Together, these three nations created a powerful alliance based on cooperation rather than competition. When one nation faced a threat, the others came to help. When one nation had extra food, they shared with the others. This system worked for thousands of years before Europeans arrived and began to change everything.</p></div>
-        </div>
-<div class="activity"><strong>Reading Comprehension</strong>
-<div class="question" data-qid="4" data-standard="4-H3.0.2">
-            <p>1. What does "Keepers of the Faith" mean? What responsibilities did the Ojibwe have?</p>
-            <span class="standards-tag">4-H3.0.2</span>
-            <textarea id="answer-4" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(4, '4-H3.0.2', this)">Check My Answer</button>
-            <div id="eval-result-4" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">The Ojibwe were the spiritual leaders responsible for preserving sacred traditions, ceremonies, and stories that passed wisdom between generations.</div>
-<div class="question" data-qid="5" data-standard="4-H3.0.2">
-            <p>2. Why were the Odawa called "Keepers of Trade"? Give one specific example from the passage.</p>
-            <span class="standards-tag">4-H3.0.2</span>
-            <textarea id="answer-5" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(5, '4-H3.0.2', this)">Check My Answer</button>
-            <div id="eval-result-5" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">They were master negotiators and traders who traveled vast distances by canoe. They traded copper, furs, corn, and other goods between different nations.</div>
-<div class="question" data-qid="6" data-standard="4-H3.0.2">
-            <p>3. What did fire represent for the Potawatomi, and why was it important?</p>
-            <span class="standards-tag">4-H3.0.2</span>
-            <textarea id="answer-6" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(6, '4-H3.0.2', this)">Check My Answer</button>
-            <div id="eval-result-6" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">Fire represented the heart of the community—where people gathered, where food was prepared, and where important decisions were made.</div>
-<div class="question" data-qid="7" data-standard="4-H3.0.2">
-            <p>4. The passage says the Three Fires Confederacy was based on "cooperation rather than competition." What evidence from the passage supports this?</p>
-            <span class="standards-tag">4-H3.0.2</span>
-            <textarea id="answer-7" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(7, '4-H3.0.2', this)">Check My Answer</button>
-            <div id="eval-result-7" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">When one nation faced a threat, the others came to help. When one nation had extra food, they shared with the others.</div></div>
-<p>---</p>
-            <div class="completion-section">
-                <h4>Mark Day Complete</h4>
-                <div class="completion-buttons">
-                    <button class="day-complete-btn digital" onclick="completeDay(1, 'digital')">Completed Digital</button>
-                    <button class="day-complete-btn print" onclick="showPhotoUpload(1)">Completed on Print</button>
-                </div>
-                <div id="photo-upload-1" class="photo-upload hidden">
-                    <p><strong>Upload photo of completed work:</strong></p>
-                    <input type="file" accept="image/*" capture="environment" onchange="handlePhotoUpload(1, this)">
-                    <div id="photo-preview-1" class="photo-preview"></div>
-                    <button class="submit-photo-btn hidden" id="submit-photo-1" onclick="completeDay(1, 'print')">Submit with Photo</button>
-                </div>
-                <div id="work-evidence-1" class="work-evidence hidden"></div>
+        <section class="features">
+            <div class="feature">
+                <div class="feature-icon">📐</div>
+                <h3>Math</h3>
+                <p>Division strategies, area model, multi-digit operations</p>
             </div>
-        </section>
-<section id="day2" class="day-content hidden">
-            <h2>Day 2: Wed 1/21</h2>
-            <h3>Today's Goals</h3>
-<input type="checkbox" class="task-checkbox"> Learn the area model for division (25 min)
-<input type="checkbox" class="task-checkbox"> Practice with 2-digit dividends (20 min)
-<input type="checkbox" class="task-checkbox"> Continue Three Fires reading (15 min)
-<h3>MATH: The Area Model for Division</h3>
-<div class="video-link">
-            <strong>Video:</strong> <a href="https://www.khanacademy.org/math/arithmetic/arith-review-multiply-divide/arith-review-div-2-digit/v/dividing-with-area-models" target="_blank">Area Model Division</a>
-        </div>
-<div class="key-concept"><strong>The Area Model</strong>
-<p>The area model breaks division into friendly chunks. For 84 / 7:</p>
-<p>Step 1: Find a friendly multiple of 7 that fits inside 84
-<ul><li>7 x 10 = 70 (that fits!)</li>
-</ul>
-Step 2: Subtract and see what's left
-<ul><li>84 - 70 = 14</li>
-</ul>
-Step 3: Divide what's left
-<ul><li>14 / 7 = 2</li>
-</ul>
-Step 4: Add your partial quotients
-<ul><li>10 + 2 = 12</li>
-</ul>
-So 84 / 7 = 12</div></p>
-<div class="activity"><strong>Area Model Practice</strong>
-<div class="question" data-qid="8" data-standard="4.NBT.6">
-            <p>1. Use the area model to solve 96 / 8. Show your steps.</p>
-            <span class="standards-tag">4.NBT.6</span>
-            <textarea id="answer-8" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(8, '4.NBT.6', this)">Check My Answer</button>
-            <div id="eval-result-8" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">8 x 10 = 80. 96 - 80 = 16. 16 / 8 = 2. Answer: 10 + 2 = 12</div>
-<div class="question" data-qid="9" data-standard="4.NBT.6">
-            <p>2. Use the area model to solve 72 / 6. Show your steps.</p>
-            <span class="standards-tag">4.NBT.6</span>
-            <textarea id="answer-9" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(9, '4.NBT.6', this)">Check My Answer</button>
-            <div id="eval-result-9" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">6 x 10 = 60. 72 - 60 = 12. 12 / 6 = 2. Answer: 10 + 2 = 12</div>
-<div class="question" data-qid="10" data-standard="4.NBT.6">
-            <p>3. The Marlins have 78 baseballs to divide among 6 practice stations. Use the area model to find how many balls at each station.</p>
-            <span class="standards-tag">4.NBT.6</span>
-            <textarea id="answer-10" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(10, '4.NBT.6', this)">Check My Answer</button>
-            <div id="eval-result-10" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">6 x 10 = 60. 78 - 60 = 18. 18 / 6 = 3. Answer: 10 + 3 = 13 balls per station</div></div>
-<h3>SOCIAL STUDIES: Anishinaabe Life Before Contact</h3>
-<div class="reading-passage-container">
-            <div class="reading-prompt">Read the following passage carefully, then answer the comprehension questions.</div>
-            <div class="reading-passage"><p>Many old history books described Indigenous peoples as "primitive" or "uncivilized." This was wrong, and it was often written by Europeans who didn't understand—or didn't want to understand—what they were seeing. The Anishinaabe and other Indigenous nations had built complex, sophisticated societies that had thrived for thousands of years before Europeans arrived.</p>
-<p>Anishinaabe communities were governed by councils made up of respected leaders, elders, and clan mothers. Unlike European kings who inherited power, Anishinaabe leaders earned their positions through wisdom, generosity, and the ability to build consensus. A leader who became selfish or made bad decisions could be removed. Decisions were made through discussion and agreement, not by one person giving orders.</p>
-<p>The Anishinaabe economy was based on a deep understanding of the natural world. They knew exactly when to plant corn, when the fish would run, when berries would ripen, and where to find medicinal plants. They practiced sustainable harvesting—taking only what they needed and ensuring there would be plenty for future generations. Their trade networks stretched for thousands of miles, connecting nations from the Atlantic coast to the Great Plains.</p>
-<p>One of the biggest differences between Anishinaabe and European societies was the role of women. In most European countries at this time, women could not own property, vote, or hold leadership positions. But in Anishinaabe society, women held real power. Women owned the homes and gardens. Clan membership—which determined your family, your responsibilities, and your place in society—passed through the mother, not the father. Clan mothers helped choose leaders and could remove them if they failed the community. Women controlled food distribution, which was one of the most important forms of power in any society.</p>
-<p>The Anishinaabe also had rich intellectual traditions. Elders passed down history, science, and moral teachings through stories and ceremonies. They had detailed knowledge of astronomy, using the stars for navigation and to track seasons. Their medicine included hundreds of plant-based treatments, many of which modern scientists have confirmed actually work.</p></div>
-        </div>
-<div class="activity"><strong>Reading Comprehension</strong>
-<div class="question" data-qid="11" data-standard="4-H3.0.2">
-            <p>1. According to the passage, why were old history books wrong to call Indigenous peoples "primitive"?</p>
-            <span class="standards-tag">4-H3.0.2</span>
-            <textarea id="answer-11" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(11, '4-H3.0.2', this)">Check My Answer</button>
-            <div id="eval-result-11" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">The Anishinaabe had complex, sophisticated societies with councils, trade networks spanning thousands of miles, sustainable practices, and advanced knowledge of medicine and astronomy.</div>
-<div class="question" data-qid="12" data-standard="4-H3.0.2">
-            <p>2. How was Anishinaabe leadership different from European leadership at the same time?</p>
-            <span class="standards-tag">4-H3.0.2</span>
-            <textarea id="answer-12" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(12, '4-H3.0.2', this)">Check My Answer</button>
-            <div id="eval-result-12" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">Anishinaabe leaders earned their positions through wisdom and generosity and could be removed if they made bad decisions. European kings inherited power. Anishinaabe decisions were made through discussion and consensus, not by one person giving orders.</div>
-<div class="question" data-qid="13" data-standard="4-H3.0.2">
-            <p>3. List THREE ways that Anishinaabe women had more power than European women.</p>
-            <span class="standards-tag">4-H3.0.2</span>
-            <textarea id="answer-13" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(13, '4-H3.0.2', this)">Check My Answer</button>
-            <div id="eval-result-13" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">1) Women owned homes and gardens. 2) Clan membership passed through the mother. 3) Clan mothers helped choose and could remove leaders. 4) Women controlled food distribution. (Any three of these)</div>
-<div class="question" data-qid="14" data-standard="4-H3.0.2">
-            <p>4. What does "sustainable harvesting" mean? Why was this practice important?</p>
-            <span class="standards-tag">4-H3.0.2</span>
-            <textarea id="answer-14" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(14, '4-H3.0.2', this)">Check My Answer</button>
-            <div id="eval-result-14" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">Taking only what they needed and ensuring there would be plenty for future generations. It was important because it allowed resources to last and kept the environment healthy.</div></div>
-<p>---</p>
-            <div class="completion-section">
-                <h4>Mark Day Complete</h4>
-                <div class="completion-buttons">
-                    <button class="day-complete-btn digital" onclick="completeDay(2, 'digital')">Completed Digital</button>
-                    <button class="day-complete-btn print" onclick="showPhotoUpload(2)">Completed on Print</button>
-                </div>
-                <div id="photo-upload-2" class="photo-upload hidden">
-                    <p><strong>Upload photo of completed work:</strong></p>
-                    <input type="file" accept="image/*" capture="environment" onchange="handlePhotoUpload(2, this)">
-                    <div id="photo-preview-2" class="photo-preview"></div>
-                    <button class="submit-photo-btn hidden" id="submit-photo-2" onclick="completeDay(2, 'print')">Submit with Photo</button>
-                </div>
-                <div id="work-evidence-2" class="work-evidence hidden"></div>
+            <div class="feature">
+                <div class="feature-icon">⚡</div>
+                <h3>Science</h3>
+                <p>Energy transfer, forces, friction</p>
             </div>
-        </section>
-<section id="day3" class="day-content hidden">
-            <h2>Day 3: Thu 1/22</h2>
-            <h3>Today's Goals</h3>
-<input type="checkbox" class="task-checkbox"> Practice area model with 3-digit numbers (25 min)
-<input type="checkbox" class="task-checkbox"> Watch science video on energy (15 min)
-<input type="checkbox" class="task-checkbox"> Complete science vocabulary (15 min)
-<h3>MATH: Area Model with Larger Numbers</h3>
-<div class="activity"><strong>Leveling Up: 3-Digit Dividends</strong>
-<p>For 156 / 6, break it into chunks:
-<ul><li>6 x 20 = 120 (Start big!)</li>
-<li>156 - 120 = 36</li>
-<li>6 x 6 = 36</li>
-<li>20 + 6 = 26</li>
-</ul>
-<div class="question" data-qid="15" data-standard="4.NBT.6">
-            <p>1. Use the area model to solve 168 / 7. Show each step.</p>
-            <span class="standards-tag">4.NBT.6</span>
-            <textarea id="answer-15" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(15, '4.NBT.6', this)">Check My Answer</button>
-            <div id="eval-result-15" class="eval-result"></div>
-        </div></p>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">7 x 20 = 140. 168 - 140 = 28. 7 x 4 = 28. Answer: 20 + 4 = 24</div>
-<div class="question" data-qid="16" data-standard="4.NBT.6">
-            <p>2. Solve 195 / 5 using the area model.</p>
-            <span class="standards-tag">4.NBT.6</span>
-            <textarea id="answer-16" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(16, '4.NBT.6', this)">Check My Answer</button>
-            <div id="eval-result-16" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">5 x 30 = 150. 195 - 150 = 45. 5 x 9 = 45. Answer: 30 + 9 = 39</div>
-<div class="question" data-qid="17" data-standard="4.NBT.6">
-            <p>3. A tournament has 216 players forming teams of 8. How many complete teams? (Use area model)</p>
-            <span class="standards-tag">4.NBT.6</span>
-            <textarea id="answer-17" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(17, '4.NBT.6', this)">Check My Answer</button>
-            <div id="eval-result-17" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">8 x 20 = 160. 216 - 160 = 56. 8 x 7 = 56. Answer: 20 + 7 = 27 teams</div></div>
-<h3>SCIENCE: Energy and Motion (Q1 Review)</h3>
-<div class="video-link">
-            <strong>Video:</strong> <a href="https://www.youtube.com/watch?v=CW0_S5YpYVo" target="_blank">Bill Nye: Energy</a>
-        </div>
-<div class="reading-passage-container">
-            <div class="reading-prompt">Read the following passage carefully, then answer the comprehension questions.</div>
-            <div class="reading-passage"><p>Energy is everywhere, even when you can't see it. Scientists define energy as the ability to do work or cause change. When you throw a ball, lift a book, or even think a thought, energy is involved. One of the most important things to understand about energy is that it cannot be created or destroyed—it can only change forms or transfer from one object to another.</p>
-<p>There are two main categories of energy: kinetic energy and potential energy. Kinetic energy is the energy of motion. Anything that is moving has kinetic energy—a running athlete, a flying baseball, a rolling skateboard, even the tiny molecules in the air around you. The faster something moves, the more kinetic energy it has. A baseball thrown at 90 miles per hour has much more kinetic energy than one thrown at 50 miles per hour.</p>
-<p>Potential energy is stored energy—energy that is waiting to be used. When you hold a ball above your head, it has potential energy because of its position. The higher you hold it, the more potential energy it has. When you let go, that potential energy transforms into kinetic energy as the ball falls. A stretched rubber band has potential energy too—when you release it, that stored energy becomes motion.</p>
-<p>Energy transfer happens constantly in our world. Think about what happens when a baseball bat hits a ball. The batter's muscles convert chemical energy (from food) into kinetic energy as they swing. The moving bat has kinetic energy. When the bat contacts the ball, energy transfers from the bat to the ball, sending it flying. But not all the energy goes into the ball's motion. Some energy transforms into sound (the crack of the bat), some becomes heat from friction, and some causes vibrations in the bat and ball. This is why your hands might sting after hitting a ball—energy transferred into your body!</p>
-<p>Understanding energy helps us understand how everything in the world works, from how cars move to why we need to eat food to how the sun keeps our planet warm.</p></div>
-        </div>
-<div class="activity"><strong>Reading Comprehension</strong>
-<div class="question" data-qid="18" data-standard="4.PS3.A">
-            <p>1. What is the scientific definition of energy?</p>
-            <span class="standards-tag">4.PS3.A</span>
-            <textarea id="answer-18" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(18, '4.PS3.A', this)">Check My Answer</button>
-            <div id="eval-result-18" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">Energy is the ability to do work or cause change.</div>
-<div class="question" data-qid="19" data-standard="4.PS3.A">
-            <p>2. Explain the difference between kinetic energy and potential energy. Give one example of each.</p>
-            <span class="standards-tag">4.PS3.A</span>
-            <textarea id="answer-19" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(19, '4.PS3.A', this)">Check My Answer</button>
-            <div id="eval-result-19" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">Kinetic energy is the energy of motion (examples: running athlete, flying baseball). Potential energy is stored energy waiting to be used (examples: ball held above head, stretched rubber band).</div>
-<div class="question" data-qid="20" data-standard="4.PS3.A">
-            <p>3. According to the passage, what happens to energy when a bat hits a ball? List at least THREE forms the energy takes.</p>
-            <span class="standards-tag">4.PS3.A</span>
-            <textarea id="answer-20" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(20, '4.PS3.A', this)">Check My Answer</button>
-            <div id="eval-result-20" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">Energy transfers to the ball's motion, becomes sound (crack of the bat), becomes heat from friction, and causes vibrations in the bat and ball.</div>
-<div class="question" data-qid="21" data-standard="4.PS3.A">
-            <p>4. The passage says energy "cannot be created or destroyed." What happens to energy instead?</p>
-            <span class="standards-tag">4.PS3.A</span>
-            <textarea id="answer-21" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(21, '4.PS3.A', this)">Check My Answer</button>
-            <div id="eval-result-21" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">It can only change forms or transfer from one object to another.</div></div>
-<p>---</p>
-            <div class="completion-section">
-                <h4>Mark Day Complete</h4>
-                <div class="completion-buttons">
-                    <button class="day-complete-btn digital" onclick="completeDay(3, 'digital')">Completed Digital</button>
-                    <button class="day-complete-btn print" onclick="showPhotoUpload(3)">Completed on Print</button>
-                </div>
-                <div id="photo-upload-3" class="photo-upload hidden">
-                    <p><strong>Upload photo of completed work:</strong></p>
-                    <input type="file" accept="image/*" capture="environment" onchange="handlePhotoUpload(3, this)">
-                    <div id="photo-preview-3" class="photo-preview"></div>
-                    <button class="submit-photo-btn hidden" id="submit-photo-3" onclick="completeDay(3, 'print')">Submit with Photo</button>
-                </div>
-                <div id="work-evidence-3" class="work-evidence hidden"></div>
+            <div class="feature">
+                <div class="feature-icon">🗺️</div>
+                <h3>Social Studies</h3>
+                <p>Michigan history, Indigenous peoples, European exploration</p>
             </div>
-        </section>
-<section id="day4" class="day-content hidden">
-            <h2>Day 4: Fri 1/23</h2>
-            <h3>Today's Goals</h3>
-<input type="checkbox" class="task-checkbox"> Learn standard algorithm for division (25 min)
-<input type="checkbox" class="task-checkbox"> Practice step-by-step division (20 min)
-<input type="checkbox" class="task-checkbox"> Read about the fur trade (15 min)
-<h3>MATH: Standard Algorithm (Long Division)</h3>
-<div class="video-link">
-            <strong>Video:</strong> <a href="https://www.khanacademy.org/math/arithmetic/arith-review-multiply-divide/arith-review-long-division/v/long-division-without-remainder" target="_blank">Long Division Steps</a>
-        </div>
-<div class="key-concept"><strong>The Steps: Divide, Multiply, Subtract, Bring Down</strong>
-<p>For 96 / 4:
-1. <strong>Divide</strong>: 9 / 4 = 2 (put 2 above the 9)
-2. <strong>Multiply</strong>: 2 x 4 = 8 (write under the 9)
-3. <strong>Subtract</strong>: 9 - 8 = 1
-4. <strong>Bring down</strong>: Bring down the 6 to make 16
-5. <strong>Repeat</strong>: 16 / 4 = 4</p>
-<p>Answer: 24</div></p>
-<div class="activity"><strong>Long Division Practice</strong>
-<div class="question" data-qid="22" data-standard="4.NBT.6">
-            <p>1. Solve 84 / 3 using the standard algorithm. Show all steps.</p>
-            <span class="standards-tag">4.NBT.6</span>
-            <textarea id="answer-22" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(22, '4.NBT.6', this)">Check My Answer</button>
-            <div id="eval-result-22" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">8 / 3 = 2 R2. 2 x 3 = 6. 8 - 6 = 2. Bring down 4 = 24. 24 / 3 = 8. Answer: 28</div>
-<div class="question" data-qid="23" data-standard="4.NBT.6">
-            <p>2. Solve 136 / 4 using the standard algorithm.</p>
-            <span class="standards-tag">4.NBT.6</span>
-            <textarea id="answer-23" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(23, '4.NBT.6', this)">Check My Answer</button>
-            <div id="eval-result-23" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">13 / 4 = 3 R1. 3 x 4 = 12. 13 - 12 = 1. Bring down 6 = 16. 16 / 4 = 4. Answer: 34</div>
-<div class="question" data-qid="24" data-standard="4.NBT.6">
-            <p>3. A coach has 126 minutes of practice time split into 6 equal stations. How long is each station?</p>
-            <span class="standards-tag">4.NBT.6</span>
-            <textarea id="answer-24" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(24, '4.NBT.6', this)">Check My Answer</button>
-            <div id="eval-result-24" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">126 / 6 = 21 minutes per station</div></div>
-<h3>SOCIAL STUDIES: The Fur Trade Changes Everything</h3>
-<div class="video-link">
-            <strong>Video:</strong> <a href="https://www.youtube.com/watch?v=QGpRTjvJxYE" target="_blank">The Fur Trade Explained</a>
-        </div>
-<div class="reading-passage-container">
-            <div class="reading-prompt">Read the following passage carefully, then answer the comprehension questions.</div>
-            <div class="reading-passage"><p>In the 1600s, something strange was happening in Europe: everyone wanted beaver fur hats. Wealthy men considered beaver hats a sign of status and fashion, and the demand was enormous. There was just one problem—Europeans had hunted beavers nearly to extinction in their own countries. When French explorers reached the Great Lakes region and discovered millions of beavers, they saw an opportunity to make fortunes.</p>
-<p>But the French faced a challenge. They didn't know the land. They didn't know where to find beavers or how to trap them efficiently. They didn't know how to survive the harsh winters or navigate the complex waterways. The Indigenous peoples, however, had this knowledge. The Anishinaabe and other nations had been trapping beavers and preparing furs for generations. They knew the forests, rivers, and seasons better than any European ever could.</p>
-<p>This created what seemed like a fair exchange. Indigenous trappers would hunt beavers and prepare the furs using traditional methods. In return, the French would provide European trade goods: metal knives that held their edge longer than stone, iron cooking pots, wool blankets, glass beads, and—most significantly—guns and ammunition. At first, both sides benefited. The French got valuable furs to ship back to Europe. Indigenous peoples got useful new tools that made daily life easier.</p>
-<p>But the trade relationship gradually shifted. As Indigenous peoples began relying on European goods, they needed to trap more and more beavers to trade. Traditional hunting practices, which had focused on taking only what was needed, gave way to intensive trapping to meet European demand. Some areas were hunted out completely. Meanwhile, Indigenous peoples who had grown accustomed to metal tools and guns found it difficult to return to traditional methods.</p>
-<p>The French understood this power shift and used it. If a nation refused to cooperate with French demands, traders could simply stop providing goods that people had come to depend on. No more gunpowder meant hunters couldn't defend themselves against enemies who still had guns. No more metal tools meant harder daily work. What started as an equal partnership became increasingly unequal, with Europeans holding more and more power.</p></div>
-        </div>
-<div class="activity"><strong>Reading Comprehension</strong>
-<div class="question" data-qid="25" data-standard="4-H3.0.5">
-            <p>1. Why did the French need Indigenous peoples to be their partners in the fur trade?</p>
-            <span class="standards-tag">4-H3.0.5</span>
-            <textarea id="answer-25" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(25, '4-H3.0.5', this)">Check My Answer</button>
-            <div id="eval-result-25" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">The French didn't know the land, where to find beavers, how to trap them, how to survive winters, or how to navigate the waterways. Indigenous peoples had this knowledge from generations of experience.</div>
-<div class="question" data-qid="26" data-standard="4-H3.0.5">
-            <p>2. List THREE European trade goods mentioned in the passage. Why were these items valuable to Indigenous peoples?</p>
-            <span class="standards-tag">4-H3.0.5</span>
-            <textarea id="answer-26" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(26, '4-H3.0.5', this)">Check My Answer</button>
-            <div id="eval-result-26" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">Metal knives, iron cooking pots, wool blankets, glass beads, guns and ammunition. They were valuable because they made daily life easier (knives held edges longer, pots were more durable, etc.)</div>
-<div class="question" data-qid="27" data-standard="4-H3.0.5">
-            <p>3. The passage describes how the trade relationship "shifted." Explain what changed and why this was dangerous for Indigenous peoples.</p>
-            <span class="standards-tag">4-H3.0.5</span>
-            <textarea id="answer-27" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(27, '4-H3.0.5', this)">Check My Answer</button>
-            <div id="eval-result-27" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">Indigenous peoples became dependent on European goods and needed to trap more beavers to get them. If the French stopped trading, people couldn't get gunpowder to defend themselves or metal tools they had come to rely on. The equal partnership became unequal with Europeans holding more power.</div>
-<div class="question" data-qid="28" data-standard="4-H3.0.5">
-            <p>4. How did the fur trade change traditional Indigenous hunting practices?</p>
-            <span class="standards-tag">4-H3.0.5</span>
-            <textarea id="answer-28" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(28, '4-H3.0.5', this)">Check My Answer</button>
-            <div id="eval-result-28" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">Traditional practices focused on taking only what was needed (sustainable harvesting). The fur trade led to intensive trapping to meet European demand, and some areas were hunted out completely.</div></div>
-<p>---</p>
-            <div class="completion-section">
-                <h4>Mark Day Complete</h4>
-                <div class="completion-buttons">
-                    <button class="day-complete-btn digital" onclick="completeDay(4, 'digital')">Completed Digital</button>
-                    <button class="day-complete-btn print" onclick="showPhotoUpload(4)">Completed on Print</button>
-                </div>
-                <div id="photo-upload-4" class="photo-upload hidden">
-                    <p><strong>Upload photo of completed work:</strong></p>
-                    <input type="file" accept="image/*" capture="environment" onchange="handlePhotoUpload(4, this)">
-                    <div id="photo-preview-4" class="photo-preview"></div>
-                    <button class="submit-photo-btn hidden" id="submit-photo-4" onclick="completeDay(4, 'print')">Submit with Photo</button>
-                </div>
-                <div id="work-evidence-4" class="work-evidence hidden"></div>
-            </div>
-        </section>
-<section id="day5" class="day-content hidden">
-            <h2>Day 5: Sat 1/24</h2>
-            <strong>Saturday - 30 minutes Math only</strong>
-<h3>Today's Goals</h3>
-<input type="checkbox" class="task-checkbox"> Division with remainders intro (15 min)
-<input type="checkbox" class="task-checkbox"> Quick remainder practice (15 min)
-<h3>MATH: Division with Remainders</h3>
-<div class="video-link">
-            <strong>Video:</strong> <a href="https://www.khanacademy.org/math/arithmetic/arith-review-multiply-divide/arith-review-remainders/v/introduction-to-remainders" target="_blank">Understanding Remainders</a>
-        </div>
-<div class="key-concept"><strong>What is a Remainder?</strong>
-<p>Sometimes numbers don't divide evenly. The "leftover" is called the remainder.</p>
-<p>Example: 17 / 5 = 3 R2
-<ul><li>5 goes into 17 three times (5 x 3 = 15)</li>
-<li>17 - 15 = 2 left over</li>
-<li>We write this as 3 R2 or 3 remainder 2</li>
-</ul>
-<strong>Real life:</strong> If 17 players need to form teams of 5, you get 3 complete teams with 2 players left over.</div></p>
-<div class="activity"><strong>Remainder Practice</strong>
-<div class="question" data-qid="29" data-standard="4.NBT.6">
-            <p>1. 23 / 4 = ?</p>
-            <span class="standards-tag">4.NBT.6</span>
-            <textarea id="answer-29" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(29, '4.NBT.6', this)">Check My Answer</button>
-            <div id="eval-result-29" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">5 R3 (4 x 5 = 20, 23 - 20 = 3)</div>
-<div class="question" data-qid="30" data-standard="4.NBT.6">
-            <p>2. 50 / 7 = ?</p>
-            <span class="standards-tag">4.NBT.6</span>
-            <textarea id="answer-30" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(30, '4.NBT.6', this)">Check My Answer</button>
-            <div id="eval-result-30" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">7 R1 (7 x 7 = 49, 50 - 49 = 1)</div>
-<div class="question" data-qid="31" data-standard="4.NBT.6">
-            <p>3. The team has 47 balls to put in bags of 6. How many full bags? How many balls left over?</p>
-            <span class="standards-tag">4.NBT.6</span>
-            <textarea id="answer-31" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(31, '4.NBT.6', this)">Check My Answer</button>
-            <div id="eval-result-31" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">7 full bags, 5 balls left over (6 x 7 = 42, 47 - 42 = 5)</div></div>
-<p>---</p>
-            <div class="completion-section">
-                <h4>Mark Day Complete</h4>
-                <div class="completion-buttons">
-                    <button class="day-complete-btn digital" onclick="completeDay(5, 'digital')">Completed Digital</button>
-                    <button class="day-complete-btn print" onclick="showPhotoUpload(5)">Completed on Print</button>
-                </div>
-                <div id="photo-upload-5" class="photo-upload hidden">
-                    <p><strong>Upload photo of completed work:</strong></p>
-                    <input type="file" accept="image/*" capture="environment" onchange="handlePhotoUpload(5, this)">
-                    <div id="photo-preview-5" class="photo-preview"></div>
-                    <button class="submit-photo-btn hidden" id="submit-photo-5" onclick="completeDay(5, 'print')">Submit with Photo</button>
-                </div>
-                <div id="work-evidence-5" class="work-evidence hidden"></div>
-            </div>
-        </section>
-<section id="day6" class="day-content hidden">
-            <h2>Day 6: Sun 1/25</h2>
-            <strong>Rest Day - No required work</strong>
-<p>Take a break! You've earned it.</p>
-<strong>Optional activities:</strong>
-<input type="checkbox" class="task-checkbox"> Watch a documentary about Michigan history
-<input type="checkbox" class="task-checkbox"> Play a math game online
-<input type="checkbox" class="task-checkbox"> Read for fun
-<p>---</p>
-            <div class="completion-section">
-                <h4>Mark Day Complete</h4>
-                <div class="completion-buttons">
-                    <button class="day-complete-btn digital" onclick="completeDay(6, 'digital')">Completed Digital</button>
-                    <button class="day-complete-btn print" onclick="showPhotoUpload(6)">Completed on Print</button>
-                </div>
-                <div id="photo-upload-6" class="photo-upload hidden">
-                    <p><strong>Upload photo of completed work:</strong></p>
-                    <input type="file" accept="image/*" capture="environment" onchange="handlePhotoUpload(6, this)">
-                    <div id="photo-preview-6" class="photo-preview"></div>
-                    <button class="submit-photo-btn hidden" id="submit-photo-6" onclick="completeDay(6, 'print')">Submit with Photo</button>
-                </div>
-                <div id="work-evidence-6" class="work-evidence hidden"></div>
-            </div>
-        </section>
-<section id="day7" class="day-content hidden">
-            <h2>Day 7: Mon 1/26</h2>
-            <h3>Today's Goals</h3>
-<input type="checkbox" class="task-checkbox"> Learn about friction (20 min)
-<input type="checkbox" class="task-checkbox"> Practice interpreting remainders (25 min)
-<input type="checkbox" class="task-checkbox"> Friction experiment (20 min)
-<input type="checkbox" class="task-checkbox"> Fur trade reading (15 min)
-<h3>SCIENCE: Friction and Air Resistance</h3>
-<div class="video-link">
-            <strong>Video:</strong> <a href="https://www.youtube.com/watch?v=fo_pmp5rtzo" target="_blank">Friction for Kids</a>
-        </div>
-<div class="key-concept"><strong>Friction: The Force That Slows Things Down</strong>
-<p>Friction happens when two surfaces rub against each other. It converts kinetic energy into heat.</p>
-<strong>Types of Friction:</strong>
-<ul><li><strong>Sliding friction</strong> - Sliding a box across the floor</li>
-<li><strong>Rolling friction</strong> - A ball rolling on grass (less friction than sliding!)</li>
-<li><strong>Air resistance</strong> - Air pushing against moving objects</li>
-</ul>
-<strong>Baseball Connection:</strong> Why does a baseball slow down after being hit? Air resistance! The air pushes against the ball as it flies. This is why pitchers can throw curveballs - they use air resistance to change the ball's path.</div>
-<div class="question" data-qid="32" data-standard="4.PS3.B">
-            <p>A ground ball slows down as it rolls through the infield. Explain what's happening using the word "friction."</p>
-            <span class="standards-tag">4.PS3.B</span>
-            <textarea id="answer-32" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(32, '4.PS3.B', this)">Check My Answer</button>
-            <div id="eval-result-32" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">The ball experiences rolling friction between the ball and the grass/dirt. This friction converts the ball's kinetic energy into heat, causing it to slow down.</div>
-<h3>MATH: What Do You Do With the Remainder?</h3>
-<div class="key-concept"><strong>Remainders in Real Life: Three Choices</strong>
-<p>Depending on the situation, you might:</p>
-<p>1. <strong>Drop it</strong> - "How many complete teams of 6 from 20 players?" Answer: 3 (ignore the 2 extras)</p>
-<p>2. <strong>Round up</strong> - "How many vans for 23 people if each van holds 8?" Answer: 3 vans (you need that extra van for the remaining 7 people!)</p>
-<p>3. <strong>Use it</strong> - "Share 23 cookies among 4 friends." Each gets 5 with 3 left over - the remainder IS the answer to "how many left?"</div></p>
-<div class="activity"><strong>Interpreting Remainders</strong>
-<div class="question" data-qid="33" data-standard="4.NBT.6">
-            <p>1. Books come in packs of 8. You need 50 books. How many packs must you buy?</p>
-            <span class="standards-tag">4.NBT.6</span>
-            <textarea id="answer-33" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(33, '4.NBT.6', this)">Check My Answer</button>
-            <div id="eval-result-33" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">7 packs (50 / 8 = 6 R2, but you need to round UP to have enough)</div>
-<div class="question" data-qid="34" data-standard="4.NBT.6">
-            <p>2. A coach has 34 players to put into groups of 5 for drills. How many complete groups?</p>
-            <span class="standards-tag">4.NBT.6</span>
-            <textarea id="answer-34" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(34, '4.NBT.6', this)">Check My Answer</button>
-            <div id="eval-result-34" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">6 complete groups (34 / 5 = 6 R4, drop the remainder)</div>
-<div class="question" data-qid="35" data-standard="4.NBT.6">
-            <p>3. You have 25 stickers to share among 4 friends. How many does each person get? How many are left over?</p>
-            <span class="standards-tag">4.NBT.6</span>
-            <textarea id="answer-35" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(35, '4.NBT.6', this)">Check My Answer</button>
-            <div id="eval-result-35" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">Each person gets 6 stickers, with 1 left over (25 / 4 = 6 R1)</div></div>
-<h3>SCIENCE: Friction Experiment</h3>
-<div class="activity"><strong>Test It Yourself!</strong>
-<p>Find a small toy car or ball. Test how far it rolls on different surfaces:</p>
-<div class="question" data-qid="36" data-standard="4.PS3.B">
-            <p>Surface 1 (smooth - tile or wood floor): How far did it roll?</p>
-            <span class="standards-tag">4.PS3.B</span>
-            <textarea id="answer-36" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(36, '4.PS3.B', this)">Check My Answer</button>
-            <div id="eval-result-36" class="eval-result"></div>
-        </div>
-<div class="question" data-qid="37" data-standard="4.PS3.B">
-            <p>Surface 2 (medium - carpet): How far did it roll?</p>
-            <span class="standards-tag">4.PS3.B</span>
-            <textarea id="answer-37" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(37, '4.PS3.B', this)">Check My Answer</button>
-            <div id="eval-result-37" class="eval-result"></div>
-        </div>
-<div class="question" data-qid="38" data-standard="4.PS3.B">
-            <p>Surface 3 (rough - grass or towel): How far did it roll?</p>
-            <span class="standards-tag">4.PS3.B</span>
-            <textarea id="answer-38" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(38, '4.PS3.B', this)">Check My Answer</button>
-            <div id="eval-result-38" class="eval-result"></div>
-        </div>
-<div class="question" data-qid="39" data-standard="4.PS3.B">
-            <p>Explain your results using the word "friction":</p>
-            <span class="standards-tag">4.PS3.B</span>
-            <textarea id="answer-39" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(39, '4.PS3.B', this)">Check My Answer</button>
-            <div id="eval-result-39" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">The ball should roll farthest on smooth surfaces (less friction) and shortest on rough surfaces (more friction). Rough surfaces create more friction because there's more contact between the surfaces.</div></div>
-<h3>SOCIAL STUDIES: European Powers Compete for Control</h3>
-<div class="reading-passage-container">
-            <div class="reading-prompt">Read the following passage carefully, then answer the comprehension questions.</div>
-            <div class="reading-passage"><p>The French were not the only Europeans interested in the Great Lakes region. The British, who had colonies along the Atlantic coast, wanted access to the valuable fur trade too. By the mid-1700s, France and Britain were locked in a fierce competition for control of North America. This competition would have enormous consequences for Indigenous peoples, who found themselves caught in the middle.</p>
-<p>At first, many Indigenous nations preferred dealing with the French. French traders often lived among Indigenous communities, learned their languages, and married Indigenous women. They participated in traditional gift-giving ceremonies and generally treated Indigenous peoples as partners and allies. The British, on the other hand, were more interested in taking land for farms and settlements. They often looked down on Indigenous peoples and were less willing to follow traditional protocols.</p>
-<p>Indigenous nations were not passive observers in this conflict. They were strategic players who made alliances based on their own interests. Some nations allied with the French, while others worked with the British. Some played the two European powers against each other, getting better trade deals by threatening to switch sides. Indigenous warriors were crucial military allies—neither France nor Britain could win in North America without their help.</p>
-<p>The competition came to a head in the French and Indian War (1754-1763). Despite the name, this was really a war between France and Britain, with Indigenous nations fighting on both sides. When Britain won, France was forced to give up its claims to Canada and the Great Lakes region. This was devastating news for Indigenous peoples who had allied with France. Their French partners were gone, and now they had to deal with the British—who had very different ideas about how to treat Indigenous nations.</p>
-<p>The British government issued the Proclamation of 1763, which said colonists could not settle west of the Appalachian Mountains. This was supposed to protect Indigenous lands. But British colonists ignored the proclamation and kept pushing westward anyway, setting the stage for more conflict.</p></div>
-        </div>
-<div class="activity"><strong>Reading Comprehension</strong>
-<div class="question" data-qid="40" data-standard="4-H3.0.5">
-            <p>1. According to the passage, why did many Indigenous nations prefer dealing with the French rather than the British?</p>
-            <span class="standards-tag">4-H3.0.5</span>
-            <textarea id="answer-40" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(40, '4-H3.0.5', this)">Check My Answer</button>
-            <div id="eval-result-40" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">French traders lived among Indigenous communities, learned their languages, married Indigenous women, participated in gift-giving ceremonies, and treated Indigenous peoples as partners. The British wanted land for farms, looked down on Indigenous peoples, and were less willing to follow traditional protocols.</div>
-<div class="question" data-qid="41" data-standard="4-H3.0.5">
-            <p>2. How did Indigenous nations act as "strategic players" in the conflict between France and Britain?</p>
-            <span class="standards-tag">4-H3.0.5</span>
-            <textarea id="answer-41" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(41, '4-H3.0.5', this)">Check My Answer</button>
-            <div id="eval-result-41" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">They made alliances based on their own interests, some allied with France, others with Britain, and some played the two powers against each other to get better trade deals. Their warriors were crucial military allies that neither European power could win without.</div>
-<div class="question" data-qid="42" data-standard="4-H3.0.5">
-            <p>3. What was the French and Indian War, and why was Britain's victory "devastating" for some Indigenous nations?</p>
-            <span class="standards-tag">4-H3.0.5</span>
-            <textarea id="answer-42" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(42, '4-H3.0.5', this)">Check My Answer</button>
-            <div id="eval-result-42" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">It was a war between France and Britain (with Indigenous nations on both sides). Britain's victory was devastating because Indigenous peoples who allied with France lost their partners and now had to deal with the British, who treated Indigenous nations differently.</div>
-<div class="question" data-qid="43" data-standard="4-H3.0.5">
-            <p>4. What was the Proclamation of 1763, and why didn't it work?</p>
-            <span class="standards-tag">4-H3.0.5</span>
-            <textarea id="answer-43" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(43, '4-H3.0.5', this)">Check My Answer</button>
-            <div id="eval-result-43" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">It was a British law saying colonists couldn't settle west of the Appalachian Mountains to protect Indigenous lands. It didn't work because British colonists ignored it and kept pushing westward anyway.</div></div>
-<p>---</p>
-            <div class="completion-section">
-                <h4>Mark Day Complete</h4>
-                <div class="completion-buttons">
-                    <button class="day-complete-btn digital" onclick="completeDay(7, 'digital')">Completed Digital</button>
-                    <button class="day-complete-btn print" onclick="showPhotoUpload(7)">Completed on Print</button>
-                </div>
-                <div id="photo-upload-7" class="photo-upload hidden">
-                    <p><strong>Upload photo of completed work:</strong></p>
-                    <input type="file" accept="image/*" capture="environment" onchange="handlePhotoUpload(7, this)">
-                    <div id="photo-preview-7" class="photo-preview"></div>
-                    <button class="submit-photo-btn hidden" id="submit-photo-7" onclick="completeDay(7, 'print')">Submit with Photo</button>
-                </div>
-                <div id="work-evidence-7" class="work-evidence hidden"></div>
-            </div>
-        </section>
-<section id="day8" class="day-content hidden">
-            <h2>Day 8: Tue 1/27</h2>
-            <h3>Today's Goals</h3>
-<input type="checkbox" class="task-checkbox"> Multi-digit division practice (25 min)
-<input type="checkbox" class="task-checkbox"> Treaty reading and questions (20 min)
-<input type="checkbox" class="task-checkbox"> Air resistance activity (15 min)
-<h3>MATH: Putting It All Together</h3>
-<div class="activity"><strong>Division Challenge</strong>
-<p>Solve each problem. Show your work using either the area model or standard algorithm.</p>
-<div class="question" data-qid="44" data-standard="4.NBT.6">
-            <p>1. 184 / 8 = ?</p>
-            <span class="standards-tag">4.NBT.6</span>
-            <textarea id="answer-44" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(44, '4.NBT.6', this)">Check My Answer</button>
-            <div id="eval-result-44" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">23 (8 x 20 = 160, 184 - 160 = 24, 24 / 8 = 3, 20 + 3 = 23)</div>
-<div class="question" data-qid="45" data-standard="4.NBT.6">
-            <p>2. 252 / 6 = ?</p>
-            <span class="standards-tag">4.NBT.6</span>
-            <textarea id="answer-45" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(45, '4.NBT.6', this)">Check My Answer</button>
-            <div id="eval-result-45" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">42 (6 x 40 = 240, 252 - 240 = 12, 12 / 6 = 2, 40 + 2 = 42)</div>
-<div class="question" data-qid="46" data-standard="4.NBT.6">
-            <p>3. 175 / 7 = ?</p>
-            <span class="standards-tag">4.NBT.6</span>
-            <textarea id="answer-46" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(46, '4.NBT.6', this)">Check My Answer</button>
-            <div id="eval-result-46" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">25 (7 x 20 = 140, 175 - 140 = 35, 35 / 7 = 5, 20 + 5 = 25)</div>
-<div class="question" data-qid="47" data-standard="4.NBT.6">
-            <p>4. 289 / 9 = ? (with remainder)</p>
-            <span class="standards-tag">4.NBT.6</span>
-            <textarea id="answer-47" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(47, '4.NBT.6', this)">Check My Answer</button>
-            <div id="eval-result-47" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">32 R1 (9 x 32 = 288, 289 - 288 = 1)</div></div>
-<h3>SOCIAL STUDIES: Treaties - Promises Made, Promises Broken</h3>
-<div class="reading-passage-container">
-            <div class="reading-prompt">Read the following passage carefully, then answer the comprehension questions.</div>
-            <div class="reading-passage"><p>Treaties were formal agreements between Indigenous nations and European or American governments. In theory, they were nation-to-nation agreements between equals, similar to treaties between France and England or Spain and Portugal. Indigenous leaders understood treaties as sacred promises that bound both parties. When they signed, they believed they were entering a relationship of mutual respect and obligation.</p>
-<p>But European and American governments often saw treaties very differently. For them, treaties were tools to gain land as cheaply as possible while avoiding costly wars. Government officials knew that fighting Indigenous nations was expensive and dangerous—it was much easier to get land through negotiation, even if those negotiations weren't entirely honest.</p>
-<p>The treaty process itself was often unfair. Treaties were written in English, which many Indigenous leaders could not read. Government translators sometimes deliberately changed the meaning of important phrases. Indigenous peoples might agree to "share" land, only to discover the treaty said they had "sold" it permanently. Different cultural ideas about land ownership caused confusion too. Many Indigenous peoples believed land could not be owned—it belonged to everyone, like air or water. When they agreed to let settlers use land, they didn't understand they were giving up all rights to it forever.</p>
-<p>The Treaty of Detroit (1807) is one painful example from Michigan's history. In this treaty, Anishinaabe nations agreed to give up millions of acres in southeastern Michigan. In exchange, the U.S. government promised yearly payments, guaranteed hunting and fishing rights, and pledged to protect remaining Indigenous lands from white settlers. Within just a few years, the government had broken almost every promise. Payments arrived late or not at all. Settlers flooded onto "protected" lands. Hunting and fishing rights were ignored.</p>
-<p>The most devastating fact is that this was not unusual. Historians estimate that the United States broke almost every single treaty it signed with Indigenous nations. Promises of "permanent" land boundaries lasted only until white settlers wanted that land. Payment promises were forgotten when they became inconvenient. This pattern of broken promises is one of the most shameful chapters in American history.</p></div>
-        </div>
-<div class="activity"><strong>Reading Comprehension</strong>
-<div class="question" data-qid="48" data-standard="4-H3.0.6">
-            <p>1. What was the difference between how Indigenous leaders and U.S. officials viewed treaties?</p>
-            <span class="standards-tag">4-H3.0.6</span>
-            <textarea id="answer-48" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(48, '4-H3.0.6', this)">Check My Answer</button>
-            <div id="eval-result-48" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">Indigenous leaders saw treaties as sacred promises and nation-to-nation agreements between equals. U.S. officials saw treaties as tools to gain land cheaply while avoiding wars.</div>
-<div class="question" data-qid="49" data-standard="4-H3.0.6">
-            <p>2. The passage lists several ways the treaty process was unfair. Name THREE of these problems.</p>
-            <span class="standards-tag">4-H3.0.6</span>
-            <textarea id="answer-49" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(49, '4-H3.0.6', this)">Check My Answer</button>
-            <div id="eval-result-49" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">1) Treaties written in English that Indigenous leaders couldn't read. 2) Translators sometimes deliberately changed meanings. 3) Different cultural ideas about land ownership caused confusion. 4) Indigenous peoples might agree to "share" land but the treaty said "sold."</div>
-<div class="question" data-qid="50" data-standard="4-H3.0.6">
-            <p>3. What did the Treaty of Detroit (1807) promise, and what actually happened?</p>
-            <span class="standards-tag">4-H3.0.6</span>
-            <textarea id="answer-50" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(50, '4-H3.0.6', this)">Check My Answer</button>
-            <div id="eval-result-50" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">It promised yearly payments, hunting/fishing rights, and protection of remaining Indigenous lands from settlers. What happened: payments arrived late or not at all, settlers flooded onto protected lands, and hunting/fishing rights were ignored.</div>
-<div class="question" data-qid="51" data-standard="4-H3.0.6">
-            <p>4. Why does the author call broken treaties "one of the most shameful chapters in American history"?</p>
-            <span class="standards-tag">4-H3.0.6</span>
-            <textarea id="answer-51" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(51, '4-H3.0.6', this)">Check My Answer</button>
-            <div id="eval-result-51" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">Because the U.S. broke almost every single treaty it signed with Indigenous nations. Promises of permanent boundaries lasted only until settlers wanted the land. This was a pattern of deliberate dishonesty.</div></div>
-<h3>SCIENCE: Air Resistance in Action</h3>
-<div class="reading-passage-container">
-            <div class="reading-prompt">Read the following passage carefully, then answer the comprehension questions.</div>
-            <div class="reading-passage"><p>You can't see air, but you can certainly feel it when you're moving fast. Stick your hand out the window of a moving car, and you'll feel the air pushing against you. This push is called air resistance, and it affects everything that moves through the atmosphere. Understanding air resistance helps explain everything from why baseballs curve to why airplanes can fly.</p>
-<p>Air resistance is a type of friction—but instead of two solid surfaces rubbing against each other, it's an object rubbing against the tiny molecules in the air. The faster an object moves, the more air molecules it hits every second, which means more resistance. A baseball thrown at 90 miles per hour experiences much more air resistance than one thrown at 50 miles per hour.</p>
-<p>The shape of an object dramatically affects how much air resistance it experiences. Streamlined shapes—like the pointed nose of a jet or the curved body of a dolphin—slice through the air easily. Flat or irregular shapes push against more air and slow down faster. This is why race cars are designed to be low and sleek. It's also why cyclists crouch down over their handlebars—they're making themselves more streamlined to reduce air resistance.</p>
-<p>Surface area matters too. A parachute works because it has a huge surface area that catches a lot of air, creating massive resistance that slows a falling person down to a safe speed. A crumpled piece of paper falls faster than a flat sheet because the flat sheet has more surface area pushing against the air. Baseball pitchers use these principles to throw tricky pitches. A curveball spins in a way that makes air push harder on one side of the ball than the other, causing it to curve as it flies toward the batter.</p></div>
-        </div>
-<div class="activity"><strong>Reading Comprehension</strong>
-<div class="question" data-qid="52" data-standard="4.PS3.B">
-            <p>1. What is air resistance? Explain it in your own words.</p>
-            <span class="standards-tag">4.PS3.B</span>
-            <textarea id="answer-52" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(52, '4.PS3.B', this)">Check My Answer</button>
-            <div id="eval-result-52" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">Air resistance is the push of air against moving objects. It's a type of friction between an object and the air molecules around it.</div>
-<div class="question" data-qid="53" data-standard="4.PS3.B">
-            <p>2. Why does a faster-moving object experience more air resistance?</p>
-            <span class="standards-tag">4.PS3.B</span>
-            <textarea id="answer-53" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(53, '4.PS3.B', this)">Check My Answer</button>
-            <div id="eval-result-53" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">Because it hits more air molecules every second, which creates more resistance.</div>
-<div class="question" data-qid="54" data-standard="4.PS3.B">
-            <p>3. The passage gives several examples of how shape affects air resistance. Describe TWO of these examples.</p>
-            <span class="standards-tag">4.PS3.B</span>
-            <textarea id="answer-54" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(54, '4.PS3.B', this)">Check My Answer</button>
-            <div id="eval-result-54" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">1) Race cars are low and sleek to reduce resistance. 2) Cyclists crouch over handlebars to be more streamlined. 3) Jet noses are pointed to slice through air. 4) Dolphins have curved bodies. (Any two)</div>
-<div class="question" data-qid="55" data-standard="4.PS3.B">
-            <p>4. How does a curveball work? Use the word "air resistance" in your answer.</p>
-            <span class="standards-tag">4.PS3.B</span>
-            <textarea id="answer-55" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(55, '4.PS3.B', this)">Check My Answer</button>
-            <div id="eval-result-55" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">A curveball spins in a way that makes air resistance push harder on one side of the ball than the other, causing it to curve as it flies toward the batter.</div></div>
-<p>---</p>
-            <div class="completion-section">
-                <h4>Mark Day Complete</h4>
-                <div class="completion-buttons">
-                    <button class="day-complete-btn digital" onclick="completeDay(8, 'digital')">Completed Digital</button>
-                    <button class="day-complete-btn print" onclick="showPhotoUpload(8)">Completed on Print</button>
-                </div>
-                <div id="photo-upload-8" class="photo-upload hidden">
-                    <p><strong>Upload photo of completed work:</strong></p>
-                    <input type="file" accept="image/*" capture="environment" onchange="handlePhotoUpload(8, this)">
-                    <div id="photo-preview-8" class="photo-preview"></div>
-                    <button class="submit-photo-btn hidden" id="submit-photo-8" onclick="completeDay(8, 'print')">Submit with Photo</button>
-                </div>
-                <div id="work-evidence-8" class="work-evidence hidden"></div>
-            </div>
-        </section>
-<section id="day9" class="day-content hidden">
-            <h2>Day 9: Wed 1/28</h2>
-            <h3>Today's Goals</h3>
-<input type="checkbox" class="task-checkbox"> Word problems with division (25 min)
-<input type="checkbox" class="task-checkbox"> Indigenous women's roles (20 min)
-<input type="checkbox" class="task-checkbox"> Energy transfer review (15 min)
-<h3>MATH: Division Word Problems</h3>
-<div class="activity"><strong>Real-World Division</strong>
-<div class="question" data-qid="56" data-standard="4.NBT.6">
-            <p>1. The batting cages have 156 tokens to distribute equally among 12 players. How many tokens does each player get?</p>
-            <span class="standards-tag">4.NBT.6</span>
-            <textarea id="answer-56" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(56, '4.NBT.6', this)">Check My Answer</button>
-            <div id="eval-result-56" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">13 tokens each (156 / 12 = 13)</div>
-<div class="question" data-qid="57" data-standard="4.NBT.6">
-            <p>2. A road trip is 324 miles. If you drive 6 hours, how many miles per hour is that?</p>
-            <span class="standards-tag">4.NBT.6</span>
-            <textarea id="answer-57" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(57, '4.NBT.6', this)">Check My Answer</button>
-            <div id="eval-result-57" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">54 miles per hour (324 / 6 = 54)</div>
-<div class="question" data-qid="58" data-standard="4.NBT.6">
-            <p>3. Practice jerseys come in packs of 8. The team needs 50 jerseys. How many packs should they order?</p>
-            <span class="standards-tag">4.NBT.6</span>
-            <textarea id="answer-58" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(58, '4.NBT.6', this)">Check My Answer</button>
-            <div id="eval-result-58" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">7 packs (50 / 8 = 6 R2, round up to 7 packs to have enough)</div>
-<div class="question" data-qid="59" data-standard="4.NBT.6">
-            <p>4. Write your own division word problem about baseball, then solve it.</p>
-            <span class="standards-tag">4.NBT.6</span>
-            <textarea id="answer-59" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(59, '4.NBT.6', this)">Check My Answer</button>
-            <div id="eval-result-59" class="eval-result"></div>
-        </div></div>
-<h3>SOCIAL STUDIES: Indigenous Women's Power</h3>
-<div class="reading-passage-container">
-            <div class="reading-prompt">Read the following passage carefully, then answer the comprehension questions.</div>
-            <div class="reading-passage"><p>When European men first encountered Anishinaabe and other Indigenous societies, they often completely misunderstood what they were seeing. Coming from cultures where women had few legal rights, they assumed Indigenous women must be oppressed too. Some early European writers described Indigenous women as "slaves" to their husbands because they saw women doing agricultural work. What these observers failed to understand was that in Indigenous societies, controlling food production was a source of power, not a sign of low status.</p>
-<p>In Anishinaabe society, women held significant authority that European women of the same era could only dream of. Women owned property—including the homes their families lived in and the gardens they cultivated. When a couple married, the husband typically moved into the wife's family home, not the other way around. If a marriage ended, the house and its contents belonged to the woman. In Europe, married women legally could not own property at all; everything belonged to their husbands.</p>
-<p>Political power flowed through women in important ways. Anishinaabe society was organized by clans, and a person's clan—which determined their responsibilities, their marriage options, and their place in the community—came from their mother, not their father. Clan mothers were respected elders who helped choose leaders and could remove them if they failed the community. Women also participated in councils that made important decisions about war, peace, and community matters.</p>
-<p>Food distribution was another crucial source of women's power. Women controlled how food was stored and shared within the community. In any society, the person who controls food has real power—they decide who eats well and who goes hungry. This wasn't seen as "women's work" in a demeaning sense; it was recognized as vital responsibility that required wisdom and fairness.</p>
-<p>European observers often missed these forms of power because they didn't look like European power. European power was visible: crowns, thrones, armies, land deeds with official seals. Indigenous women's power was embedded in family structures, social customs, and daily practices. It was no less real, but Europeans—especially European men—often couldn't or wouldn't see it.</p></div>
-        </div>
-<div class="activity"><strong>Reading Comprehension</strong>
-<div class="question" data-qid="60" data-standard="4-H3.0.2">
-            <p>1. Why did early European writers sometimes describe Indigenous women as "slaves"? What did they misunderstand?</p>
-            <span class="standards-tag">4-H3.0.2</span>
-            <textarea id="answer-60" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(60, '4-H3.0.2', this)">Check My Answer</button>
-            <div id="eval-result-60" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">They saw women doing agricultural work and assumed this meant low status. They misunderstood that controlling food production was actually a source of power, not oppression.</div>
-<div class="question" data-qid="61" data-standard="4-H3.0.2">
-            <p>2. Explain what happened when an Anishinaabe couple got married. How was this different from European marriage customs?</p>
-            <span class="standards-tag">4-H3.0.2</span>
-            <textarea id="answer-61" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(61, '4-H3.0.2', this)">Check My Answer</button>
-            <div id="eval-result-61" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">The husband moved into the wife's family home. The house belonged to the woman, and if the marriage ended, she kept it. In Europe, married women couldn't own property—everything belonged to their husbands.</div>
-<div class="question" data-qid="62" data-standard="4-H3.0.2">
-            <p>3. What were "clan mothers" and what power did they have?</p>
-            <span class="standards-tag">4-H3.0.2</span>
-            <textarea id="answer-62" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(62, '4-H3.0.2', this)">Check My Answer</button>
-            <div id="eval-result-62" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">Clan mothers were respected elders who helped choose leaders and could remove them if they failed the community. They participated in councils making important decisions about war, peace, and community matters.</div>
-<div class="question" data-qid="63" data-standard="4-H3.0.2">
-            <p>4. The passage says Europeans "couldn't or wouldn't see" Indigenous women's power. What's the difference between "couldn't" and "wouldn't" in this context?</p>
-            <span class="standards-tag">4-H3.0.2</span>
-            <textarea id="answer-63" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(63, '4-H3.0.2', this)">Check My Answer</button>
-            <div id="eval-result-63" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">"Couldn't" means they genuinely didn't understand because the power looked different from what they expected (no crowns, thrones, etc.). "Wouldn't" suggests they chose to ignore women's power because acknowledging it would challenge their belief that European ways were superior.</div></div>
-<h3>SCIENCE: Energy Transfer Review</h3>
-<div class="activity"><strong>Energy Chain Challenge</strong>
-<div class="question" data-qid="64" data-standard="4.PS3.A">
-            <p>Describe the energy transfers when:
-1. A pitcher throws a ball
-2. The ball flies through the air
-3. The batter hits the ball
-4. The ball lands in the outfield</p>
-            <span class="standards-tag">4.PS3.A</span>
-            <textarea id="answer-64" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(64, '4.PS3.A', this)">Check My Answer</button>
-            <div id="eval-result-64" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">1. Chemical energy in muscles converts to kinetic energy in the arm, then transfers to the ball. 2. The ball has kinetic energy; some is lost to air resistance (becomes heat). 3. Kinetic energy from bat transfers to ball, changing its direction; some energy becomes sound and heat. 4. Kinetic energy transfers to the ground; friction with grass converts remaining energy to heat as ball stops.</div></div>
-<p>---</p>
-            <div class="completion-section">
-                <h4>Mark Day Complete</h4>
-                <div class="completion-buttons">
-                    <button class="day-complete-btn digital" onclick="completeDay(9, 'digital')">Completed Digital</button>
-                    <button class="day-complete-btn print" onclick="showPhotoUpload(9)">Completed on Print</button>
-                </div>
-                <div id="photo-upload-9" class="photo-upload hidden">
-                    <p><strong>Upload photo of completed work:</strong></p>
-                    <input type="file" accept="image/*" capture="environment" onchange="handlePhotoUpload(9, this)">
-                    <div id="photo-preview-9" class="photo-preview"></div>
-                    <button class="submit-photo-btn hidden" id="submit-photo-9" onclick="completeDay(9, 'print')">Submit with Photo</button>
-                </div>
-                <div id="work-evidence-9" class="work-evidence hidden"></div>
-            </div>
-        </section>
-<section id="day10" class="day-content hidden">
-            <h2>Day 10: Thu 1/29</h2>
-            <h3>Today's Goals</h3>
-<input type="checkbox" class="task-checkbox"> Division assessment prep (25 min)
-<input type="checkbox" class="task-checkbox"> Complete Unit 2 checkpoint (15 min)
-<input type="checkbox" class="task-checkbox"> Science vocabulary review (15 min)
-<h3>MATH: Assessment Prep</h3>
-<div class="activity"><strong>Practice Test</strong>
-<div class="question" data-qid="65" data-standard="4.NBT.6">
-            <p>1. 144 / 6 = ?</p>
-            <span class="standards-tag">4.NBT.6</span>
-            <textarea id="answer-65" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(65, '4.NBT.6', this)">Check My Answer</button>
-            <div id="eval-result-65" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">24</div>
-<div class="question" data-qid="66" data-standard="4.NBT.6">
-            <p>2. 217 / 7 = ?</p>
-            <span class="standards-tag">4.NBT.6</span>
-            <textarea id="answer-66" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(66, '4.NBT.6', this)">Check My Answer</button>
-            <div id="eval-result-66" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">31</div>
-<div class="question" data-qid="67" data-standard="4.NBT.6">
-            <p>3. 195 / 8 = ? (with remainder)</p>
-            <span class="standards-tag">4.NBT.6</span>
-            <textarea id="answer-67" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(67, '4.NBT.6', this)">Check My Answer</button>
-            <div id="eval-result-67" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">24 R3</div>
-<div class="question" data-qid="68" data-standard="4.NBT.6">
-            <p>4. Explain in words how to use the area model to solve 168 / 7.</p>
-            <span class="standards-tag">4.NBT.6</span>
-            <textarea id="answer-68" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(68, '4.NBT.6', this)">Check My Answer</button>
-            <div id="eval-result-68" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">Find friendly multiples of 7: 7 x 20 = 140. Subtract: 168 - 140 = 28. Divide remainder: 28 / 7 = 4. Add partial quotients: 20 + 4 = 24.</div></div>
-<h3>SCIENCE: Vocabulary Check</h3>
-<div class="activity"><strong>Match the Definition</strong>
-<div class="question" data-qid="69" data-standard="4.NBT.6">
-            <p>Define each term in your own words:
-1. Kinetic Energy
-2. Potential Energy
-3. Friction
-4. Air Resistance
-5. Energy Transfer</p>
-            <span class="standards-tag">4.NBT.6</span>
-            <textarea id="answer-69" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(69, '4.NBT.6', this)">Check My Answer</button>
-            <div id="eval-result-69" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">1. Energy of motion 2. Stored energy (position or condition) 3. Force that slows objects when surfaces rub together 4. Force of air pushing against moving objects 5. Movement of energy from one object to another</div></div>
-<p>---</p>
-            <div class="completion-section">
-                <h4>Mark Day Complete</h4>
-                <div class="completion-buttons">
-                    <button class="day-complete-btn digital" onclick="completeDay(10, 'digital')">Completed Digital</button>
-                    <button class="day-complete-btn print" onclick="showPhotoUpload(10)">Completed on Print</button>
-                </div>
-                <div id="photo-upload-10" class="photo-upload hidden">
-                    <p><strong>Upload photo of completed work:</strong></p>
-                    <input type="file" accept="image/*" capture="environment" onchange="handlePhotoUpload(10, this)">
-                    <div id="photo-preview-10" class="photo-preview"></div>
-                    <button class="submit-photo-btn hidden" id="submit-photo-10" onclick="completeDay(10, 'print')">Submit with Photo</button>
-                </div>
-                <div id="work-evidence-10" class="work-evidence hidden"></div>
-            </div>
-        </section>
-<section id="day11" class="day-content hidden">
-            <h2>Day 11: Fri 1/30</h2>
-            <h3>Today's Goals</h3>
-<input type="checkbox" class="task-checkbox"> More division practice (25 min)
-<input type="checkbox" class="task-checkbox"> Review Indigenous perspectives (20 min)
-<input type="checkbox" class="task-checkbox"> Complete reflection (10 min)
-<h3>MATH: Extra Practice</h3>
-<div class="activity"><strong>Challenge Problems</strong>
-<div class="question" data-qid="70" data-standard="4.NBT.6">
-            <p>1. 432 / 9 = ?</p>
-            <span class="standards-tag">4.NBT.6</span>
-            <textarea id="answer-70" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(70, '4.NBT.6', this)">Check My Answer</button>
-            <div id="eval-result-70" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">48</div>
-<div class="question" data-qid="71" data-standard="4.NBT.6">
-            <p>2. 365 / 7 = ? (with remainder)</p>
-            <span class="standards-tag">4.NBT.6</span>
-            <textarea id="answer-71" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(71, '4.NBT.6', this)">Check My Answer</button>
-            <div id="eval-result-71" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">52 R1</div>
-<div class="question" data-qid="72" data-standard="4.NBT.6">
-            <p>3. The school year has 180 days. If there are 9 months of school, about how many days per month?</p>
-            <span class="standards-tag">4.NBT.6</span>
-            <textarea id="answer-72" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(72, '4.NBT.6', this)">Check My Answer</button>
-            <div id="eval-result-72" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">20 days per month (180 / 9 = 20)</div></div>
-<h3>SOCIAL STUDIES: Looking Back at Unit 2</h3>
-<div class="question" data-qid="73" data-standard="4.NBT.6">
-            <p>1. Name the three nations of the Three Fires Confederacy and their roles:</p>
-            <span class="standards-tag">4.NBT.6</span>
-            <textarea id="answer-73" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(73, '4.NBT.6', this)">Check My Answer</button>
-            <div id="eval-result-73" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">Ojibwe - Keepers of the Faith; Odawa - Keepers of Trade; Potawatomi - Keepers of the Fire</div>
-<div class="question" data-qid="74" data-standard="4.NBT.6">
-            <p>2. Why did the French come to Michigan, and what did they want?</p>
-            <span class="standards-tag">4.NBT.6</span>
-            <textarea id="answer-74" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(74, '4.NBT.6', this)">Check My Answer</button>
-            <div id="eval-result-74" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">The French came for the fur trade, especially beaver furs, which were valuable in Europe for making hats.</div>
-<div class="question" data-qid="75" data-standard="4.NBT.6">
-            <p>3. What is one way Indigenous women had more power than European women of the same time?</p>
-            <span class="standards-tag">4.NBT.6</span>
-            <textarea id="answer-75" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(75, '4.NBT.6', this)">Check My Answer</button>
-            <div id="eval-result-75" class="eval-result"></div>
-        </div>
-<p>---</p>
-            <div class="completion-section">
-                <h4>Mark Day Complete</h4>
-                <div class="completion-buttons">
-                    <button class="day-complete-btn digital" onclick="completeDay(11, 'digital')">Completed Digital</button>
-                    <button class="day-complete-btn print" onclick="showPhotoUpload(11)">Completed on Print</button>
-                </div>
-                <div id="photo-upload-11" class="photo-upload hidden">
-                    <p><strong>Upload photo of completed work:</strong></p>
-                    <input type="file" accept="image/*" capture="environment" onchange="handlePhotoUpload(11, this)">
-                    <div id="photo-preview-11" class="photo-preview"></div>
-                    <button class="submit-photo-btn hidden" id="submit-photo-11" onclick="completeDay(11, 'print')">Submit with Photo</button>
-                </div>
-                <div id="work-evidence-11" class="work-evidence hidden"></div>
-            </div>
-        </section>
-<section id="day12" class="day-content hidden">
-            <h2>Day 12: Sat 1/31</h2>
-            <strong>Saturday - 30 minutes Math only</strong>
-<h3>Today's Goals</h3>
-<input type="checkbox" class="task-checkbox"> Complete final Math assessment (30 min)
-<h3>MATH: Division Assessment</h3>
-<div class="activity"><strong>Show What You Know!</strong>
-<p>Complete without looking at notes first. Check answers after.</p>
-<div class="question" data-qid="76" data-standard="4.NBT.6">
-            <p>1. 156 / 6 = ?</p>
-            <span class="standards-tag">4.NBT.6</span>
-            <textarea id="answer-76" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(76, '4.NBT.6', this)">Check My Answer</button>
-            <div id="eval-result-76" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">26</div>
-<div class="question" data-qid="77" data-standard="4.NBT.6">
-            <p>2. 847 / 7 = ?</p>
-            <span class="standards-tag">4.NBT.6</span>
-            <textarea id="answer-77" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(77, '4.NBT.6', this)">Check My Answer</button>
-            <div id="eval-result-77" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">121</div>
-<div class="question" data-qid="78" data-standard="4.NBT.6">
-            <p>3. 589 / 8 = ? (include remainder)</p>
-            <span class="standards-tag">4.NBT.6</span>
-            <textarea id="answer-78" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(78, '4.NBT.6', this)">Check My Answer</button>
-            <div id="eval-result-78" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">73 R5</div>
-<div class="question" data-qid="79" data-standard="4.NBT.6">
-            <p>4. The team has 178 practice balls to divide among 9 buckets. How many in each? How many extra?</p>
-            <span class="standards-tag">4.NBT.6</span>
-            <textarea id="answer-79" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(79, '4.NBT.6', this)">Check My Answer</button>
-            <div id="eval-result-79" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">19 balls per bucket, 7 extra</div>
-<div class="question" data-qid="80" data-standard="4.NBT.6">
-            <p>5. A tournament has 234 players. If teams have 9 players each, how many teams? What happens with extras?</p>
-            <span class="standards-tag">4.NBT.6</span>
-            <textarea id="answer-80" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(80, '4.NBT.6', this)">Check My Answer</button>
-            <div id="eval-result-80" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">26 teams, 0 extra (divides evenly!)</div></div>
-<p>---</p>
-            <div class="completion-section">
-                <h4>Mark Day Complete</h4>
-                <div class="completion-buttons">
-                    <button class="day-complete-btn digital" onclick="completeDay(12, 'digital')">Completed Digital</button>
-                    <button class="day-complete-btn print" onclick="showPhotoUpload(12)">Completed on Print</button>
-                </div>
-                <div id="photo-upload-12" class="photo-upload hidden">
-                    <p><strong>Upload photo of completed work:</strong></p>
-                    <input type="file" accept="image/*" capture="environment" onchange="handlePhotoUpload(12, this)">
-                    <div id="photo-preview-12" class="photo-preview"></div>
-                    <button class="submit-photo-btn hidden" id="submit-photo-12" onclick="completeDay(12, 'print')">Submit with Photo</button>
-                </div>
-                <div id="work-evidence-12" class="work-evidence hidden"></div>
-            </div>
-        </section>
-<section id="day13" class="day-content hidden">
-            <h2>Day 13: Sun 2/1</h2>
-            <strong>Final Day - Reflection and Celebration</strong>
-<h3>Today's Goals</h3>
-<input type="checkbox" class="task-checkbox"> Preview Unit 3: Conflict and Statehood (20 min)
-<input type="checkbox" class="task-checkbox"> Complete final reflection (15 min)
-<input type="checkbox" class="task-checkbox"> Celebrate your work! You made it!
-<h3>SOCIAL STUDIES: Preview of Unit 3 - Conflict, Control and the Path to Statehood</h3>
-<div class="video-link">
-            <strong>Video:</strong> <a href="https://www.youtube.com/watch?v=HMqZ2PPOLik" target="_blank">Pontiac's Rebellion Explained</a>
-        </div>
-<div class="key-concept"><strong>What's Coming Next</strong>
-<p>In Unit 3, you'll learn how control of Michigan changed hands multiple times - from Indigenous nations to France to Britain to the United States. Each change brought conflict and consequences.</p>
-<p>After the French fur trade era you just learned about, Britain took control of Michigan. But Indigenous peoples didn't just accept this - they fought back. The most famous resistance was led by <strong>Pontiac</strong>, an Odawa leader, in 1763.</p>
-<strong>Key Events Coming Up:</strong>
-<ul><li>1763 - Pontiac's Resistance against British rule</li>
-<li>1783 - American Revolution ends; Britain gives Great Lakes to U.S. (but didn't own it to give!)</li>
-<li>1787 - Northwest Ordinance says "no slavery" in this territory (but did it work?)</li>
-<li>1837 - Michigan becomes a state (but who could vote? Who couldn't?)</div></li>
-</ul>
-<div class="question" data-qid="81" data-standard="4-H3.0.3">
-            <p>Based on what you learned in Unit 2, why might Indigenous nations be angry about Britain taking over Michigan?</p>
-            <span class="standards-tag">4-H3.0.3</span>
-            <textarea id="answer-81" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(81, '4-H3.0.3', this)">Check My Answer</button>
-            <div id="eval-result-81" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">Good answers might include: The British treated Indigenous peoples differently than the French (less respectful), they didn't continue gift-giving traditions, they wanted to settle on Indigenous land, they didn't honor existing agreements.</div>
-<div class="key-concept"><strong>Unit 3 Preview: The Toledo War (Yes, Really!)</strong>
-<p>Here's a wild fact to chew on: Michigan almost didn't include the Upper Peninsula! In 1835, Michigan and Ohio nearly went to war over a strip of land that included Toledo. Congress told Michigan: "Give up Toledo, and we'll give you the whole U.P."</p>
-<p>At the time, people thought Michigan got the bad deal. The U.P. seemed worthless - just forest and wilderness. But then they discovered copper and iron ore worth billions. Who really won?</div></p>
-<h3>Final Reflection</h3>
-<div class="question" data-qid="82" data-standard="4-H3.0.3">
-            <p><strong>MATH:</strong> What division strategy works best for you? (Area model, long division, or something else?)</p>
-            <span class="standards-tag">4-H3.0.3</span>
-            <textarea id="answer-82" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(82, '4-H3.0.3', this)">Check My Answer</button>
-            <div id="eval-result-82" class="eval-result"></div>
-        </div>
-<div class="question" data-qid="83" data-standard="4-H3.0.3">
-            <p><strong>SCIENCE:</strong> Explain how energy transfers when a bat hits a ball, using the correct vocabulary:</p>
-            <span class="standards-tag">4-H3.0.3</span>
-            <textarea id="answer-83" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(83, '4-H3.0.3', this)">Check My Answer</button>
-            <div id="eval-result-83" class="eval-result"></div>
-        </div>
-<div class="question" data-qid="84" data-standard="4-H3.0.3">
-            <p><strong>SOCIAL STUDIES:</strong> What question are you most curious about for the statehood unit?</p>
-            <span class="standards-tag">4-H3.0.3</span>
-            <textarea id="answer-84" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(84, '4-H3.0.3', this)">Check My Answer</button>
-            <div id="eval-result-84" class="eval-result"></div>
-        </div>
-<div class="question" data-qid="85" data-standard="4-H3.0.3">
-            <p><strong>Overall:</strong> What are you most proud of accomplishing during the moving weeks?</p>
-            <span class="standards-tag">4-H3.0.3</span>
-            <textarea id="answer-85" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(85, '4-H3.0.3', this)">Check My Answer</button>
-            <div id="eval-result-85" class="eval-result"></div>
-        </div>
-<p>---</p>
-<h3>Congratulations, Emory!</h3>
-<p>You completed 13 days of independent learning during a move!</p>
-<em>Scientia, Virtus, Fortitudo</em>
-Knowledge, Character, Strength
-            <div class="completion-section">
-                <h4>Mark Day Complete</h4>
-                <div class="completion-buttons">
-                    <button class="day-complete-btn digital" onclick="completeDay(13, 'digital')">Completed Digital</button>
-                    <button class="day-complete-btn print" onclick="showPhotoUpload(13)">Completed on Print</button>
-                </div>
-                <div id="photo-upload-13" class="photo-upload hidden">
-                    <p><strong>Upload photo of completed work:</strong></p>
-                    <input type="file" accept="image/*" capture="environment" onchange="handlePhotoUpload(13, this)">
-                    <div id="photo-preview-13" class="photo-preview"></div>
-                    <button class="submit-photo-btn hidden" id="submit-photo-13" onclick="completeDay(13, 'print')">Submit with Photo</button>
-                </div>
-                <div id="work-evidence-13" class="work-evidence hidden"></div>
+            <div class="feature">
+                <div class="feature-icon">📊</div>
+                <h3>Progress Tracking</h3>
+                <p>Daily completion, timed math drills, standards mastery</p>
             </div>
         </section>
 
-    <script>
-        let completedDays = JSON.parse(localStorage.getItem('ejupWorkbookDays') || '[]');
-        const totalDays = 13;
-
-        function updateProgress() {
-            const percent = (completedDays.length / totalDays) * 100;
-            document.getElementById('progressFill').style.width = percent + '%';
-            document.getElementById('progressText').textContent = completedDays.length;
-
-            document.querySelectorAll('.day-btn').forEach((btn, index) => {
-                btn.classList.remove('completed', 'current');
-                if (completedDays.includes(index + 1)) {
-                    btn.classList.add('completed');
-                }
-            });
-
-            const nextDay = completedDays.length + 1;
-            if (nextDay <= totalDays) {
-                document.querySelectorAll('.day-btn')[nextDay - 1]?.classList.add('current');
-            }
-        }
-
-        function showDay(dayNum) {
-            document.querySelectorAll('.day-content').forEach(el => el.classList.add('hidden'));
-            document.getElementById('day' + dayNum)?.classList.remove('hidden');
-            document.getElementById('day' + dayNum)?.scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // Parent PINs for signoff
-        const PARENT_PINS = {'5806': 'Denai', '3808': 'Devan'};
-        let pendingPhotos = {};
-
-        function showPhotoUpload(dayNum) {
-            document.getElementById('photo-upload-' + dayNum).classList.remove('hidden');
-        }
-
-        function handlePhotoUpload(dayNum, input) {
-            const file = input.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const preview = document.getElementById('photo-preview-' + dayNum);
-                    preview.innerHTML = '<img src="' + e.target.result + '" alt="Work photo">';
-                    pendingPhotos[dayNum] = e.target.result;
-                    document.getElementById('submit-photo-' + dayNum).classList.remove('hidden');
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        // Exit ticket state - Timed Multiplication Drill
-        let pendingExitTicket = { dayNum: null, method: null };
-        let drillProblems = [];
-        let currentProblem = 0;
-        let drillResults = [];
-        let timerInterval = null;
-        let timerSeconds = 0;
-        let timerRunning = false;
-
-        function generateProblems() {
-            const problems = [];
-            for (let i = 0; i < 10; i++) {
-                const a = Math.floor(Math.random() * 9) + 2; // 2-10
-                const b = Math.floor(Math.random() * 9) + 2; // 2-10
-                problems.push({ a, b, answer: a * b });
-            }
-            return problems;
-        }
-
-        function showExitTicket(dayNum, method) {
-            if (method === 'print' && !pendingPhotos[dayNum]) {
-                alert('Please upload a photo of your completed work first.');
-                return;
-            }
-
-            pendingExitTicket = { dayNum, method };
-            document.getElementById('exitTicketDay').textContent = dayNum;
-
-            // Reset state
-            drillProblems = generateProblems();
-            currentProblem = 0;
-            drillResults = [];
-            timerSeconds = 0;
-
-            // Show start screen
-            document.getElementById('exitTicketStart').style.display = 'block';
-            document.getElementById('exitTicketQuiz').style.display = 'none';
-            document.getElementById('exitTicketResults').style.display = 'none';
-            document.getElementById('exitCloseBtn').style.display = 'block';
-
-            document.getElementById('exitTicketModal').classList.add('show');
-        }
-
-        function startMultiplicationDrill() {
-            document.getElementById('exitTicketStart').style.display = 'none';
-            document.getElementById('exitTicketQuiz').style.display = 'block';
-            document.getElementById('exitCloseBtn').style.display = 'none';
-
-            timerRunning = true;
-            timerInterval = setInterval(() => {
-                timerSeconds++;
-                const mins = Math.floor(timerSeconds / 60);
-                const secs = timerSeconds % 60;
-                document.getElementById('timerDisplay').textContent = mins + ':' + (secs < 10 ? '0' : '') + secs;
-            }, 1000);
-
-            showProblem();
-        }
-
-        function showProblem() {
-            const p = drillProblems[currentProblem];
-            document.getElementById('questionNum').textContent = currentProblem + 1;
-            document.getElementById('mathProblem').textContent = p.a + ' x ' + p.b + ' = ';
-            document.getElementById('mathAnswer').value = '';
-            document.getElementById('mathAnswer').focus();
-        }
-
-        function checkAnswer() {
-            const userAnswer = parseInt(document.getElementById('mathAnswer').value);
-            const correct = drillProblems[currentProblem];
-            const isCorrect = userAnswer === correct.answer;
-
-            drillResults.push({
-                problem: correct.a + ' x ' + correct.b,
-                correctAnswer: correct.answer,
-                userAnswer: userAnswer || 0,
-                isCorrect: isCorrect
-            });
-
-            currentProblem++;
-
-            if (currentProblem < 10) {
-                showProblem();
-            } else {
-                endDrill();
-            }
-        }
-
-        function endDrill() {
-            clearInterval(timerInterval);
-            timerRunning = false;
-
-            document.getElementById('exitTicketQuiz').style.display = 'none';
-            document.getElementById('exitTicketResults').style.display = 'block';
-            document.getElementById('exitCloseBtn').style.display = 'block';
-
-            const correct = drillResults.filter(r => r.isCorrect).length;
-            document.getElementById('scoreDisplay').textContent = correct + '/10';
-
-            const mins = Math.floor(timerSeconds / 60);
-            const secs = timerSeconds % 60;
-            document.getElementById('timeDisplay').textContent = 'Time: ' + mins + ':' + (secs < 10 ? '0' : '') + secs;
-
-            // Show details
-            const detailsHtml = drillResults.map((r, i) => {
-                const color = r.isCorrect ? 'green' : 'red';
-                const icon = r.isCorrect ? '✓' : '✗';
-                return '<div style="padding:5px;color:' + color + ';">' + icon + ' ' + r.problem + ' = ' + r.correctAnswer + (r.isCorrect ? '' : ' (you: ' + r.userAnswer + ')') + '</div>';
-            }).join('');
-            document.getElementById('resultsDetails').innerHTML = detailsHtml;
-        }
-
-        function cancelExitTicket() {
-            if (timerRunning) {
-                if (!confirm('Are you sure? Your progress will be lost.')) return;
-                clearInterval(timerInterval);
-                timerRunning = false;
-            }
-            document.getElementById('exitTicketModal').classList.remove('show');
-            pendingExitTicket = { dayNum: null, method: null };
-        }
-
-        function submitExitTicket() {
-            const correct = drillResults.filter(r => r.isCorrect).length;
-
-            // Save exit ticket results
-            const exitTickets = JSON.parse(localStorage.getItem('ejupExitTickets') || '{}');
-            exitTickets[pendingExitTicket.dayNum] = {
-                score: correct,
-                total: 10,
-                timeSeconds: timerSeconds,
-                problems: drillResults,
-                timestamp: new Date().toLocaleString()
-            };
-            localStorage.setItem('ejupExitTickets', JSON.stringify(exitTickets));
-
-            document.getElementById('exitTicketModal').classList.remove('show');
-            finishDayCompletion(pendingExitTicket.dayNum, pendingExitTicket.method);
-        }
-
-        function completeDay(dayNum, method) {
-            // Show exit ticket first
-            showExitTicket(dayNum, method);
-        }
-
-        function finishDayCompletion(dayNum, method) {
-            const pin = prompt('Parent PIN required to mark day complete:');
-            if (!pin || !PARENT_PINS[pin]) {
-                alert('Invalid PIN. Please have a parent enter their PIN.');
-                return;
-            }
-            const parentName = PARENT_PINS[pin];
-
-            if (!completedDays.includes(dayNum)) {
-                completedDays.push(dayNum);
-                localStorage.setItem('ejupWorkbookDays', JSON.stringify(completedDays));
-
-                // Store signoff with method and photo if applicable
-                const signoffs = JSON.parse(localStorage.getItem('ejupSignoffs') || '{}');
-                signoffs[dayNum] = {
-                    parent: parentName,
-                    time: new Date().toLocaleString(),
-                    method: method,
-                    photo: method === 'print' ? pendingPhotos[dayNum] : null
-                };
-                localStorage.setItem('ejupSignoffs', JSON.stringify(signoffs));
-
-                // Show evidence
-                showWorkEvidence(dayNum, signoffs[dayNum]);
-            }
-
-            updateProgress();
-            alert(`Day ${dayNum} (${method}) verified by ${parentName}!`);
-
-            if (dayNum < totalDays) {
-                setTimeout(() => showDay(dayNum + 1), 500);
-            }
-        }
-
-        function showWorkEvidence(dayNum, data) {
-            const evidenceDiv = document.getElementById('work-evidence-' + dayNum);
-            if (evidenceDiv && data) {
-                let html = '<p class="verified">Verified by ' + data.parent + ' on ' + data.time + '</p>';
-                html += '<p>Method: ' + (data.method === 'print' ? 'Printed workbook' : 'Digital') + '</p>';
-                if (data.photo) {
-                    html += '<img src="' + data.photo + '" alt="Work evidence">';
-                }
-                evidenceDiv.innerHTML = html;
-                evidenceDiv.classList.remove('hidden');
-
-                // Hide the completion buttons since day is done
-                const section = document.getElementById('day' + dayNum);
-                const buttons = section.querySelector('.completion-buttons');
-                const upload = section.querySelector('.photo-upload');
-                if (buttons) buttons.style.display = 'none';
-                if (upload) upload.classList.add('hidden');
-            }
-        }
-
-        function loadExistingEvidence() {
-            const signoffs = JSON.parse(localStorage.getItem('ejupSignoffs') || '{}');
-            for (const [dayNum, data] of Object.entries(signoffs)) {
-                showWorkEvidence(dayNum, data);
-            }
-        }
-
-        function toggleAnswer(btn) {
-            const answer = btn.nextElementSibling;
-            answer.classList.toggle('show');
-            btn.textContent = answer.classList.contains('show') ? 'Hide Answer' : 'Check Answer';
-        }
-
-        // API endpoint - update this after deploying to Netlify
-        const API_URL = localStorage.getItem('ejupApiUrl') || '';
-
-        // Answer key for evaluation (extracted from source)
-        const answerKey = {};
-
-        updateProgress();
-        loadExistingEvidence();
-        loadQuestions();
-        loadGradebook();
-
-        // AI Evaluation System
-        async function evaluateAnswer(qid, standard, btn) {
-            const textarea = document.getElementById('answer-' + qid);
-            const studentAnswer = textarea.value.trim();
-
-            if (!studentAnswer) {
-                alert('Please write your answer first!');
-                return;
-            }
-
-            // Get the question text
-            const questionDiv = textarea.closest('.question');
-            const questionText = questionDiv.querySelector('p').textContent;
-
-            // Find the correct answer (look for next answer-reveal sibling)
-            let correctAnswer = '';
-            let nextEl = questionDiv.nextElementSibling;
-            while (nextEl) {
-                if (nextEl.classList.contains('answer-reveal')) {
-                    const answerDiv = nextEl.nextElementSibling;
-                    if (answerDiv && answerDiv.classList.contains('answer')) {
-                        correctAnswer = answerDiv.textContent.trim();
-                    }
-                    break;
-                }
-                if (nextEl.classList.contains('question')) break;
-                nextEl = nextEl.nextElementSibling;
-            }
-
-            // Show loading state
-            btn.disabled = true;
-            btn.innerHTML = '<span class="loading-spinner"></span>Checking...';
-
-            const resultDiv = document.getElementById('eval-result-' + qid);
-
-            try {
-                let evaluation;
-
-                if (API_URL) {
-                    // Use AI evaluation via Netlify function
-                    const response = await fetch(API_URL + '/evaluate', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            question: questionText,
-                            studentAnswer: studentAnswer,
-                            correctAnswer: correctAnswer,
-                            standard: standard,
-                            gradeLevel: '4th Grade'
-                        })
-                    });
-
-                    const data = await response.json();
-                    if (data.success) {
-                        evaluation = data.evaluation;
-                    } else {
-                        throw new Error(data.error);
-                    }
-                } else {
-                    // Fallback: Simple local evaluation
-                    evaluation = localEvaluate(studentAnswer, correctAnswer, standard);
-                }
-
-                // Display result
-                const levelClass = evaluation.level.toLowerCase().replace(' ', '_');
-                resultDiv.className = 'eval-result show ' + levelClass;
-                resultDiv.innerHTML = `
-                    <span class="eval-score ${levelClass}">${evaluation.level} (${evaluation.score}/4)</span>
-                    <div class="eval-feedback">${evaluation.feedback}</div>
-                    ${evaluation.hint && evaluation.score < 3 ? `<div class="eval-hint"><strong>Hint:</strong> ${evaluation.hint}</div>` : ''}
-                `;
-
-                // Save to gradebook
-                saveToGradebook(qid, standard, evaluation);
-
-            } catch (error) {
-                console.error('Evaluation error:', error);
-                resultDiv.className = 'eval-result show developing';
-                resultDiv.innerHTML = `
-                    <span class="eval-score developing">Check Manually</span>
-                    <div class="eval-feedback">Couldn't connect to tutor. Have Mom or Dad check your answer!</div>
-                `;
-            }
-
-            btn.disabled = false;
-            btn.textContent = 'Check Again';
-        }
-
-        function localEvaluate(studentAnswer, correctAnswer, standard) {
-            // Simple keyword-based evaluation as fallback
-            const studentLower = studentAnswer.toLowerCase();
-            const correctLower = correctAnswer.toLowerCase();
-
-            // Extract key terms from correct answer
-            const keyTerms = correctLower.split(/\s+/).filter(w => w.length > 4);
-            const matchedTerms = keyTerms.filter(term => studentLower.includes(term));
-            const matchRatio = keyTerms.length > 0 ? matchedTerms.length / keyTerms.length : 0;
-
-            let score, level, feedback, hint;
-
-            if (matchRatio >= 0.7 || studentLower.includes(correctLower.substring(0, 20))) {
-                score = 4;
-                level = 'ADVANCED';
-                feedback = 'Excellent work! You really understand this concept.';
-                hint = '';
-            } else if (matchRatio >= 0.5) {
-                score = 3;
-                level = 'PROFICIENT';
-                feedback = 'Good job! You've got the main idea.';
-                hint = '';
-            } else if (matchRatio >= 0.25 || studentAnswer.length > 20) {
-                score = 2;
-                level = 'DEVELOPING';
-                feedback = 'You're on the right track! Try adding more detail.';
-                hint = 'Look back at the passage for key words and ideas.';
-            } else {
-                score = 1;
-                level = 'NOT_PROFICIENT';
-                feedback = 'Let's work on this together. Read the passage again carefully.';
-                hint = 'Start by finding the main topic in the passage.';
-            }
-
-            return { score, level, feedback, hint, correct: score >= 3 };
-        }
-
-        function saveToGradebook(qid, standard, evaluation) {
-            const gradebook = JSON.parse(localStorage.getItem('ejupGradebook') || '{}');
-
-            if (!gradebook[standard]) {
-                gradebook[standard] = { scores: [], attempts: 0 };
-            }
-
-            gradebook[standard].scores.push(evaluation.score);
-            gradebook[standard].attempts++;
-            gradebook[standard].lastScore = evaluation.score;
-            gradebook[standard].lastLevel = evaluation.level;
-
-            // Calculate average
-            const scores = gradebook[standard].scores;
-            gradebook[standard].average = scores.reduce((a, b) => a + b, 0) / scores.length;
-
-            // Determine overall proficiency
-            if (gradebook[standard].average >= 3.5) {
-                gradebook[standard].proficiency = 'ADVANCED';
-            } else if (gradebook[standard].average >= 2.5) {
-                gradebook[standard].proficiency = 'PROFICIENT';
-            } else if (gradebook[standard].average >= 1.5) {
-                gradebook[standard].proficiency = 'DEVELOPING';
-            } else {
-                gradebook[standard].proficiency = 'NOT_PROFICIENT';
-            }
-
-            localStorage.setItem('ejupGradebook', JSON.stringify(gradebook));
-            loadGradebook();
-        }
-
-        function loadGradebook() {
-            const gradebook = JSON.parse(localStorage.getItem('ejupGradebook') || '{}');
-            const container = document.getElementById('gradebookTable');
-            if (!container) return;
-
-            if (Object.keys(gradebook).length === 0) {
-                container.innerHTML = '<p style="color:#666;font-style:italic;padding:15px;">No evaluations yet. Complete some questions to see your progress!</p>';
-                return;
-            }
-
-            let html = `<table>
-                <thead>
-                    <tr>
-                        <th>Standard</th>
-                        <th>Attempts</th>
-                        <th>Average</th>
-                        <th>Proficiency</th>
-                    </tr>
-                </thead>
-                <tbody>`;
-
-            for (const [standard, data] of Object.entries(gradebook)) {
-                const levelClass = data.proficiency.toLowerCase().replace(' ', '_');
-                html += `<tr>
-                    <td>${standard}</td>
-                    <td>${data.attempts}</td>
-                    <td>${data.average.toFixed(1)}/4</td>
-                    <td><span class="proficiency-badge ${levelClass}">${data.proficiency.replace('_', ' ')}</span></td>
-                </tr>`;
-            }
-
-            html += '</tbody></table>';
-            container.innerHTML = html;
-        }
-
-        // Help/Question System
-        function showHelpModal() {
-            document.getElementById('helpModal').classList.add('show');
-        }
-
-        function hideHelpModal() {
-            document.getElementById('helpModal').classList.remove('show');
-        }
-
-        function submitQuestion() {
-            const questionText = document.getElementById('questionText').value.trim();
-            const questionType = document.getElementById('questionType').value;
-            const currentDay = document.querySelector('.day-content:not(.hidden)')?.id?.replace('day', '') || '?';
-
-            if (!questionText) {
-                alert('Please type your question first.');
-                return;
-            }
-
-            const questions = JSON.parse(localStorage.getItem('ejupQuestions') || '[]');
-            questions.push({
-                text: questionText,
-                type: questionType,
-                day: currentDay,
-                time: new Date().toLocaleString(),
-                answered: false
-            });
-            localStorage.setItem('ejupQuestions', JSON.stringify(questions));
-
-            document.getElementById('questionText').value = '';
-            alert('Question saved! Mom or Dad will see it when they check your work.');
-            hideHelpModal();
-            loadQuestions();
-        }
-
-        function loadQuestions() {
-            const questions = JSON.parse(localStorage.getItem('ejupQuestions') || '[]');
-            const unanswered = questions.filter(q => !q.answered);
-            const badge = document.getElementById('questionBadge');
-            if (unanswered.length > 0) {
-                badge.textContent = unanswered.length;
-                badge.style.display = 'block';
-            } else {
-                badge.style.display = 'none';
-            }
-
-            // Show in parent review
-            const reviewList = document.getElementById('questionReviewList');
-            if (reviewList) {
-                reviewList.innerHTML = questions.map((q, i) => `
-                    <div class="question-item ${q.answered ? 'answered' : ''}">
-                        <span class="q-type">${q.type} (Day ${q.day})</span>
-                        <p>${q.text}</p>
-                        <span class="q-time">${q.time}</span>
-                        ${!q.answered ? `<button onclick="markQuestionAnswered(${i})">Mark Answered</button>` : '<span style="color:green">Answered</span>'}
-                    </div>
-                `).join('');
-            }
-        }
-
-        function markQuestionAnswered(index) {
-            const questions = JSON.parse(localStorage.getItem('ejupQuestions') || '[]');
-            if (questions[index]) {
-                questions[index].answered = true;
-                localStorage.setItem('ejupQuestions', JSON.stringify(questions));
-                loadQuestions();
-            }
-        }
-
-        function showDashboard() {
-            document.querySelectorAll('.day-content').forEach(el => el.classList.add('hidden'));
-            document.getElementById('dashboard').classList.remove('hidden');
-            updateDashboard();
-        }
-
-        function updateDashboard() {
-            const signoffs = JSON.parse(localStorage.getItem('ejupSignoffs') || '{}');
-            const daysComplete = Object.keys(signoffs).length;
-            const today = new Date();
-            const startDate = new Date('2026-01-20');
-            const daysSinceStart = Math.floor((today - startDate) / (1000 * 60 * 60 * 24)) + 1;
-            const expectedDay = Math.min(daysSinceStart, totalDays);
-
-            // Pacing indicator
-            const pacingEl = document.getElementById('pacingIndicator');
-            if (pacingEl) {
-                let status, message;
-                if (daysComplete >= expectedDay) {
-                    status = 'on-track';
-                    message = daysComplete > expectedDay ? 'Ahead of schedule!' : 'Right on track!';
-                } else {
-                    status = 'behind';
-                    message = `${expectedDay - daysComplete} day(s) behind - let's catch up!`;
-                }
-                pacingEl.className = 'pacing-indicator ' + status;
-                pacingEl.innerHTML = `<strong>Pacing:</strong> ${message} (${daysComplete}/${totalDays} days complete)`;
-            }
-
-            // Standards progress (simplified)
-            const standardsProgress = {
-                'Math: Division': { covered: [3,4,5,7,8,9,10,11,12], mastered: daysComplete >= 12 ? 100 : Math.round((daysComplete/12)*100) },
-                'Science: Energy': { covered: [3,8,9], mastered: daysComplete >= 9 ? 100 : Math.round((Math.min(daysComplete,9)/9)*100) },
-                'Science: Friction': { covered: [7,8], mastered: daysComplete >= 8 ? 100 : Math.round((Math.min(daysComplete,8)/8)*100) },
-                'SS: First Peoples': { covered: [1,2,4,7,8,9], mastered: daysComplete >= 9 ? 100 : Math.round((Math.min(daysComplete,9)/9)*100) },
-                'SS: Unit 3 Preview': { covered: [13], mastered: daysComplete >= 13 ? 100 : 0 }
-            };
-
-            const standardsEl = document.getElementById('standardsProgress');
-            if (standardsEl) {
-                standardsEl.innerHTML = Object.entries(standardsProgress).map(([name, data]) => `
-                    <div class="standard-card ${data.mastered >= 100 ? 'mastered' : data.mastered > 0 ? 'in-progress' : ''}">
-                        <h4>${name}</h4>
-                        <div class="progress-mini">
-                            <div class="progress-mini-fill" style="width: ${data.mastered}%"></div>
-                        </div>
-                        <small>${data.mastered}% complete</small>
-                    </div>
-                `).join('');
-            }
-
-            // M-STEP alignment
-            const mstepEl = document.getElementById('mstepAlignment');
-            if (mstepEl) {
-                const mstepStandards = [
-                    { code: '4.NBT.6', desc: 'Divide multi-digit numbers', progress: daysComplete >= 12 ? 100 : Math.round((daysComplete/12)*80) },
-                    { code: '4.PS3.A', desc: 'Energy transfer', progress: daysComplete >= 9 ? 100 : Math.round((daysComplete/9)*70) },
-                    { code: '4.PS3.B', desc: 'Energy and forces', progress: daysComplete >= 8 ? 100 : Math.round((daysComplete/8)*70) },
-                    { code: '4-H3.0.2', desc: 'Michigan Indigenous peoples', progress: daysComplete >= 9 ? 100 : Math.round((daysComplete/9)*80) },
-                    { code: '4-H3.0.5', desc: 'European exploration', progress: daysComplete >= 9 ? 100 : Math.round((daysComplete/9)*70) }
-                ];
-                mstepEl.innerHTML = mstepStandards.map(s => `
-                    <div class="standard-card ${s.progress >= 100 ? 'mastered' : s.progress > 0 ? 'in-progress' : ''}">
-                        <h4>${s.code}</h4>
-                        <small>${s.desc}</small>
-                        <div class="progress-mini">
-                            <div class="progress-mini-fill" style="width: ${s.progress}%"></div>
-                        </div>
-                    </div>
-                `).join('');
-            }
-
-            // Exit tickets
-            renderExitTickets();
-        }
-
-        function renderExitTickets() {
-            const exitTickets = JSON.parse(localStorage.getItem('ejupExitTickets') || '{}');
-            const container = document.getElementById('exitTicketsList');
-            if (!container) return;
-
-            const days = Object.keys(exitTickets).sort((a,b) => parseInt(b) - parseInt(a));
-            if (days.length === 0) {
-                container.innerHTML = '<p style="color:#666;font-style:italic;">No exit tickets yet.</p>';
-                return;
-            }
-
-            container.innerHTML = days.map(day => {
-                const ticket = exitTickets[day];
-                const mins = Math.floor(ticket.timeSeconds / 60);
-                const secs = ticket.timeSeconds % 60;
-                const timeStr = mins + ':' + (secs < 10 ? '0' : '') + secs;
-                const percentage = Math.round((ticket.score / ticket.total) * 100);
-                const color = percentage >= 80 ? 'var(--success)' : percentage >= 60 ? 'var(--gold)' : '#c0392b';
-
-                return '<div style="background:white;padding:15px;border-radius:8px;margin-bottom:10px;border-left:4px solid ' + color + ';">' +
-                    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">' +
-                        '<strong style="color:var(--navy);">Day ' + day + '</strong>' +
-                        '<span style="font-size:24px;font-weight:bold;color:' + color + ';">' + ticket.score + '/' + ticket.total + '</span>' +
-                    '</div>' +
-                    '<p style="margin:8px 0;"><strong>Time:</strong> ' + timeStr + '</p>' +
-                    '<small style="color:#666;">' + ticket.timestamp + '</small>' +
-                '</div>';
-            }).join('');
-        }
-
-        // Format choice functions
-        function showFormatChoice() {
-            var choice = confirm('Choose your format:\n\nOK = Open Print/PDF Version\nCancel = Stay on Digital Version');
-            if (choice) {
-                window.open('/print.html', '_blank');
-            }
-        }
-    </script>
-
-    <!-- Help Button -->
-    <button class="help-btn" onclick="showHelpModal()">?<span id="questionBadge" style="display:none;position:absolute;top:-5px;right:-5px;background:red;color:white;border-radius:50%;width:20px;height:20px;font-size:12px;"></span></button>
-
-    <!-- Help Modal -->
-    <div id="helpModal" class="help-modal" onclick="if(event.target===this)hideHelpModal()">
-        <div class="help-content" style="position:relative;">
-            <button class="help-close" onclick="hideHelpModal()">x</button>
-            <h3>Need Help?</h3>
-            <p>Type your question below. Mom or Dad will see it when they check your work!</p>
-            <select id="questionType">
-                <option value="Confused">I'm confused about something</option>
-                <option value="Stuck">I'm stuck and need help</option>
-                <option value="Check">Can you check my answer?</option>
-                <option value="Question">I have a question about the topic</option>
-                <option value="Done Early">I finished early - what's next?</option>
-            </select>
-            <textarea id="questionText" placeholder="Type your question here..."></textarea>
-            <button class="help-submit" onclick="submitQuestion()">Send to Mom/Dad</button>
-
-            <div id="questionReviewList" class="question-list"></div>
-        </div>
-    </div>
-
-    <!-- Format Choice Modal -->
-    <div id="formatChoiceModal" class="help-modal" onclick="if(event.target===this)hideFormatChoice()">
-        <div class="help-content" style="position:relative; max-width: 450px; text-align: center;">
-            <button class="help-close" onclick="hideFormatChoice()">x</button>
-            <h3>How would you like to learn today?</h3>
-            <p style="margin: 15px 0;">Choose your preferred format:</p>
-
-            <div style="display: flex; gap: 20px; justify-content: center; margin: 25px 0;">
-                <button onclick="chooseFormat('digital')" style="flex:1; padding: 30px 20px; background: var(--navy); color: white; border: none; border-radius: 12px; cursor: pointer;">
-                    <div style="font-size: 36px; margin-bottom: 10px;">💻</div>
-                    <div style="font-weight: bold; font-size: 18px;">Digital</div>
-                    <div style="font-size: 12px; margin-top: 8px; opacity: 0.8;">Answer on screen<br>Get AI feedback</div>
-                </button>
-
-                <button onclick="chooseFormat('print')" style="flex:1; padding: 30px 20px; background: white; color: var(--navy); border: 2px solid var(--navy); border-radius: 12px; cursor: pointer;">
-                    <div style="font-size: 36px; margin-bottom: 10px;">📄</div>
-                    <div style="font-weight: bold; font-size: 18px;">Print PDF</div>
-                    <div style="font-size: 12px; margin-top: 8px; opacity: 0.7;">Download workbook<br>Write on paper</div>
-                </button>
+        <section class="cta-section">
+            <h2>Choose Your Format</h2>
+            <div class="format-options">
+                <a href="/app.html" class="format-card digital">
+                    <div class="format-icon">💻</div>
+                    <h3>Digital Interactive</h3>
+                    <ul>
+                        <li>AI-powered feedback on answers</li>
+                        <li>Timed multiplication drills</li>
+                        <li>Progress dashboard</li>
+                        <li>Auto-saved progress</li>
+                        <li>Parent verification system</li>
+                    </ul>
+                    <span class="btn btn-navy">Start Digital</span>
+                </a>
+
+                <a href="/print.html" class="format-card print">
+                    <div class="format-icon">📄</div>
+                    <h3>Print Worksheets</h3>
+                    <ul>
+                        <li>Dense, efficient layout</li>
+                        <li>Select specific days</li>
+                        <li>Save as PDF</li>
+                        <li>Write on paper</li>
+                        <li>Traditional workbook feel</li>
+                    </ul>
+                    <span class="btn btn-gold">Get PDF</span>
+                </a>
             </div>
-        </div>
-    </div>
+        </section>
 
-    <!-- Exit Ticket Modal - Timed Multiplication Facts -->
-    <div id="exitTicketModal" class="help-modal" onclick="if(event.target===this && !timerRunning)cancelExitTicket()">
-        <div class="help-content" style="position:relative; max-width: 500px;">
-            <button class="help-close" onclick="cancelExitTicket()" id="exitCloseBtn">x</button>
-            <h3>Exit Ticket - Day <span id="exitTicketDay"></span></h3>
-            <p><strong>Timed Multiplication Facts</strong></p>
-
-            <!-- Start Screen -->
-            <div id="exitTicketStart">
-                <p style="margin: 20px 0; text-align: center;">Answer 10 multiplication problems as fast as you can!</p>
-                <p style="text-align: center; color: #666;">Timer starts when you click Begin.</p>
-                <button class="help-submit" onclick="startMultiplicationDrill()" style="width: 100%; margin-top: 15px; font-size: 18px; padding: 15px;">Begin!</button>
+        <section class="standards">
+            <h3>M-STEP Standards Alignment</h3>
+            <div class="standards-grid">
+                <div class="standard-item"><strong>4.NBT.6</strong> Multi-digit division</div>
+                <div class="standard-item"><strong>4.PS3.A</strong> Energy transfer</div>
+                <div class="standard-item"><strong>4.PS3.B</strong> Forces & friction</div>
+                <div class="standard-item"><strong>4-H3.0.2</strong> Indigenous peoples</div>
+                <div class="standard-item"><strong>4-H3.0.5</strong> European exploration</div>
+                <div class="standard-item"><strong>4-H3.0.6</strong> Treaties & government</div>
             </div>
+        </section>
+    </main>
 
-            <!-- Quiz Screen -->
-            <div id="exitTicketQuiz" style="display: none;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                    <span style="font-size: 18px;">Question <span id="questionNum">1</span>/10</span>
-                    <span style="font-size: 24px; font-weight: bold; color: var(--navy);" id="timerDisplay">0:00</span>
-                </div>
-                <div style="text-align: center; margin: 30px 0;">
-                    <span style="font-size: 48px; font-weight: bold;" id="mathProblem">7 x 8 = </span>
-                    <input type="number" id="mathAnswer" style="font-size: 36px; width: 100px; text-align: center; border: 2px solid var(--navy); border-radius: 8px; padding: 10px;" onkeypress="if(event.key==='Enter')checkAnswer()">
-                </div>
-                <button class="help-submit" onclick="checkAnswer()" style="width: 100%;">Next</button>
-            </div>
-
-            <!-- Results Screen -->
-            <div id="exitTicketResults" style="display: none; text-align: center;">
-                <h3 style="color: var(--navy); margin: 20px 0;">Results</h3>
-                <div style="font-size: 48px; font-weight: bold; color: var(--gold);" id="scoreDisplay">8/10</div>
-                <p style="font-size: 24px; margin: 10px 0;" id="timeDisplay">Time: 0:45</p>
-                <div id="resultsDetails" style="text-align: left; margin: 20px 0; max-height: 150px; overflow-y: auto;"></div>
-                <button class="help-submit" onclick="submitExitTicket()" style="width: 100%; margin-top: 15px;">Complete Day</button>
-            </div>
-        </div>
-    </div>
+    <footer>
+        <p>EJUP - Emory James University Prep | <a href="/">Home</a></p>
+        <p style="opacity: 0.7; margin-top: 5px;">Scientia, Virtus, Fortitudo</p>
+    </footer>
 </body>
 </html>
