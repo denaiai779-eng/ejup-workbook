@@ -7,12 +7,13 @@
     <style>
         @page {
             size: letter;
-            margin: 0.75in;
+            margin: 0.5in;
         }
 
         :root {
             --navy: #1A365D;
             --gold: #D4AF37;
+            --cream: #FDF6E3;
         }
 
         * {
@@ -24,476 +25,711 @@
         body {
             font-family: 'Georgia', serif;
             color: #333;
-            line-height: 1.6;
-            font-size: 12pt;
+            line-height: 1.5;
+            font-size: 11pt;
+            padding: 20px;
+            max-width: 900px;
+            margin: 0 auto;
         }
 
         .no-print {
             background: var(--navy);
             color: white;
-            padding: 15px 30px;
-            text-align: center;
-            margin-bottom: 20px;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+        }
+
+        .no-print h2 {
+            color: var(--gold);
+            margin-bottom: 15px;
         }
 
         .no-print button {
             background: var(--gold);
             color: var(--navy);
             border: none;
-            padding: 12px 30px;
+            padding: 12px 24px;
             border-radius: 8px;
             font-weight: bold;
             cursor: pointer;
-            font-size: 16px;
-            margin: 0 10px;
+            font-size: 14px;
+            margin: 5px;
+        }
+
+        .no-print button.secondary {
+            background: transparent;
+            color: white;
+            border: 1px solid white;
+        }
+
+        .style-toggle {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .style-toggle button {
+            flex: 1;
+            padding: 15px;
+        }
+
+        .style-toggle button.active {
+            background: white;
+            color: var(--navy);
+        }
+
+        .day-selector {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+            margin: 15px 0;
+        }
+
+        .day-selector label {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(255,255,255,0.1);
+            padding: 8px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .day-selector input:checked + span {
+            color: var(--gold);
+            font-weight: bold;
         }
 
         @media print {
-            .no-print {
-                display: none;
-            }
-            .page-break {
-                page-break-before: always;
-            }
+            .no-print { display: none; }
+            .page-break { page-break-before: always; }
+            body { padding: 0; max-width: none; }
         }
 
-        header {
-            text-align: center;
-            border-bottom: 3px solid var(--navy);
-            padding-bottom: 20px;
-            margin-bottom: 30px;
-        }
-
-        header h1 {
-            color: var(--navy);
-            font-size: 28pt;
-            margin-bottom: 5px;
-        }
-
-        header p {
-            color: #666;
-            font-size: 14pt;
-        }
-
-        .student-info {
-            border: 2px solid var(--navy);
-            padding: 15px;
-            margin-bottom: 30px;
-            display: flex;
-            gap: 20px;
-        }
-
-        .student-info label {
-            font-weight: bold;
-        }
-
-        .student-info input {
-            border: none;
-            border-bottom: 1px solid #333;
-            width: 200px;
-            font-size: 12pt;
-        }
-
-        .day-section {
-            margin-bottom: 40px;
-        }
-
-        .day-header {
+        /* ============ STYLE 2: EJUP BRANDED ============ */
+        .style-branded .day-header {
             background: var(--navy);
             color: white;
-            padding: 10px 20px;
+            padding: 15px 20px;
             margin-bottom: 20px;
+            border-radius: 8px;
         }
 
-        .day-header h2 {
+        .style-branded .day-header h2 {
             color: var(--gold);
             margin: 0;
+            font-size: 18pt;
         }
 
-        .subject-header {
-            background: #f0f0f0;
-            padding: 8px 15px;
+        .style-branded .subject-header {
+            background: linear-gradient(90deg, var(--navy), transparent);
+            color: white;
+            padding: 10px 15px;
             font-weight: bold;
-            border-left: 4px solid var(--navy);
-            margin: 20px 0 15px;
+            margin: 25px 0 15px;
+            border-radius: 5px;
         }
 
-        .question {
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 1px dotted #ccc;
+        .style-branded .question-block {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: var(--cream);
+            border-radius: 8px;
+            border-left: 4px solid var(--gold);
         }
 
-        .question p {
-            margin-bottom: 10px;
-        }
-
-        .question-number {
+        .style-branded .question-num {
+            display: inline-block;
+            background: var(--navy);
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
             font-weight: bold;
-            color: var(--navy);
+            margin-right: 10px;
         }
 
-        .standard-tag {
+        .style-branded .standard-tag {
             background: var(--gold);
             color: var(--navy);
             padding: 2px 8px;
             border-radius: 4px;
-            font-size: 10pt;
-            margin-left: 10px;
+            font-size: 9pt;
+            font-weight: bold;
+            float: right;
         }
 
-        .answer-lines {
-            border-bottom: 1px solid #999;
-            height: 25px;
-            margin: 5px 0;
+        .style-branded .answer-space {
+            border: 2px solid var(--navy);
+            border-radius: 5px;
+            min-height: 60px;
+            margin-top: 10px;
+            background: white;
         }
 
-        .answer-box {
-            border: 1px solid #999;
-            min-height: 80px;
-            margin: 10px 0;
-            padding: 10px;
+        .style-branded .answer-lines {
+            border-bottom: 1px solid #ccc;
+            height: 30px;
+            margin: 8px 0;
         }
 
-        .reading-passage {
-            background: #f9f9f9;
-            padding: 20px;
-            border: 1px solid #ddd;
-            margin: 15px 0;
-            font-size: 11pt;
-        }
-
-        .reading-passage p {
-            margin-bottom: 12px;
-            text-indent: 20px;
-        }
-
-        .checklist {
-            list-style: none;
-            margin: 15px 0;
-        }
-
-        .checklist li {
-            padding: 8px 0;
-            padding-left: 30px;
-            position: relative;
-        }
-
-        .checklist li::before {
-            content: "☐";
-            position: absolute;
-            left: 0;
-            font-size: 16pt;
-        }
-
-        .key-concept {
-            background: #e8f4f8;
-            border: 1px solid #b8d4e3;
+        .style-branded .reading-passage {
+            background: white;
+            border: 2px solid var(--navy);
             padding: 15px;
             margin: 15px 0;
-            border-radius: 5px;
+            border-radius: 8px;
+            font-size: 10.5pt;
         }
 
-        .key-concept strong {
-            color: var(--navy);
-        }
-
-        .completion-box {
+        .style-branded .key-concept {
+            background: #e8f4f8;
             border: 2px solid var(--navy);
-            padding: 20px;
-            margin-top: 30px;
-            text-align: center;
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 8px;
         }
 
-        .completion-box h4 {
+        /* ============ STYLE 3: WORKSHEET DENSE ============ */
+        .style-worksheet {
+            font-size: 10pt;
+            line-height: 1.3;
+        }
+
+        .style-worksheet .day-header {
+            border-bottom: 3px solid black;
+            padding-bottom: 5px;
             margin-bottom: 15px;
-            color: var(--navy);
         }
 
-        .signature-line {
-            display: inline-block;
-            border-bottom: 1px solid #333;
-            width: 200px;
-            margin: 0 10px;
+        .style-worksheet .day-header h2 {
+            font-size: 14pt;
+            margin: 0;
         }
+
+        .style-worksheet .subject-header {
+            font-weight: bold;
+            font-size: 11pt;
+            border-bottom: 1px solid black;
+            padding: 3px 0;
+            margin: 15px 0 10px;
+            text-transform: uppercase;
+        }
+
+        .style-worksheet .question-block {
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px dotted #999;
+        }
+
+        .style-worksheet .question-num {
+            font-weight: bold;
+        }
+
+        .style-worksheet .standard-tag {
+            font-size: 8pt;
+            color: #666;
+            float: right;
+        }
+
+        .style-worksheet .answer-space {
+            border: 1px solid #999;
+            min-height: 45px;
+            margin-top: 5px;
+        }
+
+        .style-worksheet .answer-lines {
+            border-bottom: 1px solid #999;
+            height: 22px;
+            margin: 3px 0;
+        }
+
+        .style-worksheet .reading-passage {
+            border: 1px solid #999;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 9.5pt;
+            columns: 2;
+            column-gap: 20px;
+        }
+
+        .style-worksheet .reading-passage p {
+            margin-bottom: 8px;
+            text-indent: 15px;
+        }
+
+        .style-worksheet .key-concept {
+            background: #f5f5f5;
+            border: 1px solid #999;
+            padding: 8px;
+            margin: 10px 0;
+            font-size: 9.5pt;
+        }
+
+        .style-worksheet .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        /* Hide inactive style */
+        .hidden { display: none !important; }
     </style>
 </head>
 <body>
     <div class="no-print">
-        <p><strong>Print-Friendly Version</strong> - Use your browser's print function (Ctrl+P or Cmd+P) to save as PDF</p>
+        <h2>EJUP Moving Week Workbook - Print Preview</h2>
+
+        <p><strong>1. Choose your style:</strong></p>
+        <div class="style-toggle">
+            <button id="btnBranded" class="active" onclick="setStyle('branded')">EJUP Branded</button>
+            <button id="btnWorksheet" onclick="setStyle('worksheet')">Worksheet Dense</button>
+        </div>
+
+        <p><strong>2. Select days to print:</strong></p>
+        <div class="day-selector">
+            <label><input type="checkbox" value="1" checked onchange="toggleDay(1)"><span>Day 1</span></label>
+            <label><input type="checkbox" value="2" checked onchange="toggleDay(2)"><span>Day 2</span></label>
+            <label><input type="checkbox" value="3" checked onchange="toggleDay(3)"><span>Day 3</span></label>
+            <label><input type="checkbox" value="4" onchange="toggleDay(4)"><span>Day 4</span></label>
+            <label><input type="checkbox" value="5" onchange="toggleDay(5)"><span>Day 5</span></label>
+            <label><input type="checkbox" value="6" onchange="toggleDay(6)"><span>Day 6</span></label>
+            <label><input type="checkbox" value="7" onchange="toggleDay(7)"><span>Day 7</span></label>
+        </div>
+        <div style="margin-top: 10px;">
+            <button onclick="selectAll()">Select All</button>
+            <button onclick="selectNone()" class="secondary">Clear All</button>
+        </div>
+
+        <p style="margin-top: 20px;"><strong>3. Print or save:</strong></p>
         <button onclick="window.print()">Print / Save as PDF</button>
-        <button onclick="window.location.href='/'">Back to Digital Version</button>
+        <button onclick="window.location.href='/'" class="secondary">Back to Digital</button>
     </div>
 
-    <header>
-        <h1>EJUP Moving Week Workbook</h1>
-        <p>Self-Paced Independent Learning | January 20 - February 1, 2026</p>
-    </header>
+    <!-- ============ STYLE 2: EJUP BRANDED ============ -->
+    <div id="branded-content" class="style-branded">
 
-    <div class="student-info">
-        <div><label>Student Name:</label> <input type="text" placeholder=""></div>
-        <div><label>Start Date:</label> <input type="text" placeholder=""></div>
+        <!-- DAY 1 BRANDED -->
+        <section class="day-content" data-day="1">
+            <div class="day-header">
+                <h2>Day 1: Tuesday, January 20</h2>
+            </div>
+
+            <div class="subject-header">MATH: Division as the Opposite of Multiplication</div>
+
+            <div class="key-concept">
+                <strong>Key Concept:</strong> Division and multiplication are inverse operations. If you know that 8 x 9 = 72, then you also know that 72 / 8 = 9 and 72 / 9 = 8.
+            </div>
+
+            <div class="question-block">
+                <span class="standard-tag">4.NBT.6</span>
+                <span class="question-num">1</span> If 8 x 9 = 72, what is 72 / 8?
+                <div class="answer-lines"></div>
+            </div>
+
+            <div class="question-block">
+                <span class="standard-tag">4.NBT.6</span>
+                <span class="question-num">2</span> If 7 x 6 = 42, what is 42 / 7?
+                <div class="answer-lines"></div>
+            </div>
+
+            <div class="question-block">
+                <span class="standard-tag">4.NBT.6</span>
+                <span class="question-num">3</span> A baseball team has 45 balls to put equally into 9 buckets. Write this as a division problem and solve it.
+                <div class="answer-space"></div>
+            </div>
+
+            <div class="subject-header">SOCIAL STUDIES: The Three Fires Confederacy</div>
+
+            <div class="reading-passage">
+                <p>Long before any European ship crossed the Atlantic Ocean, the Great Lakes region was home to thriving Indigenous nations. Among the most powerful was an alliance called the Three Fires Confederacy, made up of three related Anishinaabe peoples: the Ojibwe, the Odawa, and the Potawatomi.</p>
+                <p>The Ojibwe were known as the "Keepers of the Faith." They were the spiritual leaders, responsible for preserving sacred traditions and ceremonies. The Odawa earned the title "Keepers of Trade." They traveled vast distances by canoe, creating trade networks that stretched hundreds of miles. The Potawatomi were called the "Keepers of the Fire," responsible for the heart of the community.</p>
+                <p>Together, these three nations created a powerful alliance based on cooperation rather than competition.</p>
+            </div>
+
+            <div class="question-block">
+                <span class="standard-tag">4-H3.0.2</span>
+                <span class="question-num">4</span> What does "Keepers of the Faith" mean? What responsibilities did the Ojibwe have?
+                <div class="answer-space"></div>
+            </div>
+
+            <div class="question-block">
+                <span class="standard-tag">4-H3.0.2</span>
+                <span class="question-num">5</span> Why were the Odawa called "Keepers of Trade"?
+                <div class="answer-space"></div>
+            </div>
+
+            <div class="question-block">
+                <span class="standard-tag">4-H3.0.2</span>
+                <span class="question-num">6</span> How did the three nations help each other? Give an example.
+                <div class="answer-space"></div>
+            </div>
+        </section>
+
+        <div class="page-break"></div>
+
+        <!-- DAY 2 BRANDED -->
+        <section class="day-content" data-day="2">
+            <div class="day-header">
+                <h2>Day 2: Wednesday, January 21</h2>
+            </div>
+
+            <div class="subject-header">MATH: The Area Model for Division</div>
+
+            <div class="key-concept">
+                <strong>The Area Model</strong> breaks division into friendly chunks.<br>
+                For 84 / 7: First, 7 x 10 = 70 (fits inside 84). Then 84 - 70 = 14 left. Finally, 14 / 7 = 2.<br>
+                Add partial quotients: 10 + 2 = <strong>12</strong>
+            </div>
+
+            <div class="question-block">
+                <span class="standard-tag">4.NBT.6</span>
+                <span class="question-num">7</span> Use the area model to solve: 96 / 8. Show your work.
+                <div class="answer-space" style="min-height: 80px;"></div>
+            </div>
+
+            <div class="question-block">
+                <span class="standard-tag">4.NBT.6</span>
+                <span class="question-num">8</span> A baseball league has 78 players to divide into teams of 6. How many complete teams?
+                <div class="answer-space"></div>
+            </div>
+
+            <div class="question-block">
+                <span class="standard-tag">4.NBT.6</span>
+                <span class="question-num">9</span> Solve using the area model: 85 / 5
+                <div class="answer-space" style="min-height: 80px;"></div>
+            </div>
+
+            <div class="subject-header">SOCIAL STUDIES: Three Fires Confederacy - Continued</div>
+
+            <div class="question-block">
+                <span class="standard-tag">4-H3.0.2</span>
+                <span class="question-num">10</span> Compare the Three Fires Confederacy to a sports team. How are they similar?
+                <div class="answer-space"></div>
+            </div>
+
+            <div class="question-block">
+                <span class="standard-tag">4-H3.0.2</span>
+                <span class="question-num">11</span> Why do you think having three nations with different skills made the Confederacy stronger?
+                <div class="answer-space"></div>
+            </div>
+        </section>
+
+        <div class="page-break"></div>
+
+        <!-- DAY 3 BRANDED -->
+        <section class="day-content" data-day="3">
+            <div class="day-header">
+                <h2>Day 3: Thursday, January 22</h2>
+            </div>
+
+            <div class="subject-header">MATH: Multi-Digit Division Practice</div>
+
+            <div class="question-block">
+                <span class="standard-tag">4.NBT.6</span>
+                <span class="question-num">12</span> Solve: 144 / 12
+                <div class="answer-lines"></div>
+            </div>
+
+            <div class="question-block">
+                <span class="standard-tag">4.NBT.6</span>
+                <span class="question-num">13</span> Solve: 156 / 13
+                <div class="answer-lines"></div>
+            </div>
+
+            <div class="question-block">
+                <span class="standard-tag">4.NBT.6</span>
+                <span class="question-num">14</span> A coach has 168 baseballs to divide equally among 14 players. How many does each get?
+                <div class="answer-space"></div>
+            </div>
+
+            <div class="subject-header">SCIENCE: Energy Transfer</div>
+
+            <div class="key-concept">
+                <strong>Energy Transfer:</strong> Energy can move from one object to another. When you hit a baseball with a bat, energy transfers from the bat to the ball, making the ball fly.
+            </div>
+
+            <div class="question-block">
+                <span class="standard-tag">4.PS3.A</span>
+                <span class="question-num">15</span> When a pitcher throws a ball, where does the energy come from?
+                <div class="answer-space"></div>
+            </div>
+
+            <div class="question-block">
+                <span class="standard-tag">4.PS3.A</span>
+                <span class="question-num">16</span> Describe what happens to energy when a bat hits a baseball.
+                <div class="answer-space"></div>
+            </div>
+
+            <div class="question-block">
+                <span class="standard-tag">4.PS3.A</span>
+                <span class="question-num">17</span> Give another example of energy transfer in sports (not baseball).
+                <div class="answer-space"></div>
+            </div>
+        </section>
+
     </div>
 
-    <!-- Day 1 -->
-    <section class="day-section">
-        <div class="day-header">
-            <h2>Day 1: Tuesday, January 20</h2>
-        </div>
+    <!-- ============ STYLE 3: WORKSHEET DENSE ============ -->
+    <div id="worksheet-content" class="style-worksheet hidden">
 
-        <ul class="checklist">
-            <li>Watch Khan Academy video: Relationship between multiplication and division</li>
-            <li>Complete math warm-up questions</li>
-            <li>Read Three Fires Confederacy passage</li>
-            <li>Answer reading comprehension questions</li>
-        </ul>
-
-        <div class="subject-header">MATH: Division as the Opposite of Multiplication</div>
-
-        <div class="key-concept">
-            <strong>Key Concept:</strong> Division and multiplication are inverse operations. If you know that 8 x 9 = 72, then you also know that 72 / 8 = 9 and 72 / 9 = 8.
-        </div>
-
-        <div class="question">
-            <p><span class="question-number">1.</span> If 8 x 9 = 72, what is 72 / 8? <span class="standard-tag">4.NBT.6</span></p>
-            <div class="answer-lines"></div>
-        </div>
-
-        <div class="question">
-            <p><span class="question-number">2.</span> If 7 x 6 = 42, what is 42 / 7? <span class="standard-tag">4.NBT.6</span></p>
-            <div class="answer-lines"></div>
-        </div>
-
-        <div class="question">
-            <p><span class="question-number">3.</span> A baseball team has 45 balls to put equally into 9 buckets. Write this as a division problem and solve it. <span class="standard-tag">4.NBT.6</span></p>
-            <div class="answer-box"></div>
-        </div>
-
-        <div class="subject-header">SOCIAL STUDIES: Meet the Three Fires Confederacy</div>
-
-        <div class="reading-passage">
-            <p>Long before any European ship crossed the Atlantic Ocean, the Great Lakes region was home to thriving Indigenous nations. Among the most powerful was an alliance called the Three Fires Confederacy, made up of three related Anishinaabe peoples: the Ojibwe, the Odawa, and the Potawatomi. These three nations shared similar languages, beliefs, and customs, but each had their own special role in the alliance.</p>
-            <p>The Ojibwe, sometimes called Chippewa, were known as the "Keepers of the Faith." They were the spiritual leaders of the confederacy, responsible for preserving sacred traditions, ceremonies, and the stories that passed wisdom from generation to generation. The Ojibwe lived primarily in the northern Great Lakes region, in areas that are now Michigan, Wisconsin, and Minnesota.</p>
-            <p>The Odawa, also spelled Ottawa, earned the title "Keepers of Trade." They were master negotiators and traders who traveled vast distances by canoe, creating trade networks that stretched hundreds of miles. The Odawa traded copper, furs, corn, and other goods between different nations.</p>
-            <p>The Potawatomi were called the "Keepers of the Fire," which was a sacred responsibility. Fire represented the heart of the community—the place where people gathered, where food was prepared, and where important decisions were made. The Potawatomi lived in the southern Great Lakes region and were known for their farming skills.</p>
-            <p>Together, these three nations created a powerful alliance based on cooperation rather than competition. When one nation faced a threat, the others came to help. When one nation had extra food, they shared with the others.</p>
-        </div>
-
-        <div class="question">
-            <p><span class="question-number">4.</span> What does "Keepers of the Faith" mean? What responsibilities did the Ojibwe have? <span class="standard-tag">4-H3.0.2</span></p>
-            <div class="answer-box"></div>
-        </div>
-
-        <div class="question">
-            <p><span class="question-number">5.</span> Why were the Odawa called "Keepers of Trade"? Give specific examples. <span class="standard-tag">4-H3.0.2</span></p>
-            <div class="answer-box"></div>
-        </div>
-
-        <div class="question">
-            <p><span class="question-number">6.</span> What made fire so important to the Potawatomi? Why was being "Keepers of the Fire" a big responsibility? <span class="standard-tag">4-H3.0.2</span></p>
-            <div class="answer-box"></div>
-        </div>
-
-        <div class="question">
-            <p><span class="question-number">7.</span> The passage says the Three Fires Confederacy was based on "cooperation rather than competition." What evidence from the passage supports this? <span class="standard-tag">4-H3.0.2</span></p>
-            <div class="answer-box"></div>
-        </div>
-
-        <div class="completion-box">
-            <h4>Day 1 Completion</h4>
-            <p>Student Signature: <span class="signature-line"></span> Date: <span class="signature-line"></span></p>
-            <p>Parent Signature: <span class="signature-line"></span> Date: <span class="signature-line"></span></p>
-        </div>
-    </section>
-
-    <div class="page-break"></div>
-
-    <!-- Day 2 -->
-    <section class="day-section">
-        <div class="day-header">
-            <h2>Day 2: Wednesday, January 21</h2>
-        </div>
-
-        <ul class="checklist">
-            <li>Watch Khan Academy video: Area Model Division</li>
-            <li>Learn the area model for division</li>
-            <li>Practice with 2-digit dividends</li>
-            <li>Continue Three Fires reading</li>
-        </ul>
-
-        <div class="subject-header">MATH: The Area Model for Division</div>
-
-        <div class="key-concept">
-            <strong>The Area Model</strong> breaks division into friendly chunks. For 84 / 7:
-            <br>Step 1: Find a friendly multiple of 7 that fits inside 84 → 7 x 10 = 70 (that fits!)
-            <br>Step 2: Subtract and see what's left → 84 - 70 = 14
-            <br>Step 3: Divide the leftover → 14 / 7 = 2
-            <br>Step 4: Add your partial quotients → 10 + 2 = 12
-            <br><strong>Answer: 84 / 7 = 12</strong>
-        </div>
-
-        <div class="question">
-            <p><span class="question-number">8.</span> Use the area model to solve: 96 / 8 <span class="standard-tag">4.NBT.6</span></p>
-            <p><em>Show your work: What friendly multiple did you use? What was left over?</em></p>
-            <div class="answer-box"></div>
-        </div>
-
-        <div class="question">
-            <p><span class="question-number">9.</span> A baseball league has 78 players to divide into teams of 6. Use the area model to find how many complete teams they can make. <span class="standard-tag">4.NBT.6</span></p>
-            <div class="answer-box"></div>
-        </div>
-
-        <div class="question">
-            <p><span class="question-number">10.</span> Solve using the area model: 85 / 5 <span class="standard-tag">4.NBT.6</span></p>
-            <div class="answer-box"></div>
-        </div>
-
-        <div class="subject-header">SOCIAL STUDIES: Three Fires Confederacy - Continued</div>
-
-        <div class="question">
-            <p><span class="question-number">11.</span> How did the three nations of the Confederacy help each other? <span class="standard-tag">4-H3.0.2</span></p>
-            <div class="answer-box"></div>
-        </div>
-
-        <div class="question">
-            <p><span class="question-number">12.</span> Why do you think having three nations with different skills made the Confederacy stronger? <span class="standard-tag">4-H3.0.2</span></p>
-            <div class="answer-box"></div>
-        </div>
-
-        <div class="question">
-            <p><span class="question-number">13.</span> Compare the Three Fires Confederacy to a team (like a baseball team). How are they similar? <span class="standard-tag">4-H3.0.2</span></p>
-            <div class="answer-box"></div>
-        </div>
-
-        <div class="question">
-            <p><span class="question-number">14.</span> If you could interview a member of the Three Fires Confederacy, what would you ask them? Write 2 questions. <span class="standard-tag">4-H3.0.2</span></p>
-            <div class="answer-box"></div>
-        </div>
-
-        <div class="completion-box">
-            <h4>Day 2 Completion</h4>
-            <p>Student Signature: <span class="signature-line"></span> Date: <span class="signature-line"></span></p>
-            <p>Parent Signature: <span class="signature-line"></span> Date: <span class="signature-line"></span></p>
-        </div>
-    </section>
-
-    <div class="page-break"></div>
-
-    <!-- Day 3 -->
-    <section class="day-section">
-        <div class="day-header">
-            <h2>Day 3: Thursday, January 22</h2>
-        </div>
-
-        <ul class="checklist">
-            <li>Practice multi-digit division</li>
-            <li>Learn about energy transfer</li>
-            <li>Complete science questions</li>
-        </ul>
-
-        <div class="subject-header">MATH: Multi-Digit Division Practice</div>
-
-        <div class="question">
-            <p><span class="question-number">15.</span> Solve: 144 / 12 <span class="standard-tag">4.NBT.6</span></p>
-            <div class="answer-lines"></div>
-        </div>
-
-        <div class="question">
-            <p><span class="question-number">16.</span> Solve: 156 / 13 <span class="standard-tag">4.NBT.6</span></p>
-            <div class="answer-lines"></div>
-        </div>
-
-        <div class="question">
-            <p><span class="question-number">17.</span> A coach has 168 baseballs to divide equally among 14 players. How many does each player get? <span class="standard-tag">4.NBT.6</span></p>
-            <div class="answer-box"></div>
-        </div>
-
-        <div class="subject-header">SCIENCE: Energy Transfer</div>
-
-        <div class="key-concept">
-            <strong>Energy Transfer:</strong> Energy can move from one object to another. When you hit a baseball with a bat, energy transfers from the bat to the ball, making the ball fly through the air.
-        </div>
-
-        <div class="question">
-            <p><span class="question-number">18.</span> When a pitcher throws a ball, where does the energy come from that makes the ball move? <span class="standard-tag">4.PS3.A</span></p>
-            <div class="answer-box"></div>
-        </div>
-
-        <div class="question">
-            <p><span class="question-number">19.</span> Describe what happens to the energy when a bat hits a baseball. <span class="standard-tag">4.PS3.A</span></p>
-            <div class="answer-box"></div>
-        </div>
-
-        <div class="question">
-            <p><span class="question-number">20.</span> Give another example of energy transfer in sports (not baseball). <span class="standard-tag">4.PS3.A</span></p>
-            <div class="answer-box"></div>
-        </div>
-
-        <div class="question">
-            <p><span class="question-number">21.</span> When you rub your hands together and they get warm, what type of energy transfer is happening? <span class="standard-tag">4.PS3.A</span></p>
-            <div class="answer-box"></div>
-        </div>
-
-        <div class="completion-box">
-            <h4>Day 3 Completion</h4>
-            <p>Student Signature: <span class="signature-line"></span> Date: <span class="signature-line"></span></p>
-            <p>Parent Signature: <span class="signature-line"></span> Date: <span class="signature-line"></span></p>
-        </div>
-    </section>
-
-    <div class="page-break"></div>
-
-    <!-- Exit Ticket Template -->
-    <section class="day-section">
-        <div class="day-header">
-            <h2>Daily Exit Ticket (Make copies as needed)</h2>
-        </div>
-
-        <div style="border: 2px solid var(--navy); padding: 20px; margin: 20px 0;">
-            <p><strong>Day: ___________</strong></p>
-
-            <div class="question">
-                <p><strong>1. What's ONE thing you learned today?</strong></p>
-                <div class="answer-box"></div>
+        <!-- DAY 1 WORKSHEET -->
+        <section class="day-content" data-day="1">
+            <div class="day-header">
+                <h2>Day 1: Tue 1/20 - Division & Three Fires Confederacy</h2>
             </div>
 
-            <div class="question">
-                <p><strong>2. What was challenging or confusing?</strong></p>
-                <div class="answer-box"></div>
+            <div class="subject-header">Math: Division as Inverse of Multiplication</div>
+
+            <div class="two-column">
+                <div>
+                    <div class="question-block">
+                        <span class="standard-tag">[4.NBT.6]</span>
+                        <span class="question-num">1.</span> 8 x 9 = 72, so 72 / 8 = _______
+                    </div>
+                    <div class="question-block">
+                        <span class="standard-tag">[4.NBT.6]</span>
+                        <span class="question-num">2.</span> 7 x 6 = 42, so 42 / 7 = _______
+                    </div>
+                    <div class="question-block">
+                        <span class="standard-tag">[4.NBT.6]</span>
+                        <span class="question-num">3.</span> 9 x 8 = 72, so 72 / 9 = _______
+                    </div>
+                    <div class="question-block">
+                        <span class="standard-tag">[4.NBT.6]</span>
+                        <span class="question-num">4.</span> 6 x 7 = 42, so 42 / 6 = _______
+                    </div>
+                </div>
+                <div>
+                    <div class="question-block">
+                        <span class="standard-tag">[4.NBT.6]</span>
+                        <span class="question-num">5.</span> 5 x 9 = 45, so 45 / 5 = _______
+                    </div>
+                    <div class="question-block">
+                        <span class="standard-tag">[4.NBT.6]</span>
+                        <span class="question-num">6.</span> 8 x 7 = 56, so 56 / 8 = _______
+                    </div>
+                    <div class="question-block">
+                        <span class="standard-tag">[4.NBT.6]</span>
+                        <span class="question-num">7.</span> 9 x 4 = 36, so 36 / 9 = _______
+                    </div>
+                    <div class="question-block">
+                        <span class="standard-tag">[4.NBT.6]</span>
+                        <span class="question-num">8.</span> 6 x 8 = 48, so 48 / 6 = _______
+                    </div>
+                </div>
             </div>
 
-            <div class="question">
-                <p><strong>3. Rate your effort today (circle one):</strong></p>
-                <p style="text-align: center; font-size: 24pt; letter-spacing: 20px;">1 &nbsp; 2 &nbsp; 3 &nbsp; 4 &nbsp; 5</p>
-                <p style="text-align: center; font-size: 10pt;">(1 = Could try harder | 5 = Gave my best effort)</p>
-            </div>
-        </div>
-
-        <div style="border: 2px solid var(--navy); padding: 20px; margin: 20px 0;">
-            <p><strong>Day: ___________</strong></p>
-
-            <div class="question">
-                <p><strong>1. What's ONE thing you learned today?</strong></p>
-                <div class="answer-box"></div>
+            <div class="question-block">
+                <span class="standard-tag">[4.NBT.6]</span>
+                <span class="question-num">9.</span> Word Problem: A baseball team has 45 balls for 9 buckets. Balls per bucket: _______
             </div>
 
-            <div class="question">
-                <p><strong>2. What was challenging or confusing?</strong></p>
-                <div class="answer-box"></div>
+            <div class="subject-header">Social Studies: Three Fires Confederacy</div>
+
+            <div class="reading-passage">
+                <p>The Three Fires Confederacy was an alliance of three Anishinaabe peoples in the Great Lakes region: the Ojibwe, Odawa, and Potawatomi.</p>
+                <p>The <strong>Ojibwe</strong> were "Keepers of the Faith" - spiritual leaders preserving sacred traditions. The <strong>Odawa</strong> were "Keepers of Trade" - master traders with vast canoe networks. The <strong>Potawatomi</strong> were "Keepers of the Fire" - maintaining the community heart.</p>
+                <p>Together they formed a powerful alliance based on cooperation, helping each other in times of need.</p>
             </div>
 
-            <div class="question">
-                <p><strong>3. Rate your effort today (circle one):</strong></p>
-                <p style="text-align: center; font-size: 24pt; letter-spacing: 20px;">1 &nbsp; 2 &nbsp; 3 &nbsp; 4 &nbsp; 5</p>
-                <p style="text-align: center; font-size: 10pt;">(1 = Could try harder | 5 = Gave my best effort)</p>
+            <div class="two-column">
+                <div>
+                    <div class="question-block">
+                        <span class="standard-tag">[4-H3.0.2]</span>
+                        <span class="question-num">10.</span> Ojibwe role: ________________
+                    </div>
+                    <div class="question-block">
+                        <span class="standard-tag">[4-H3.0.2]</span>
+                        <span class="question-num">11.</span> Odawa role: ________________
+                    </div>
+                </div>
+                <div>
+                    <div class="question-block">
+                        <span class="standard-tag">[4-H3.0.2]</span>
+                        <span class="question-num">12.</span> Potawatomi role: ________________
+                    </div>
+                    <div class="question-block">
+                        <span class="standard-tag">[4-H3.0.2]</span>
+                        <span class="question-num">13.</span> What did they share? ________________
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
 
-    <div class="no-print" style="margin-top: 30px; padding: 20px;">
-        <p><strong>Note:</strong> This is a condensed print version showing Days 1-3 and the Exit Ticket template. The full digital version at <a href="/" style="color: var(--gold);">ejup-workbook.netlify.app</a> contains all 13 days with AI-powered feedback.</p>
-        <button onclick="window.print()">Print / Save as PDF</button>
-        <button onclick="window.location.href='/'">Back to Digital Version</button>
+            <div class="question-block">
+                <span class="standard-tag">[4-H3.0.2]</span>
+                <span class="question-num">14.</span> How is the Confederacy like a sports team?
+                <div class="answer-space" style="min-height: 35px;"></div>
+            </div>
+        </section>
+
+        <div class="page-break"></div>
+
+        <!-- DAY 2 WORKSHEET -->
+        <section class="day-content" data-day="2">
+            <div class="day-header">
+                <h2>Day 2: Wed 1/21 - Area Model Division</h2>
+            </div>
+
+            <div class="subject-header">Math: Area Model for Division</div>
+
+            <div class="key-concept">
+                <strong>Area Model:</strong> 84 / 7 → Find friendly multiple: 7x10=70 → Subtract: 84-70=14 → Divide leftover: 14/7=2 → Add: 10+2=<strong>12</strong>
+            </div>
+
+            <div class="question-block">
+                <span class="standard-tag">[4.NBT.6]</span>
+                <span class="question-num">15.</span> 96 / 8 using area model:
+                <br>Friendly multiple: 8 x ____ = ____ | Leftover: 96 - ____ = ____ | ____ / 8 = ____ | Answer: ____
+            </div>
+
+            <div class="question-block">
+                <span class="standard-tag">[4.NBT.6]</span>
+                <span class="question-num">16.</span> 85 / 5 using area model:
+                <br>Friendly multiple: 5 x ____ = ____ | Leftover: 85 - ____ = ____ | ____ / 5 = ____ | Answer: ____
+            </div>
+
+            <div class="question-block">
+                <span class="standard-tag">[4.NBT.6]</span>
+                <span class="question-num">17.</span> 78 / 6 using area model:
+                <br>Friendly multiple: 6 x ____ = ____ | Leftover: 78 - ____ = ____ | ____ / 6 = ____ | Answer: ____
+            </div>
+
+            <div class="two-column">
+                <div>
+                    <div class="question-block">
+                        <span class="question-num">18.</span> 72 / 6 = _______
+                    </div>
+                    <div class="question-block">
+                        <span class="question-num">19.</span> 91 / 7 = _______
+                    </div>
+                </div>
+                <div>
+                    <div class="question-block">
+                        <span class="question-num">20.</span> 84 / 4 = _______
+                    </div>
+                    <div class="question-block">
+                        <span class="question-num">21.</span> 99 / 9 = _______
+                    </div>
+                </div>
+            </div>
+
+            <div class="subject-header">Social Studies: Confederacy Analysis</div>
+
+            <div class="question-block">
+                <span class="standard-tag">[4-H3.0.2]</span>
+                <span class="question-num">22.</span> Why did different skills make the Confederacy stronger?
+                <div class="answer-space" style="min-height: 35px;"></div>
+            </div>
+        </section>
+
+        <div class="page-break"></div>
+
+        <!-- DAY 3 WORKSHEET -->
+        <section class="day-content" data-day="3">
+            <div class="day-header">
+                <h2>Day 3: Thu 1/22 - Multi-Digit Division & Energy</h2>
+            </div>
+
+            <div class="subject-header">Math: Multi-Digit Division</div>
+
+            <div class="two-column">
+                <div>
+                    <div class="question-block">
+                        <span class="question-num">23.</span> 144 / 12 = _______
+                    </div>
+                    <div class="question-block">
+                        <span class="question-num">24.</span> 156 / 13 = _______
+                    </div>
+                    <div class="question-block">
+                        <span class="question-num">25.</span> 168 / 14 = _______
+                    </div>
+                </div>
+                <div>
+                    <div class="question-block">
+                        <span class="question-num">26.</span> 132 / 11 = _______
+                    </div>
+                    <div class="question-block">
+                        <span class="question-num">27.</span> 180 / 15 = _______
+                    </div>
+                    <div class="question-block">
+                        <span class="question-num">28.</span> 192 / 16 = _______
+                    </div>
+                </div>
+            </div>
+
+            <div class="subject-header">Science: Energy Transfer</div>
+
+            <div class="key-concept">
+                <strong>Energy Transfer:</strong> Energy moves between objects. Bat hits ball = energy transfers from bat to ball.
+            </div>
+
+            <div class="question-block">
+                <span class="standard-tag">[4.PS3.A]</span>
+                <span class="question-num">29.</span> Where does the energy come from when a pitcher throws?
+                <div class="answer-lines"></div>
+            </div>
+
+            <div class="question-block">
+                <span class="standard-tag">[4.PS3.A]</span>
+                <span class="question-num">30.</span> What happens to energy when bat hits ball?
+                <div class="answer-lines"></div>
+            </div>
+
+            <div class="question-block">
+                <span class="standard-tag">[4.PS3.A]</span>
+                <span class="question-num">31.</span> Give another sports example of energy transfer:
+                <div class="answer-lines"></div>
+            </div>
+
+            <div class="question-block">
+                <span class="standard-tag">[4.PS3.A]</span>
+                <span class="question-num">32.</span> When you rub hands together and they get warm, what type of energy transfer is this?
+                <div class="answer-lines"></div>
+            </div>
+        </section>
+
     </div>
+
+    <script>
+        let currentStyle = 'branded';
+
+        function setStyle(style) {
+            currentStyle = style;
+            document.getElementById('branded-content').classList.toggle('hidden', style !== 'branded');
+            document.getElementById('worksheet-content').classList.toggle('hidden', style !== 'worksheet');
+            document.getElementById('btnBranded').classList.toggle('active', style === 'branded');
+            document.getElementById('btnWorksheet').classList.toggle('active', style === 'worksheet');
+        }
+
+        function toggleDay(day) {
+            const sections = document.querySelectorAll('.day-content[data-day="' + day + '"]');
+            const checkbox = document.querySelector('input[value="' + day + '"]');
+            sections.forEach(s => s.style.display = checkbox.checked ? 'block' : 'none');
+        }
+
+        function selectAll() {
+            document.querySelectorAll('.day-selector input').forEach(cb => {
+                cb.checked = true;
+                toggleDay(cb.value);
+            });
+        }
+
+        function selectNone() {
+            document.querySelectorAll('.day-selector input').forEach(cb => {
+                cb.checked = false;
+                toggleDay(cb.value);
+            });
+        }
+
+        // Initialize - only show days 1-3 for preview
+        document.querySelectorAll('.day-content[data-day="4"]').forEach(s => s.style.display = 'none');
+        document.querySelectorAll('.day-content[data-day="5"]').forEach(s => s.style.display = 'none');
+        document.querySelectorAll('.day-content[data-day="6"]').forEach(s => s.style.display = 'none');
+        document.querySelectorAll('.day-content[data-day="7"]').forEach(s => s.style.display = 'none');
+    </script>
 </body>
 </html>
