@@ -700,6 +700,10 @@
         <h1>EJUP Moving Week Workbook</h1>
         <p>Self-Paced Independent Learning</p>
         <p>January 20 - February 1, 2026</p>
+        <div style="margin: 15px 0;">
+            <button onclick="showFormatChoice()" style="background:var(--gold);color:var(--navy);border:none;padding:10px 20px;border-radius:8px;cursor:pointer;font-weight:bold;margin-right:10px;">Choose Format: Digital or Print</button>
+            <button onclick="window.print()" style="background:transparent;color:white;border:1px solid white;padding:10px 20px;border-radius:8px;cursor:pointer;">Print This Page</button>
+        </div>
         <div class="progress-bar">
             <div class="progress-fill" id="progressFill"></div>
         </div>
@@ -737,6 +741,11 @@
         <h3 style="margin:20px 0 15px;">Questions from Emory</h3>
         <div id="questionReviewList" class="question-list" style="max-height:none;background:var(--light-gray);padding:15px;border-radius:8px;">
             <p style="color:#666;font-style:italic;">No questions yet.</p>
+        </div>
+
+        <h3 style="margin:20px 0 15px;">Exit Tickets (Daily Reflections)</h3>
+        <div id="exitTicketsList" style="background:var(--light-gray);padding:15px;border-radius:8px;">
+            <p style="color:#666;font-style:italic;">No exit tickets yet.</p>
         </div>
 
         <h3 style="margin:20px 0 15px;">Curriculum Coverage</h3>
@@ -2539,6 +2548,57 @@ Knowledge, Character, Strength
                     </div>
                 `).join('');
             }
+
+            // Exit tickets
+            renderExitTickets();
+        }
+
+        function renderExitTickets() {
+            const exitTickets = JSON.parse(localStorage.getItem('ejupExitTickets') || '{}');
+            const container = document.getElementById('exitTicketsList');
+            if (!container) return;
+
+            const days = Object.keys(exitTickets).sort((a,b) => parseInt(b) - parseInt(a));
+            if (days.length === 0) {
+                container.innerHTML = '<p style="color:#666;font-style:italic;">No exit tickets yet.</p>';
+                return;
+            }
+
+            container.innerHTML = days.map(day => {
+                const ticket = exitTickets[day];
+                const effortStars = '★'.repeat(ticket.effort) + '☆'.repeat(5 - ticket.effort);
+                return `
+                    <div style="background:white;padding:15px;border-radius:8px;margin-bottom:10px;border-left:4px solid var(--gold);">
+                        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+                            <strong style="color:var(--navy);">Day ${day}</strong>
+                            <span style="color:var(--gold);font-size:18px;" title="Effort: ${ticket.effort}/5">${effortStars}</span>
+                        </div>
+                        <p style="margin:8px 0;"><strong>Learned:</strong> ${ticket.learned}</p>
+                        ${ticket.challenging ? `<p style="margin:8px 0;"><strong>Challenging:</strong> ${ticket.challenging}</p>` : ''}
+                        <small style="color:#666;">${ticket.time}</small>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Format choice functions
+        function showFormatChoice() {
+            document.getElementById('formatChoiceModal').style.display = 'flex';
+        }
+
+        function hideFormatChoice() {
+            document.getElementById('formatChoiceModal').style.display = 'none';
+        }
+
+        function chooseFormat(format) {
+            hideFormatChoice();
+            if (format === 'digital') {
+                // Stay on digital version
+                alert('Great! Continue working on screen. Click "Check My Answer" to get feedback from the AI tutor.');
+            } else if (format === 'print') {
+                // Open print-friendly version
+                window.open('/print.html', '_blank');
+            }
         }
     </script>
 
@@ -2562,6 +2622,29 @@ Knowledge, Character, Strength
             <button class="help-submit" onclick="submitQuestion()">Send to Mom/Dad</button>
 
             <div id="questionReviewList" class="question-list"></div>
+        </div>
+    </div>
+
+    <!-- Format Choice Modal -->
+    <div id="formatChoiceModal" class="help-modal" style="display:none;" onclick="if(event.target===this)hideFormatChoice()">
+        <div class="help-content" style="position:relative; max-width: 450px; text-align: center;">
+            <button class="help-close" onclick="hideFormatChoice()">x</button>
+            <h3>How would you like to learn today?</h3>
+            <p style="margin: 15px 0;">Choose your preferred format:</p>
+
+            <div style="display: flex; gap: 20px; justify-content: center; margin: 25px 0;">
+                <button onclick="chooseFormat('digital')" style="flex:1; padding: 30px 20px; background: var(--navy); color: white; border: none; border-radius: 12px; cursor: pointer;">
+                    <div style="font-size: 36px; margin-bottom: 10px;">💻</div>
+                    <div style="font-weight: bold; font-size: 18px;">Digital</div>
+                    <div style="font-size: 12px; margin-top: 8px; opacity: 0.8;">Answer on screen<br>Get AI feedback</div>
+                </button>
+
+                <button onclick="chooseFormat('print')" style="flex:1; padding: 30px 20px; background: white; color: var(--navy); border: 2px solid var(--navy); border-radius: 12px; cursor: pointer;">
+                    <div style="font-size: 36px; margin-bottom: 10px;">📄</div>
+                    <div style="font-weight: bold; font-size: 18px;">Print PDF</div>
+                    <div style="font-size: 12px; margin-top: 8px; opacity: 0.7;">Download workbook<br>Write on paper</div>
+                </button>
+            </div>
         </div>
     </div>
 
