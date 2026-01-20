@@ -701,7 +701,7 @@
         <p>Self-Paced Independent Learning</p>
         <p>January 20 - February 1, 2026</p>
         <div style="margin: 15px 0;">
-            <button onclick="showFormatChoice()" style="background:var(--gold);color:var(--navy);border:none;padding:10px 20px;border-radius:8px;cursor:pointer;font-weight:bold;margin-right:10px;">Choose Format: Digital or Print</button>
+            <button onclick="window.open('/print.html', '_blank')" style="background:var(--gold);color:var(--navy);border:none;padding:10px 20px;border-radius:8px;cursor:pointer;font-weight:bold;margin-right:10px;">Get Print/PDF Version</button>
             <button onclick="window.print()" style="background:transparent;color:white;border:1px solid white;padding:10px 20px;border-radius:8px;cursor:pointer;">Print This Page</button>
         </div>
         <div class="progress-bar">
@@ -2583,20 +2583,8 @@ Knowledge, Character, Strength
 
         // Format choice functions
         function showFormatChoice() {
-            document.getElementById('formatChoiceModal').classList.add('show');
-        }
-
-        function hideFormatChoice() {
-            document.getElementById('formatChoiceModal').classList.remove('show');
-        }
-
-        function chooseFormat(format) {
-            hideFormatChoice();
-            if (format === 'digital') {
-                // Stay on digital version
-                alert('Great! Continue working on screen. Click "Check My Answer" to get feedback from the AI tutor.');
-            } else if (format === 'print') {
-                // Open print-friendly version
+            var choice = confirm('Choose your format:\n\nOK = Open Print/PDF Version\nCancel = Stay on Digital Version');
+            if (choice) {
                 window.open('/print.html', '_blank');
             }
         }
