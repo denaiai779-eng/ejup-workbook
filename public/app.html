@@ -693,6 +693,68 @@
         li {
             margin: 5px 0;
         }
+
+        /* Subject Tabs */
+        .subject-tabs {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .subject-tab {
+            padding: 12px 20px;
+            border: 2px solid var(--navy);
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            font-weight: bold;
+            color: var(--navy);
+            transition: all 0.2s;
+        }
+
+        .subject-tab:hover {
+            background: var(--light-gray);
+        }
+
+        .subject-tab.active {
+            background: var(--navy);
+            color: white;
+        }
+
+        .subject-tab.math { border-color: #2196F3; }
+        .subject-tab.math.active { background: #2196F3; }
+
+        .subject-tab.science { border-color: #4CAF50; }
+        .subject-tab.science.active { background: #4CAF50; }
+
+        .subject-tab.social { border-color: #FF9800; }
+        .subject-tab.social.active { background: #FF9800; }
+
+        .subject-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .subject-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .day-goals {
+            background: var(--light-gray);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .day-goals h3 {
+            margin-top: 0;
+        }
     </style>
 </head>
 <body>
@@ -770,97 +832,118 @@
         <button onclick="document.getElementById('dashboard').classList.add('hidden');showDay(1);" style="margin-top:20px;background:var(--gold);color:var(--navy);border:none;padding:12px 24px;border-radius:8px;cursor:pointer;font-weight:bold;">Back to Workbook</button>
     </section>
 
-    <section id="day1" class="day-content ">
-            <h2>Day 1: Tue 1/20</h2>
+    <section id="day1" class="day-content">
+        <h2>Day 1: Tue 1/20</h2>
+
+        <div class="day-goals">
             <h3>Today's Goals</h3>
-<input type="checkbox" class="task-checkbox"> Watch division intro video (10 min)
-<input type="checkbox" class="task-checkbox"> Complete area model practice (20 min)
-<input type="checkbox" class="task-checkbox"> Read Three Fires intro (15 min)
-<h3>MATH: Introduction to Division</h3>
-<div class="video-link">
-            <strong>Video:</strong> <a href="https://www.khanacademy.org/math/cc-fourth-grade-math/division" target="_blank">Khan Academy: Division Basics</a>
+            <input type="checkbox" class="task-checkbox"> Watch division intro video (10 min)<br>
+            <input type="checkbox" class="task-checkbox"> Complete math practice (20 min)<br>
+            <input type="checkbox" class="task-checkbox"> Read Three Fires passage (15 min)
         </div>
-<div class="key-concept"><strong>Division is the Opposite of Multiplication</strong>
-<p>If you know that 6 x 7 = 42, then you also know:
-<ul><li>42 / 6 = 7</li>
-<li>42 / 7 = 6</li>
-</ul>
-Think of it like this: Division asks "How many groups?" or "How many in each group?"</div></p>
-<div class="activity"><strong>Warm-Up: Multiplication to Division</strong>
-<div class="question" data-qid="1" data-standard="4.NBT.6">
-            <p>1. If 8 x 9 = 72, what is 72 / 8?</p>
-            <span class="standards-tag">4.NBT.6</span>
-            <textarea id="answer-1" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(1, '4.NBT.6', this)">Check My Answer</button>
-            <div id="eval-result-1" class="eval-result"></div>
+
+        <div class="subject-tabs">
+            <button class="subject-tab math active" data-subject="math" onclick="showSubject(1, 'math')">Math</button>
+            <button class="subject-tab social" data-subject="social" onclick="showSubject(1, 'social')">Social Studies</button>
         </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">72 / 8 = 9</div>
-<div class="question" data-qid="2" data-standard="4.NBT.6">
-            <p>2. If 7 x 6 = 42, what is 42 / 7?</p>
-            <span class="standards-tag">4.NBT.6</span>
-            <textarea id="answer-2" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(2, '4.NBT.6', this)">Check My Answer</button>
-            <div id="eval-result-2" class="eval-result"></div>
+
+        <!-- MATH SECTION -->
+        <div class="subject-content active" data-subject="math">
+            <h3>MATH: Introduction to Division</h3>
+            <div class="video-link">
+                <strong>Video:</strong> <a href="https://www.khanacademy.org/math/cc-fourth-grade-math/division" target="_blank">Khan Academy: Division Basics</a>
+            </div>
+            <div class="key-concept">
+                <strong>Division is the Opposite of Multiplication</strong>
+                <p>If you know that 6 x 7 = 42, then you also know:</p>
+                <ul><li>42 / 6 = 7</li><li>42 / 7 = 6</li></ul>
+                <p>Think of it like this: Division asks "How many groups?" or "How many in each group?"</p>
+            </div>
+            <div class="activity">
+                <strong>Warm-Up: Multiplication to Division</strong>
+                <div class="question" data-qid="1" data-standard="4.NBT.6">
+                    <p>1. If 8 x 9 = 72, what is 72 / 8?</p>
+                    <span class="standards-tag">4.NBT.6</span>
+                    <textarea id="answer-1" rows="3" placeholder="Your answer..."></textarea>
+                    <button class="eval-btn" onclick="evaluateAnswer(1, '4.NBT.6', this)">Check My Answer</button>
+                    <div id="eval-result-1" class="eval-result"></div>
+                </div>
+                <button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
+                <div class="answer">72 / 8 = 9</div>
+                <div class="question" data-qid="2" data-standard="4.NBT.6">
+                    <p>2. If 7 x 6 = 42, what is 42 / 7?</p>
+                    <span class="standards-tag">4.NBT.6</span>
+                    <textarea id="answer-2" rows="3" placeholder="Your answer..."></textarea>
+                    <button class="eval-btn" onclick="evaluateAnswer(2, '4.NBT.6', this)">Check My Answer</button>
+                    <div id="eval-result-2" class="eval-result"></div>
+                </div>
+                <button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
+                <div class="answer">42 / 7 = 6</div>
+                <div class="question" data-qid="3" data-standard="4.NBT.6">
+                    <p>3. A baseball team has 45 balls to put equally into 9 buckets. Write this as a division problem and solve it.</p>
+                    <span class="standards-tag">4.NBT.6</span>
+                    <textarea id="answer-3" rows="3" placeholder="Your answer..."></textarea>
+                    <button class="eval-btn" onclick="evaluateAnswer(3, '4.NBT.6', this)">Check My Answer</button>
+                    <div id="eval-result-3" class="eval-result"></div>
+                </div>
+                <button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
+                <div class="answer">45 / 9 = 5 balls per bucket</div>
+            </div>
         </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">42 / 7 = 6</div>
-<div class="question" data-qid="3" data-standard="4.NBT.6">
-            <p>3. A baseball team has 45 balls to put equally into 9 buckets. Write this as a division problem and solve it.</p>
-            <span class="standards-tag">4.NBT.6</span>
-            <textarea id="answer-3" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(3, '4.NBT.6', this)">Check My Answer</button>
-            <div id="eval-result-3" class="eval-result"></div>
+
+        <!-- SOCIAL STUDIES SECTION -->
+        <div class="subject-content" data-subject="social">
+            <h3>SOCIAL STUDIES: Meet the Three Fires Confederacy</h3>
+            <div class="reading-passage-container">
+                <div class="reading-prompt">Read the following passage carefully, then answer the comprehension questions.</div>
+                <div class="reading-passage">
+                    <p>Long before any European ship crossed the Atlantic Ocean, the Great Lakes region was home to thriving Indigenous nations. Among the most powerful was an alliance called the Three Fires Confederacy, made up of three related Anishinaabe peoples: the Ojibwe, the Odawa, and the Potawatomi. These three nations shared similar languages, beliefs, and customs, but each had their own special role in the alliance.</p>
+                    <p>The Ojibwe, sometimes called Chippewa, were known as the "Keepers of the Faith." They were the spiritual leaders of the confederacy, responsible for preserving sacred traditions, ceremonies, and the stories that passed wisdom from generation to generation.</p>
+                    <p>The Odawa, also spelled Ottawa, earned the title "Keepers of Trade." They were master negotiators and traders who traveled vast distances by canoe, creating trade networks that stretched hundreds of miles.</p>
+                    <p>The Potawatomi were called the "Keepers of the Fire," which was a sacred responsibility. Fire represented the heart of the community—the place where people gathered, where food was prepared, and where important decisions were made.</p>
+                    <p>Together, these three nations created a powerful alliance based on cooperation rather than competition.</p>
+                </div>
+            </div>
+            <div class="activity">
+                <strong>Reading Comprehension</strong>
+                <div class="question" data-qid="4" data-standard="4-H3.0.2">
+                    <p>1. What does "Keepers of the Faith" mean? What responsibilities did the Ojibwe have?</p>
+                    <span class="standards-tag">4-H3.0.2</span>
+                    <textarea id="answer-4" rows="3" placeholder="Your answer..."></textarea>
+                    <button class="eval-btn" onclick="evaluateAnswer(4, '4-H3.0.2', this)">Check My Answer</button>
+                    <div id="eval-result-4" class="eval-result"></div>
+                </div>
+                <button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
+                <div class="answer">The Ojibwe were the spiritual leaders responsible for preserving sacred traditions, ceremonies, and stories.</div>
+                <div class="question" data-qid="5" data-standard="4-H3.0.2">
+                    <p>2. Why were the Odawa called "Keepers of Trade"?</p>
+                    <span class="standards-tag">4-H3.0.2</span>
+                    <textarea id="answer-5" rows="3" placeholder="Your answer..."></textarea>
+                    <button class="eval-btn" onclick="evaluateAnswer(5, '4-H3.0.2', this)">Check My Answer</button>
+                    <div id="eval-result-5" class="eval-result"></div>
+                </div>
+                <button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
+                <div class="answer">They were master traders who traveled vast distances by canoe, creating trade networks.</div>
+                <div class="question" data-qid="6" data-standard="4-H3.0.2">
+                    <p>3. What did fire represent for the Potawatomi?</p>
+                    <span class="standards-tag">4-H3.0.2</span>
+                    <textarea id="answer-6" rows="3" placeholder="Your answer..."></textarea>
+                    <button class="eval-btn" onclick="evaluateAnswer(6, '4-H3.0.2', this)">Check My Answer</button>
+                    <div id="eval-result-6" class="eval-result"></div>
+                </div>
+                <button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
+                <div class="answer">Fire represented the heart of the community—where people gathered and decisions were made.</div>
+                <div class="question" data-qid="7" data-standard="4-H3.0.2">
+                    <p>4. How did the three nations help each other?</p>
+                    <span class="standards-tag">4-H3.0.2</span>
+                    <textarea id="answer-7" rows="3" placeholder="Your answer..."></textarea>
+                    <button class="eval-btn" onclick="evaluateAnswer(7, '4-H3.0.2', this)">Check My Answer</button>
+                    <div id="eval-result-7" class="eval-result"></div>
+                </div>
+                <button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
+                <div class="answer">When one nation faced a threat, the others helped. When one had extra food, they shared.</div>
+            </div>
         </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">45 / 9 = 5 balls per bucket</div></div>
-<h3>SOCIAL STUDIES: Meet the Three Fires Confederacy</h3>
-<div class="reading-passage-container">
-            <div class="reading-prompt">Read the following passage carefully, then answer the comprehension questions.</div>
-            <div class="reading-passage"><p>Long before any European ship crossed the Atlantic Ocean, the Great Lakes region was home to thriving Indigenous nations. Among the most powerful was an alliance called the Three Fires Confederacy, made up of three related Anishinaabe peoples: the Ojibwe, the Odawa, and the Potawatomi. These three nations shared similar languages, beliefs, and customs, but each had their own special role in the alliance.</p>
-<p>The Ojibwe, sometimes called Chippewa, were known as the "Keepers of the Faith." They were the spiritual leaders of the confederacy, responsible for preserving sacred traditions, ceremonies, and the stories that passed wisdom from generation to generation. The Ojibwe lived primarily in the northern Great Lakes region, in areas that are now Michigan, Wisconsin, and Minnesota. They were skilled hunters and gatherers who developed deep knowledge of the forests and waterways.</p>
-<p>The Odawa, also spelled Ottawa, earned the title "Keepers of Trade." They were master negotiators and traders who traveled vast distances by canoe, creating trade networks that stretched hundreds of miles. The Odawa traded copper, furs, corn, and other goods between different nations. Their trading skills would later make them important partners—and sometimes rivals—of European fur traders.</p>
-<p>The Potawatomi were called the "Keepers of the Fire," which was a sacred responsibility. Fire represented the heart of the community—the place where people gathered, where food was prepared, and where important decisions were made. The Potawatomi lived in the southern Great Lakes region and were known for their farming skills, growing corn, beans, and squash in the rich soil.</p>
-<p>Together, these three nations created a powerful alliance based on cooperation rather than competition. When one nation faced a threat, the others came to help. When one nation had extra food, they shared with the others. This system worked for thousands of years before Europeans arrived and began to change everything.</p></div>
-        </div>
-<div class="activity"><strong>Reading Comprehension</strong>
-<div class="question" data-qid="4" data-standard="4-H3.0.2">
-            <p>1. What does "Keepers of the Faith" mean? What responsibilities did the Ojibwe have?</p>
-            <span class="standards-tag">4-H3.0.2</span>
-            <textarea id="answer-4" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(4, '4-H3.0.2', this)">Check My Answer</button>
-            <div id="eval-result-4" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">The Ojibwe were the spiritual leaders responsible for preserving sacred traditions, ceremonies, and stories that passed wisdom between generations.</div>
-<div class="question" data-qid="5" data-standard="4-H3.0.2">
-            <p>2. Why were the Odawa called "Keepers of Trade"? Give one specific example from the passage.</p>
-            <span class="standards-tag">4-H3.0.2</span>
-            <textarea id="answer-5" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(5, '4-H3.0.2', this)">Check My Answer</button>
-            <div id="eval-result-5" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">They were master negotiators and traders who traveled vast distances by canoe. They traded copper, furs, corn, and other goods between different nations.</div>
-<div class="question" data-qid="6" data-standard="4-H3.0.2">
-            <p>3. What did fire represent for the Potawatomi, and why was it important?</p>
-            <span class="standards-tag">4-H3.0.2</span>
-            <textarea id="answer-6" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(6, '4-H3.0.2', this)">Check My Answer</button>
-            <div id="eval-result-6" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">Fire represented the heart of the community—where people gathered, where food was prepared, and where important decisions were made.</div>
-<div class="question" data-qid="7" data-standard="4-H3.0.2">
-            <p>4. The passage says the Three Fires Confederacy was based on "cooperation rather than competition." What evidence from the passage supports this?</p>
-            <span class="standards-tag">4-H3.0.2</span>
-            <textarea id="answer-7" rows="3" placeholder="Your answer..."></textarea>
-            <button class="eval-btn" onclick="evaluateAnswer(7, '4-H3.0.2', this)">Check My Answer</button>
-            <div id="eval-result-7" class="eval-result"></div>
-        </div>
-<button class="answer-reveal" onclick="toggleAnswer(this)">Check Answer</button>
-        <div class="answer">When one nation faced a threat, the others came to help. When one nation had extra food, they shared with the others.</div></div>
-<p>---</p>
             <div class="completion-section">
                 <h4>Mark Day Complete</h4>
                 <div class="completion-buttons">
@@ -2052,6 +2135,23 @@ Knowledge, Character, Strength
             document.querySelectorAll('.day-content').forEach(el => el.classList.add('hidden'));
             document.getElementById('day' + dayNum)?.classList.remove('hidden');
             document.getElementById('day' + dayNum)?.scrollIntoView({ behavior: 'smooth' });
+            // Show first subject tab by default
+            const firstTab = document.querySelector('#day' + dayNum + ' .subject-tab');
+            if (firstTab) firstTab.click();
+        }
+
+        function showSubject(dayNum, subject) {
+            // Update tabs
+            document.querySelectorAll('#day' + dayNum + ' .subject-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelector('#day' + dayNum + ' .subject-tab[data-subject="' + subject + '"]')?.classList.add('active');
+
+            // Update content
+            document.querySelectorAll('#day' + dayNum + ' .subject-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.querySelector('#day' + dayNum + ' .subject-content[data-subject="' + subject + '"]')?.classList.add('active');
         }
 
         // Parent PINs for signoff
